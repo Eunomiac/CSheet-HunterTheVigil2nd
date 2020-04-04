@@ -220,8 +220,8 @@ input.sheet-settingssheet:not(:checked) ~ input.sheet-demonsheet:checked ~ img.s
 }
 
 input.sheet-settingssheet:not(:checked) ~ input.sheet-huntersheet:checked ~ img.sheet-header.sheet-hunter {
-    top: 10px;
-    height: 65px;
+    top: 15px;
+    height: 60px;
 }
 
 input.sheet-settingssheet:checked ~ .sheet-header + .sheet-settings {
@@ -414,7 +414,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 
 .sheet-diceroller {
     position: absolute;
-    top: 10px;
+    top: 18px;
     left: 30px;
     background: white;
 }
@@ -428,6 +428,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 
 .charsheet .sheet-diceroller table {
     border: solid 1px #000000;
+    width: 286px;
 }
 
 .charsheet .sheet-diceroller table td {
@@ -451,11 +452,10 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 }
 
 .charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(1) { background: url('https://i.imgur.com/X0cOWfN.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(2) { background: url('https://i.imgur.com/aVTwVkG.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(3) { background: url('https://i.imgur.com/PZIOGkO.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(4) { background: url('https://i.imgur.com/MXlJlKc.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(5) { background: url('https://i.imgur.com/4JudYAV.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(6) { background: url('https://i.imgur.com/NXEtJGS.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(2) { background: url('https://i.imgur.com/PZIOGkO.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(3) { background: url('https://i.imgur.com/MXlJlKc.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(4) { background: url('https://i.imgur.com/4JudYAV.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(5) { background: url('https://i.imgur.com/NXEtJGS.png') no-repeat center/contain; }
 
 .charsheet .sheet-diceroller button:before {
     font-family: "Courier" !important;
@@ -480,11 +480,27 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     text-align: center;
     height: 35px;
     pointer-events: none;
-    width: 120px;
+    width: 180px;
+    font-size: 14px;
+    font-family: "Special Elite";
+    font-weight: bold;
+}
+
+.charsheet .sheet-diceroller .sheet-rolldisplay input.sheet-rolldisplay-chance {
+    display: none;
+}
+
+.charsheet .sheet-diceroller .sheet-rolldisplay input.sheet-rolldisplay-chance:checked + textarea {
+    background-color: darkred;
+    color: white;
+}
+
+.charsheet .sheet-diceroller .sheet-rolldisplay input.sheet-rolldisplay-chance:not(:checked) + textarea {
+    background-color: transparent;
+    color:black;
 }
 
 .charsheet .sheet-diceroller td.sheet-rolldisplay {
-    width: 10px;
     text-align: center;
     text-align-last: center;
 }
@@ -509,7 +525,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .charsheet .sheet-diceroller td.sheet-rolldisplay div.sheet-attackdisplay {
     display: inline-block;
     height: 12px;
-    width: 120px;
+    width: 180px;
     margin: 0px;
     padding: 0px;
     background-color: #ff000033;
@@ -521,7 +537,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .charsheet .sheet-diceroller td.sheet-rolldisplay span.sheet-attackdisplay {
     display: inline-block;
     height: 12px;
-    width: 80px;
+    width: 150px;
     margin: 0px;
     padding: 0px;
     margin-left: 5px;
@@ -547,8 +563,9 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 }
 
 .charsheet div.sheet-3colrow.sheet-trackers {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     margin-left: -16px;
+    margin-top: -5px;
     width: calc(100% + 16px);
 }
 .charsheet div.sheet-3colrow.sheet-trackers table.sheet-dottable td {
@@ -578,7 +595,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     clear: none;
     width: 75%;
     margin-top: -120px;
-    margin-left: 280px;
+    margin-left: 295px;
 }
 
 .charsheet div.sheet-2of3colrow input[type=text] {
@@ -676,7 +693,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 }
 
 .sheet-skills table {
-    border-right: solid 1px black;
+    /* border-right: solid 1px black; */
 }
 
 .sheet-skills td:first-child {
@@ -689,6 +706,24 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 
 .sheet-skills td:nth-child(2) {
     width: 106px;
+}
+
+.sheet-skills td.sheet-subheader.sheet-skillheader span:nth-child(1) {
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+    text-align: left;
+    text-align-last: left;
+    margin-left: -5px;
+}
+
+.sheet-skills td.sheet-subheader.sheet-skillheader span:nth-child(2) {
+    display: inline-block;
+    width: 90px;
+    margin-left: -85px;
+    font-size: 8px;
+    text-align: right;
+    text-align-last: right;
 }
 
 .sheet-skills input.sheet-spec {
@@ -793,7 +828,7 @@ table.sheet-hunter span.sheet-othertraitplus {
 .sheet-skills {
     float: left;
     margin-left: -16px;
-
+    margin-top: -20px;
 }
 
 .sheet-otherattributes {
@@ -817,7 +852,7 @@ table.sheet-attributes td:last-child {
     border-right: solid 1px black;
 }
 
-.charsheet table.sheet-attributes tr:nth-child(2) td:not(.sheet-spacer):not(.sheet-category) {
+.charsheet table.sheet-attributes tr:nth-child(1) td:not(.sheet-spacer):not(.sheet-category) {
     border-top: solid 1px black;
 }
 
@@ -1821,6 +1856,27 @@ tr.sheet-wpnheader td.sheet-a-str { background-image: url('https://i.imgur.com/y
     margin: 0;
     padding: 0;
 }
+
+.charsheet .sheet-diceroller td.sheet-rollflags input[type=number] {    
+    font-family: "Special Elite";
+    width: 25px;
+    height: 18px;
+    padding: 0px;
+    padding-top: 3px;
+    margin-left: -6px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    margin-top: -4px;
+}
+
+.charsheet .sheet-diceroller td.sheet-rollflags input[type=number] + span {    
+    display: inline-block;
+    height: 18px;
+    padding: 0px;
+    margin: 0px;
+}
+
 
 .sheet-expandedsheet textarea,
 .sheet-expandedsheet2 textarea {

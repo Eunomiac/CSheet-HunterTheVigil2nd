@@ -93,9 +93,6 @@
     <table>
         <tbody>
             <tr>
-                <th colspan="2" class="sheet-bottom" data-i18n="dice-roller-u">DICE ROLLER</th>
-            </tr>
-            <tr>
                 <td colspan="2" class="sheet-initiative sheet-rolltoggles">	
                     <input type="radio" class="sheet-attr" style="margin-left: 6px;" name="attr_rerolldice" value="0" />
                     <span class="sheet-attr" >None </span>
@@ -111,7 +108,6 @@
             </tr>
             <tr>
                 <td colspan="2" class="rollcontainer rollbuttons">
-                    <div><button type="roll" name="roll_check" value="@{roll_nomods}@{rolltype}"></button></div>
                     <div><button type="roll" name="roll_check" value="@{roll_base}@{rolltype}"></button></div>
                     <div><button type="roll" name="roll_initiative" value="&{template:wod-initiative} {{name=@{character_name}}} {{dexterity=@{dexterity}}} {{composure=@{composure}}} {{fastReflexes=@{fast_reflexes}}} {{initiativePenalty=@{initiative_penalty}}} {{result=[[1d10 + @{dexterity} + @{composure} + @{fast_reflexes} + @{initiative_penalty} &{tracker}]]}}"></button></div>
                     <div><button type="roll" name="roll_check" value="@{rollattack}@{rolltype}"></button></div>
@@ -121,7 +117,7 @@
             </tr>
             <tr>
                 <td class="sheet-rolldisplay">
-                    <textarea name="attr_rolldisplay_base"></textarea>
+                    <input class="rolldisplay-chance" type="checkbox" name="attr_rolldisplay_ischance" value="1"><textarea name="attr_rolldisplay_base"></textarea>
                     <br>
                     <div class="attackdisplay">
                         <span class="attackdisplay-start">atk:</span><span class="attackdisplay">
@@ -129,9 +125,11 @@
                         </span>
                     </div>
                 </td>
-                <td class="sheet-rolldisplay sheet-rolltoggles sheet-rollflags" style="text-align: center; text-align-last: center;">
+                <td class="sheet-rolldisplay sheet-rolltoggles sheet-rollflags" style="padding-top: 4px; padding-bottom: 0px;">
+                    <input type="number" name="attr_rollmodifier" value="0" />
+                    <span>Mod / Def</span><br>
                     <input type="checkbox" class="sheet-attr" name="attr_spendwp" value="1" />
-                    <span class="sheet-attr" style="margin-top: 5px; margin-bottom: 10px;"  >Willpower</span><br>
+                    <span class="sheet-attr" style="margin-bottom: 5px;" >Willpower</span><br>
                     <input type="checkbox" class="sheet-attr" name="attr_specialty" value="1" />
                     <span class="sheet-attr" >Specialty</span>
                 </td>
@@ -273,9 +271,6 @@
     <table class="attributes">
         <tbody>
             <tr>
-                <th colspan="10" data-i18n="attributes-u">ATTRIBUTES</th>
-            </tr>
-            <tr>
                 <td>
                     <input type="checkbox" class="sheet-attr" name="attr_Intelligence_flag" value="@{intelligence}" />
                     <span class="sheet-attr" data-i18n="intelligence" >Intelligence</span>
@@ -382,7 +377,7 @@
             <td class="changeling 2nd variablecontainer">
                 <input type="radio" class="sheet-normal" name="attr_moralhealth" value="1" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_1" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_1" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_1" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="2" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_2" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_2" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_2" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="3" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_3" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_3" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_3" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="4" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_4" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_4" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_4" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="5" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_5" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_5" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_5" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="6" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_6" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_6" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_6" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="7" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_7" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_7" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_7" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="8" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_8" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_8" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_8" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="9" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_9" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_9" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_9" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="10" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_10" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_10" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_10" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="11" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_11" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_11" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_11" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="12" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_12" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_12" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_12" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="13" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_13" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_13" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_13" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="14" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_14" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_14" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_14" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="15" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_15" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_15" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_15" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="16" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_16" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_16" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_16" value="2" /><span class="sheet-lethaldot"></span></span>
             </td>
-            <td class="normal variablecontainer" style="text-align: center;">
+            <td class="normal" style="text-align: center;">
                 <input type="radio" class="sheet-normal" name="attr_morality" value="1" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="2" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="3" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="4" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="5" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="6" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="7" checked="checked" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="8" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="9" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="10" /><span></span>
             </td>
         </tr>
@@ -395,10 +390,7 @@
     <table>
         <tbody>
             <tr>
-                <th colspan="4" data-i18n="skills-u">SKILLS</th>
-            </tr>
-            <tr>
-                <td class="subheader" colspan="4" data-i18n="mental">Mental</td>
+                <td class="subheader skillheader" colspan="4"><span>Mental Skills</span><span>(-3 Untrained)</span></td>
             </tr>
             <tr>
                 <td>
@@ -521,7 +513,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="subheader" colspan="4" data-i18n="physical">Physical</td>
+                <td class="subheader skillheader" colspan="4"><span>Physical Skills</span><span>(-1 Untrained)</span></td>
             </tr>
             <tr>
                 <td>
@@ -644,7 +636,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="subheader" colspan="4" data-i18n="social">Social</td>
+                <td class="subheader skillheader" colspan="4"><span>Social Skills</span><span>(-1 Untrained)</span></td>
             </tr>
             <tr>
                 <td>
@@ -772,11 +764,8 @@
 
 <!-- OTHER TRAITS -->
 <div class="othertraits">
-    <table class="merits" style="margin-right: -47px; display: inline-block;">
+    <table class="merits" style="margin-right: -47px; display: inline-block; margin-top: -15px;">
         <tbody>
-            <tr>
-                <th data-i18n="other-traits-u" style="padding-right: 100px; padding-bottom: 6px;">OTHER TRAITS</th>
-            </tr>
             <tr>
                 <td>
                     <table class="merittable">
@@ -1418,17 +1407,17 @@
                                             <input type="text" name="attr_attack_name0" class="weaponstat name" disabled="disabled" value="@{unarmedmacro}" /></td>
                                         <td class="selectcontainer">
                                             <select name="attr_attack_type0">
-                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" checked="checked" data-i18n="brawl" >👊</option>
-                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage0}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >⚔️</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage0}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >🔫</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage0}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >⚾</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage0}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >👊 (+FF)</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage0}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >⚔️ (+FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >⚔️</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >🔫</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >⚾</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >👊 (+FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >⚔️ (+FF)</option>
+                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" checked="checked" data-i18n="brawl" >👊</option>
+                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage0}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >⚔️</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage0}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >🔫</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage0}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >⚾</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage0}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >👊 (+FF)</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage0}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >⚔️ (+FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >⚔️</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >🔫</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >⚾</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >👊 (+FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >⚔️ (+FF)</option>
                                             </select>
                                         </td>
                                         <td><input type="number" name="attr_attack_damage0" class="weaponstat damage" value="0" /></td>
@@ -1443,18 +1432,18 @@
                                             <input type="text" name="attr_attack_name1" class="weaponstat name" /></td>
                                         <td class="selectcontainer">
                                             <select name="attr_attack_type1">
-                                                <option value="{{result=[[{((?{@{modifiermacro}|0})" checked="checked"></option>
-                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl" >Brawl</option>
-                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
+                                                <option value="{{result=[[{((@{rollmodifier})" checked="checked"></option>
+                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl" >Brawl</option>
+                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
                                             </select>
                                         </td>
                                         <td><input type="number" name="attr_attack_damage1" class="weaponstat damage" /></td>
@@ -1469,18 +1458,18 @@
                                             <input type="text" name="attr_attack_name2" class="weaponstat name" /></td>
                                         <td class="selectcontainer">
                                             <select name="attr_attack_type2">
-                                                <option value="{{result=[[{((?{@{modifiermacro}|0})" checked="checked"></option>
-                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl" >Brawl</option>
-                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage2}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage2}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage2}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage2}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage2}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
+                                                <option value="{{result=[[{((@{rollmodifier})" checked="checked"></option>
+                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl" >Brawl</option>
+                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage2}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage2}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage2}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage2}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage2}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
                                             </select>
                                         </td>
                                         <td><input type="number" name="attr_attack_damage2" class="weaponstat damage" /></td>
@@ -1495,18 +1484,18 @@
                                             <input type="text" name="attr_attack_name3" class="weaponstat name" /></td>
                                         <td class="selectcontainer">
                                             <select name="attr_attack_type3">
-                                                <option value="{{result=[[{((?{@{modifiermacro}|0})" checked="checked"></option>
-                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl" >Brawl</option>
-                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage3}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage3}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage3}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage3}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage3}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
+                                                <option value="{{result=[[{((@{rollmodifier})" checked="checked"></option>
+                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl" >Brawl</option>
+                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage3}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage3}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage3}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage3}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage3}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
                                             </select>
                                         </td>
                                         <td><input type="number" name="attr_attack_damage3" class="weaponstat damage" /></td>
@@ -1521,18 +1510,18 @@
                                             <input type="text" name="attr_attack_name4" class="weaponstat name" /></td>
                                         <td class="selectcontainer">
                                             <select name="attr_attack_type4">
-                                                <option value="{{result=[[{((?{@{modifiermacro}|0})" checked="checked"></option>
-                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl" >Brawl</option>
-                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage4}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage4}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage4}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage4}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
-                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage4}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
-                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
+                                                <option value="{{result=[[{((@{rollmodifier})" checked="checked"></option>
+                                                <option value="{{str=1}} {{bra=1}} {{result=[[{((@{strength}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl" >Brawl</option>
+                                                <option class="1st" value="{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage4}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage4}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage4}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage4}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
+                                                <option class="1st" value="{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage4}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee" >Melee</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="gun" >Gun</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="thrown" >Thrown</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="brawl-fight-finesse" >Brawl (FF)</option>
+                                                <option class="2nd" value="{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})" data-i18n="melee-fight-finesse" >Melee (FF)</option>
                                             </select>
                                         </td>
                                         <td><input type="number" name="attr_attack_damage4" class="weaponstat damage" /></td>
@@ -1592,7 +1581,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="dottable" style="margin-top: -63px;">
+                    <table class="dottable" style="margin-top: -30px;">
                         <tr>
                             <td class="rowtext" style="padding-top: 8px;"><span class="touchstone subheader">6</span><input type="text" class="touchstone" name="attr_touchstone1" /></td>
                         </tr>
@@ -1788,7 +1777,7 @@
                         <option value="Contested" data-i18n="contested" >Contested</option>
                     </select>
                 <div class="rollcontainer">
-                    <button type='roll' class="sheet-roll" name='roll_customRoll1' value="&{template:wod-3part} {{name=@{character_name}}} {{roll_name=@{customRollName1}}} {{mod=[[?{@{modifiermacro}|0}]]}} {{part1=@{part1name_1}}} {{part2=@{part2name_1}}} {{part3=@{part3name_1}}} {{part4=@{part4name_1}}} {{part5=@{part5name_1}}} {{part6=@{part6name_1}}} {{part1pool=@{part1pool_1}}} {{part2pool=@{part2pool_1}}} {{part3pool=@{part3pool_1}}} {{part4pool=@{part4pool_1}}} {{part5pool=@{part5pool_1}}} {{part6pool=@{part6pool_1}}} {{result=[[{((?{@{modifiermacro}|0}+(@{part1pool_1}+0)+(@{part2pool_1}+0)+(@{part3pool_1}+0)+(@{part4pool_1}+0)+(@{part5pool_1}+0)+(@{part6pool_1}+0))@{rolltype}" ></button>
+                    <button type='roll' class="sheet-roll" name='roll_customRoll1' value="&{template:wod-3part} {{name=@{character_name}}} {{roll_name=@{customRollName1}}} {{mod=[[@{rollmodifier}]]}} {{part1=@{part1name_1}}} {{part2=@{part2name_1}}} {{part3=@{part3name_1}}} {{part4=@{part4name_1}}} {{part5=@{part5name_1}}} {{part6=@{part6name_1}}} {{part1pool=@{part1pool_1}}} {{part2pool=@{part2pool_1}}} {{part3pool=@{part3pool_1}}} {{part4pool=@{part4pool_1}}} {{part5pool=@{part5pool_1}}} {{part6pool=@{part6pool_1}}} {{result=[[{((@{rollmodifier}+(@{part1pool_1}+0)+(@{part2pool_1}+0)+(@{part3pool_1}+0)+(@{part4pool_1}+0)+(@{part5pool_1}+0)+(@{part6pool_1}+0))@{rolltype}" ></button>
                 </div>
                 <br>
                 <span data-i18n="source-d">Source: </span>
@@ -1818,7 +1807,7 @@
                         <option value="Contested" data-i18n="contested" >Contested</option>
                     </select>
                 <div class="rollcontainer">
-                    <button type='roll' class="sheet-roll" name='roll_customRoll2' value="&{template:wod-3part} {{name=@{character_name}}} {{roll_name=@{customRollName2}}} {{mod=[[?{@{modifiermacro}|0}]]}} {{part1=@{part1name_2}}} {{part2=@{part2name_2}}} {{part3=@{part3name_2}}} {{part4=@{part4name_2}}} {{part5=@{part5name_2}}} {{part6=@{part6name_2}}} {{part1pool=@{part1pool_2}}} {{part2pool=@{part2pool_2}}} {{part3pool=@{part3pool_2}}} {{part4pool=@{part4pool_2}}} {{part5pool=@{part5pool_2}}} {{part6pool=@{part6pool_2}}} {{result=[[{((?{@{modifiermacro}|0}+(@{part1pool_2}+0)+(@{part2pool_2}+0)+(@{part3pool_2}+0)+(@{part4pool_2}+0)+(@{part5pool_2}+0)+(@{part6pool_2}+0))@{rolltype}" ></button>
+                    <button type='roll' class="sheet-roll" name='roll_customRoll2' value="&{template:wod-3part} {{name=@{character_name}}} {{roll_name=@{customRollName2}}} {{mod=[[@{rollmodifier}]]}} {{part1=@{part1name_2}}} {{part2=@{part2name_2}}} {{part3=@{part3name_2}}} {{part4=@{part4name_2}}} {{part5=@{part5name_2}}} {{part6=@{part6name_2}}} {{part1pool=@{part1pool_2}}} {{part2pool=@{part2pool_2}}} {{part3pool=@{part3pool_2}}} {{part4pool=@{part4pool_2}}} {{part5pool=@{part5pool_2}}} {{part6pool=@{part6pool_2}}} {{result=[[{((@{rollmodifier}+(@{part1pool_2}+0)+(@{part2pool_2}+0)+(@{part3pool_2}+0)+(@{part4pool_2}+0)+(@{part5pool_2}+0)+(@{part6pool_2}+0))@{rolltype}" ></button>
                 </div>
                 <br>
                 <span  data-i18n="source-d">Source: </span>
@@ -1862,8 +1851,8 @@
 <input type="hidden" name="attr_0" value="0" />
 <input type="hidden" name="attr_rollsimple" value="&{template:wod-simple} {{name=@{character_name}}} {{option=?{@{dicepoolmacro}|0}}} {{result=[[{(?{@{dicepoolmacro}|1}" />
 <input type="hidden" name="attr_roll3part" value="" />
-<input type="hidden" name="attr_rollsheet" value="&{template:wod} {{name=@{character_name}}} {{mod=?{@{modifiermacro}|0}}} {{strength=@{strength}}} {{dexterity=@{dexterity}}} {{stamina=@{stamina}}} {{intelligence=@{intelligence}}} {{wits=@{wits}}} {{resolve=@{resolve}}} {{presence=@{presence}}} {{manipulation=@{manipulation}}} {{composure=@{composure}}} {{Academics=@{Academics}}} {{Computer=@{Computer}}} {{Crafts=@{Crafts}}} {{Investigation=@{Investigation}}} {{Medicine=@{Medicine}}} {{Occult=@{Occult}}} {{Politics=@{Politics}}} {{Science=@{Science}}} {{Athletics=@{Athletics}}} {{Brawl=@{Brawl}}} {{Drive=@{Drive}}} {{Firearms=@{Firearms}}} {{Larceny=@{Larceny}}} {{Stealth=@{Stealth}}} {{Survival=@{Survival}}} {{Weaponry=@{Weaponry}}} {{AnimalKen=@{AnimalKen}}} {{Empathy=@{Empathy}}} {{Expression=@{Expression}}} {{Intimidation=@{Intimidation}}} {{Persuasion=@{Persuasion}}} {{Socialize=@{Socialize}}} {{Streetwise=@{Streetwise}}} {{Subterfuge=@{Subterfuge}}} {{Animalism=@{Animalism}}} {{Auspex=@{Auspex}}} {{Celerity=@{Celerity}}} {{Dominate=@{Dominate}}} {{Majesty=@{Majesty}}} {{Nightmare=@{Nightmare}}} {{Obfuscate=@{Obfuscate}}} {{Protean=@{Protean}}} {{Resilience=@{Resilience}}} {{Vigor=@{Vigor}}} {{Crúac=@{Crúac}}} {{ThebanSorcery=@{ThebanSorcery}}} {{Death=@{Death}}} {{Fate=@{Fate}}} {{Forces=@{Forces}}} {{Life=@{Life}}} {{Matter=@{Matter}}} {{Mind=@{Mind}}} {{Prime=@{Prime}}} {{Spirit=@{Spirit}}} {{Space=@{Space}}} {{Time=@{Time}}} {{potency=@{potency}}} {{@{strength_flag}str=1}} {{@{dexterity_flag}dex=1}} {{@{stamina_flag}sta=1}} {{@{intelligence_flag}int=1}} {{@{wits_flag}wit=1}} {{@{resolve_flag}res=1}} {{@{presence_flag}pre=1}} {{@{manipulation_flag}man=1}} {{@{composure_flag}com=1}} {{@{Academics_flag}aca=1}} {{@{Computer_flag}comp=1}} {{@{Crafts_flag}cra=1}} {{@{Investigation_flag}inv=1}} {{@{Medicine_flag}med=1}} {{@{Occult_flag}occ=1}} {{@{Politics_flag}pol=1}} {{@{Science_flag}sci=1}} {{@{Athletics_flag}ath=1}} {{@{Brawl_flag}bra=1}} {{@{Drive_flag}dri=1}} {{@{Firearms_flag}fir=1}} {{@{Larceny_flag}lar=1}} {{@{Stealth_flag}ste=1}} {{@{Survival_flag}sur=1}} {{@{Weaponry_flag}wea=1}} {{@{AnimalKen_flag}ani=1}} {{@{Empathy_flag}emp=1}} {{@{Expression_flag}exp=1}} {{@{Intimidation_flag}inti=1}} {{@{Persuasion_flag}per=1}} {{@{Socialize_flag}soc=1}} {{@{Streetwise_flag}stre=1}} {{@{Subterfuge_flag}sub=1}} {{@{Animalism_flag}anim=1}} {{@{Auspex_flag}ausp=1}} {{@{Celerity_flag}cele=1}} {{@{Dominate_flag}domi=1}} {{@{Majesty_flag}maje=1}} {{@{Nightmare_flag}nigh=1}} {{@{Obfuscate_flag}obfu=1}} {{@{Protean_flag}prot=1}} {{@{Resilience_flag}resi=1}} {{@{Vigor_flag}vigo=1}} {{@{Crúac_flag}crúa=1}} {{@{ThebanSorcery_flag}theb=1}} {{@{Death_flag}deat=1}} {{@{Fate_flag}fate=1}} {{@{Forces_flag}forc=1}} {{@{Life_flag}life=1}} {{@{Matter_flag}matt=1}} {{@{Mind_flag}mind=1}} {{@{Prime_flag}prim=1}} {{@{Spirit_flag}spir=1}} {{@{Space_flag}spac=1}} {{@{Time_flag}time=1}} {{@{potency_flag}pote=1}} {{result=[[{(([[?{@{modifiermacro}|0}+@{strength_flag}+@{dexterity_flag}+@{stamina_flag}+@{intelligence_flag}+@{wits_flag}+@{resolve_flag}+@{presence_flag}+@{manipulation_flag}+@{composure_flag}+@{Academics_flag}+@{Computer_flag}+@{Crafts_flag}+@{Investigation_flag}+@{Medicine_flag}+@{Occult_flag}+@{Politics_flag}+@{Science_flag}+@{Athletics_flag}+@{Brawl_flag}+@{Drive_flag}+@{Firearms_flag}+@{Larceny_flag}+@{Stealth_flag}+@{Survival_flag}+@{Weaponry_flag}+@{AnimalKen_flag}+@{Empathy_flag}+@{Expression_flag}+@{Intimidation_flag}+@{Persuasion_flag}+@{Socialize_flag}+@{Streetwise_flag}+@{Subterfuge_flag}+@{Animalism_flag}+@{Auspex_flag}+@{Celerity_flag}+@{Dominate_flag}+@{Majesty_flag}+@{Nightmare_flag}+@{Obfuscate_flag}+@{Protean_flag}+@{Resilience_flag}+@{Vigor_flag}+@{Crúac_flag}+@{ThebanSorcery_flag}+@{Death_flag}+@{Fate_flag}+@{Forces_flag}+@{Life_flag}+@{Matter_flag}+@{Mind_flag}+@{Prime_flag}+@{Spirit_flag}+@{Space_flag}+@{Time_flag}+@{potency_flag}]])" />
-<input type="hidden" name="attr_rollattack" value="&{template:wod-attack} {{name=@{character_name}}} {{strength=@{strength}}} {{dexterity=@{dexterity}}} {{brawl=@{brawl}}} {{weaponry=@{weaponry}}} {{firearms=@{firearms}}} {{athletics=@{athletics}}} {{mod=[[?{@{modifiermacro}|0}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{wpen=[[@{weapon_penalty}]]}} {{apen=[[@{armor_penalty}]]}} @{attack}" />
+<input type="hidden" name="attr_rollsheet" value="&{template:wod} {{name=@{character_name}}} {{mod=@{rollmodifier}}} {{strength=@{strength}}} {{dexterity=@{dexterity}}} {{stamina=@{stamina}}} {{intelligence=@{intelligence}}} {{wits=@{wits}}} {{resolve=@{resolve}}} {{presence=@{presence}}} {{manipulation=@{manipulation}}} {{composure=@{composure}}} {{Academics=@{Academics}}} {{Computer=@{Computer}}} {{Crafts=@{Crafts}}} {{Investigation=@{Investigation}}} {{Medicine=@{Medicine}}} {{Occult=@{Occult}}} {{Politics=@{Politics}}} {{Science=@{Science}}} {{Athletics=@{Athletics}}} {{Brawl=@{Brawl}}} {{Drive=@{Drive}}} {{Firearms=@{Firearms}}} {{Larceny=@{Larceny}}} {{Stealth=@{Stealth}}} {{Survival=@{Survival}}} {{Weaponry=@{Weaponry}}} {{AnimalKen=@{AnimalKen}}} {{Empathy=@{Empathy}}} {{Expression=@{Expression}}} {{Intimidation=@{Intimidation}}} {{Persuasion=@{Persuasion}}} {{Socialize=@{Socialize}}} {{Streetwise=@{Streetwise}}} {{Subterfuge=@{Subterfuge}}} {{Animalism=@{Animalism}}} {{Auspex=@{Auspex}}} {{Celerity=@{Celerity}}} {{Dominate=@{Dominate}}} {{Majesty=@{Majesty}}} {{Nightmare=@{Nightmare}}} {{Obfuscate=@{Obfuscate}}} {{Protean=@{Protean}}} {{Resilience=@{Resilience}}} {{Vigor=@{Vigor}}} {{Crúac=@{Crúac}}} {{ThebanSorcery=@{ThebanSorcery}}} {{Death=@{Death}}} {{Fate=@{Fate}}} {{Forces=@{Forces}}} {{Life=@{Life}}} {{Matter=@{Matter}}} {{Mind=@{Mind}}} {{Prime=@{Prime}}} {{Spirit=@{Spirit}}} {{Space=@{Space}}} {{Time=@{Time}}} {{potency=@{potency}}} {{@{strength_flag}str=1}} {{@{dexterity_flag}dex=1}} {{@{stamina_flag}sta=1}} {{@{intelligence_flag}int=1}} {{@{wits_flag}wit=1}} {{@{resolve_flag}res=1}} {{@{presence_flag}pre=1}} {{@{manipulation_flag}man=1}} {{@{composure_flag}com=1}} {{@{Academics_flag}aca=1}} {{@{Computer_flag}comp=1}} {{@{Crafts_flag}cra=1}} {{@{Investigation_flag}inv=1}} {{@{Medicine_flag}med=1}} {{@{Occult_flag}occ=1}} {{@{Politics_flag}pol=1}} {{@{Science_flag}sci=1}} {{@{Athletics_flag}ath=1}} {{@{Brawl_flag}bra=1}} {{@{Drive_flag}dri=1}} {{@{Firearms_flag}fir=1}} {{@{Larceny_flag}lar=1}} {{@{Stealth_flag}ste=1}} {{@{Survival_flag}sur=1}} {{@{Weaponry_flag}wea=1}} {{@{AnimalKen_flag}ani=1}} {{@{Empathy_flag}emp=1}} {{@{Expression_flag}exp=1}} {{@{Intimidation_flag}inti=1}} {{@{Persuasion_flag}per=1}} {{@{Socialize_flag}soc=1}} {{@{Streetwise_flag}stre=1}} {{@{Subterfuge_flag}sub=1}} {{@{Animalism_flag}anim=1}} {{@{Auspex_flag}ausp=1}} {{@{Celerity_flag}cele=1}} {{@{Dominate_flag}domi=1}} {{@{Majesty_flag}maje=1}} {{@{Nightmare_flag}nigh=1}} {{@{Obfuscate_flag}obfu=1}} {{@{Protean_flag}prot=1}} {{@{Resilience_flag}resi=1}} {{@{Vigor_flag}vigo=1}} {{@{Crúac_flag}crúa=1}} {{@{ThebanSorcery_flag}theb=1}} {{@{Death_flag}deat=1}} {{@{Fate_flag}fate=1}} {{@{Forces_flag}forc=1}} {{@{Life_flag}life=1}} {{@{Matter_flag}matt=1}} {{@{Mind_flag}mind=1}} {{@{Prime_flag}prim=1}} {{@{Spirit_flag}spir=1}} {{@{Space_flag}spac=1}} {{@{Time_flag}time=1}} {{@{potency_flag}pote=1}} {{result=[[{(([[@{rollmodifier}+@{strength_flag}+@{dexterity_flag}+@{stamina_flag}+@{intelligence_flag}+@{wits_flag}+@{resolve_flag}+@{presence_flag}+@{manipulation_flag}+@{composure_flag}+@{Academics_flag}+@{Computer_flag}+@{Crafts_flag}+@{Investigation_flag}+@{Medicine_flag}+@{Occult_flag}+@{Politics_flag}+@{Science_flag}+@{Athletics_flag}+@{Brawl_flag}+@{Drive_flag}+@{Firearms_flag}+@{Larceny_flag}+@{Stealth_flag}+@{Survival_flag}+@{Weaponry_flag}+@{AnimalKen_flag}+@{Empathy_flag}+@{Expression_flag}+@{Intimidation_flag}+@{Persuasion_flag}+@{Socialize_flag}+@{Streetwise_flag}+@{Subterfuge_flag}+@{Animalism_flag}+@{Auspex_flag}+@{Celerity_flag}+@{Dominate_flag}+@{Majesty_flag}+@{Nightmare_flag}+@{Obfuscate_flag}+@{Protean_flag}+@{Resilience_flag}+@{Vigor_flag}+@{Crúac_flag}+@{ThebanSorcery_flag}+@{Death_flag}+@{Fate_flag}+@{Forces_flag}+@{Life_flag}+@{Matter_flag}+@{Mind_flag}+@{Prime_flag}+@{Spirit_flag}+@{Space_flag}+@{Time_flag}+@{potency_flag}]])" />
+<input type="hidden" name="attr_rollattack" value="&{template:wod-attack} {{name=@{character_name}}} {{strength=@{strength}}} {{dexterity=@{dexterity}}} {{brawl=@{brawl}}} {{weaponry=@{weaponry}}} {{firearms=@{firearms}}} {{athletics=@{athletics}}} {{mod=[[@{rollmodifier}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{wpen=[[@{weapon_penalty}]]}} {{apen=[[@{armor_penalty}]]}} @{attack}" />
 
 <input type="hidden" name="attr_balistic_armor" value="((@{armor_ballistic0}+0)*@{armor_flag0})+((@{armor_ballistic1}+0)*@{armor_flag1})+((@{armor_ballistic2}+0)*@{armor_flag2})" />
 <input type="hidden" name="attr_general_armor" value="((@{armor_general0}+0)*@{armor_flag0})+((@{armor_general1}+0)*@{armor_flag1})+((@{armor_general2}+0)*@{armor_flag2})" />
@@ -1883,6 +1872,7 @@
 <input type="hidden" name="attr_rolldisplay_baseNoMods" />
 <input type="hidden" name="attr_rolldisplay_attack" />
 <input type="hidden" name="attr_rolldisplay_simple" />
+<input type="hidden" name="attr_rolldisplay_ischance" />
 <input type="hidden" name="attr_defense_base" />
 <input type="hidden" name="attr_potency_name" />
 <input type="hidden" name="attr_rolltype" value=")d10!cs>10}>8]]}}" />
@@ -2175,6 +2165,10 @@
             {{#^rollTotal() mod 0}}
                 <span data-i18n="modifiers">Modifiers</span>({{mod}})
             {{/^rollTotal() mod 0}}
+            {{#chance}}
+            <br><span style="color: darkred;">= a Chance Die for</span>
+            {{/chance}}
+
         </td></tr>
         <tr>
             <td class="result">{{result}} <span data-i18n="successes">Successes</span></td>
@@ -2308,8 +2302,10 @@
             const source = eventInfo.sourceAttribute;
             const attribute = (attr.includes("flag")) ? attr.split(`_flag`)[0] : attr; //Remove the "_flag" part so we can pass the name
 
-            updateRolls(`${attribute}`);
-            console.log(source);
+            if (eventInfo.sourceType != "sheetworker") {
+                console.log(`==== Ch:Trait/Flag ==== updateRolls('${attribute}'):\n${JSON.stringify(eventInfo)}`)
+                updateRolls(`${attribute}`);
+            }
 
             if (source === "resolve_flag" || source === "composure_flag") {
                 updateWillpower();
@@ -2333,15 +2329,19 @@
 
     [...Array(5).keys()].forEach((attr) => {
         on(`change:attack_type${attr}`, (eventInfo) => {//checks attack_type0 trough attack_type4
-          const source = eventInfo.sourceAttribute;
-          console.log(source);
-          updateRolls("rolltype");
+            if (eventInfo.sourceType != "sheetworker") {
+                console.log(`==== Ch:ATTACK_TYPE ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
+                updateRolls("rolltype");
+            }
         });
     });
 
-    on("change:attack", function() {
-        updateRolls("rolltype");
-        updateAttacks();
+    on("change:attack", function(eventInfo) {
+        if (eventInfo.sourceType != "sheetworker") {
+            console.log(`==== Ch:ATTACK ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
+            updateRolls("rolltype", "previousValue" in eventInfo);
+            updateAttacks();
+        }
     });
 
     ["_initiative0","_initiative1","_initiative2","_initiative3","_initiative4","_strength0","_strength1","_strength2","_strength3","_strength4"].forEach((attr) => {
@@ -2372,11 +2372,14 @@
         updateHealth();
     });
 
-    on("change:sheettype", function() {
-        updateHealth();
-        updateDefaultDefense();
-        updatePotencyName();
-        updateRollType();
+    on("change:sheettype", function(eventInfo) {
+        if (eventInfo.sourceType != "sheetworker") {
+            updateHealth();
+            updateDefaultDefense();
+            updatePotencyName();
+            console.log(`==== Ch:SHEETTYPE ==== updateRollType():\n${JSON.stringify(eventInfo)}`)
+            updateRollType();
+        }
     });
 
     on("change:bonus_willpower", function() {
@@ -2395,9 +2398,19 @@
         updateWoundPenalties();
     });
 
-    on("change:rolltype_select change:rerolldice change:spendwp change:specialty", function() {
-        updateRollType();
+    on("change:rolltype_select change:rerolldice change:spendwp change:specialty", function(eventInfo) {
+        if (eventInfo.sourceType != "sheetworker") {
+            console.log(`==== Ch:ROLL FLAGS ==== updateRollType():\n${JSON.stringify(eventInfo)}`)
+            updateRollType();
+        }
     });
+
+    on("change:rollmodifier", function(eventInfo) {
+        if (eventInfo.sourceType != "sheetworker") {
+            console.log(`==== Ch:ROLLMOD ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
+            updateRolls("rolltype");
+        }
+    })
 
     on("sheet:opened", function() {
         updateDefaultDefense();
@@ -2414,11 +2427,11 @@
     });
 
 // --------------------------------------------------------------------------------------------------
-    var updateRolls = function(stat) {
+    var updateRolls = function(stat, isClearingFlags = false, isChangingModifier = false) {
         var type;
         var stat_flag = stat + "_flag";
         var rarray = [];
-        getAttrs(["attack","rollstyle","roll_array","attack_type0","attack_type1","attack_type2","attack_type3","attack_type4","intelligence_flag","wits_flag","resolve_flag","strength_flag","dexterity_flag","stamina_flag","presence_flag","manipulation_flag","composure_flag","academics_flag","computer_flag","crafts_flag","investigation_flag","medicine_flag","occult_flag","politics_flag","science_flag","athletics_flag","brawl_flag","drive_flag","firearms_flag","larceny_flag","stealth_flag","survival_flag","weaponry_flag","animalken_flag","empathy_flag","expression_flag","intimidation_flag","persuasion_flag","socialize_flag","streetwise_flag","subterfuge_flag","intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","animalism_flag","auspex","auspex_flag","celerity","celerity_flag","dominate","dominate_flag","majesty","majesty_flag","nightmare","nightmare_flag","obfuscate","obfuscate_flag","protean","protean_flag","resilience","resilience_flag","vigor","vigor_flag","crúac","crúac_flag","thebansorcery","thebansorcery_flag","death","death_flag","fate","fate_flag","forces","forces_flag","life","life_flag","matter","matter_flag","mind","mind_flag","prime","prime_flag","spirit","spirit_flag","space","space_flag","time","time_flag","potency","potency_flag","potency_name"], function(v) {
+        getAttrs(["attack","spendwp", "specialty", "wound_penalty", "rollstyle","rollmodifier","roll_array","attack_type0","attack_type1","attack_type2","attack_type3","attack_type4","intelligence_flag","wits_flag","resolve_flag","strength_flag","dexterity_flag","stamina_flag","presence_flag","manipulation_flag","composure_flag","academics_flag","computer_flag","crafts_flag","investigation_flag","medicine_flag","occult_flag","politics_flag","science_flag","athletics_flag","brawl_flag","drive_flag","firearms_flag","larceny_flag","stealth_flag","survival_flag","weaponry_flag","animalken_flag","empathy_flag","expression_flag","intimidation_flag","persuasion_flag","socialize_flag","streetwise_flag","subterfuge_flag","intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","animalism_flag","auspex","auspex_flag","celerity","celerity_flag","dominate","dominate_flag","majesty","majesty_flag","nightmare","nightmare_flag","obfuscate","obfuscate_flag","protean","protean_flag","resilience","resilience_flag","vigor","vigor_flag","crúac","crúac_flag","thebansorcery","thebansorcery_flag","death","death_flag","fate","fate_flag","forces","forces_flag","life","life_flag","matter","matter_flag","mind","mind_flag","prime","prime_flag","spirit","spirit_flag","space","space_flag","time","time_flag","potency","potency_flag","potency_name"], function(v) {
             allStats.forEach(function(x) {
                 var flagname = x + "_flag";
                 if(parseInt(v[flagname], 10) != 0) {
@@ -2426,7 +2439,7 @@
                 }
             });
             var prev_rarray = v.roll_array && v.roll_array != "" ? v.roll_array.split(",") : [];
-            var consoleLines = ["====== UPDATE ROLLS: ATTRIBUTES PASSED: ======="]
+            var consoleLines = [`====== UPDATE ROLLS (${stat}): ATTRIBUTES PASSED... =======`]
             for (const [name, val] of Object.entries(v))
                 if (`${val}` !== "0" && val && !normalStats.includes(name.toLowerCase()))
                     consoleLines.push(`${name.toUpperCase()}: ${typeof val === "string" ? `"${val}"` : val}`)
@@ -2477,13 +2490,25 @@
                 if(rarray.length > 3) {
                     rarray.length = 3;
                 }
-                var cleanup = {};
+                var cleanup = {
+                        rerolldice: "10",
+                        rollmodifier: 0,
+                        spendwp: 0,
+                        specialty: 0
+                    };
                 var diff = prev_rarray.filter(function(x) {return rarray.indexOf(x) < 0});
                 diff.forEach(function(x) {
                     var flagname = x + "_flag";
                     cleanup[flagname] = 0;
                 });
                 setAttrs(cleanup);
+            } else if (isClearingFlags) {
+                setAttrs({
+                    rerolldice: "10",
+                    rollmodifier: 0,
+                    spendwp: 0,
+                    specialty: 0
+                });
             }
             var final = parseInt(v[stat_flag], 10) === 0 || type === "rolltype" ? prev_rarray.join(",") : rarray.join(",");
             var order = [];
@@ -2512,38 +2537,41 @@
             ])
 
             var base = "&{template:wod-simple} {{name=@{character_name}}} {{option=?{@{dicepoolmacro}|0}}} {{result=[[{(?{@{dicepoolmacro}|1}@{rolltype}";
-            var baseNoMods = base;
-            var result = ""
-            var resultNoMods = ""
+            var result = "";
+            var dicePool = 0;
+            if (parseInt(v["specialty"])|0 > 0)
+                dicePool += 1;
+            if (parseInt(v["spendwp"])|0 > 0)
+                dicePool += 3;
+            if (parseInt(v["rollmodifier"])|0 !== 0)
+                dicePool += parseInt(v["rollmodifier"])
+            if (parseInt(v["wound_penalty"])|0 !== 0)
+                dicePool += parseInt(v["wound_penalty"])
             if(order.length > 0) {
-                base = "&{template:wod-3part} {{name=@{character_name}}} {{mod=[[?{@{modifiermacro}|0}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}}";
-                baseNoMods = "&{template:wod-3part} {{name=@{character_name}}} {{mod=0}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}}";
-
-                result = " {{result=[[{((?{@{modifiermacro}|0}+@{wound_penalty}+" + v[order[0]];
-                resultNoMods = " {{result=[[{((@{wound_penalty}+" + v[order[0]];
+                base = "&{template:wod-3part} {{name=@{character_name}}} {{mod=[[@{rollmodifier}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}}";
+                result = " {{result=[[{((@{rollmodifier}+@{wound_penalty}+" + v[order[0]];
+                dicePool += parseInt(v[order[0]]);
                 if(order.length > 1) {
                     base = base + " {{part2=" + names[1] + "}} {{part2pool=" + v[order[1]] + "}}";
-                    baseNoMods = baseNoMods + " {{part2=" + names[1] + "}} {{part2pool=" + v[order[1]] + "}}";
                     result = result + "+" + v[order[1]];
-                    resultNoMods = resultNoMods + "+" + v[order[1]];
+                    dicePool += parseInt(v[order[1]]);
                 }
                 if(order.length > 2) {
                     base = base + " {{part3=" + names[2] + "}} {{part3pool=" + v[order[2]] + "}}";
-                    baseNoMods = baseNoMods + " {{part3=" + names[2] + "}} {{part3pool=" + v[order[2]] + "}}";
                     result = result + "+" + v[order[2]];
-                    resultNoMods = resultNoMods + "+" + v[order[2]];
+                    dicePool += parseInt(v[order[2]]);
                 }
-                base = base + result + ")@{rolltype}"
-                baseNoMods = baseNoMods + resultNoMods + ")@{rolltype}"
+                if (dicePool <= 0)
+                    base = base + " {{result=[[{1d10cf<1}>10]]}} {{chance=1}}"
+                else
+                    base = base + ` {{dicepool=${dicePool}}}` + result + ")@{rolltype}"
             }
             consoleLines.push(...[
                 " ",
                 "====== ROLL TEMPLATE CALLS: ======",
                 `RESULT: ${result}`,
                 `BASE: ${base}`,
-                " ",
-                `RESULT-NOMODS: ${result}`,
-                `BASE-NOMODS: ${baseNoMods}`,
+                `DICE POOL: ${dicePool}`,
                 " "
             ])
             var display = "",
@@ -2553,7 +2581,7 @@
             if (order.length === 0)
                 displayBase = `${display}${getTranslationByKey("simple-roll")}\n`
             else
-                displayBase = names.join(" +\n");
+                displayBase = names.join(" + ");
             var regex = /attack_type(.)/;
             var attack_type = "attack_type" + v.attack.match(regex)[1];
             var attackTerms = []
@@ -2582,7 +2610,8 @@
                 " ",
                 "====== DISPLAYS: ======",
                 `BASE: ${displayBase}`,
-                `ATTACK: ${displayAttack}`
+                `ATTACK: ${displayAttack}`,
+                `DICE POOL: ${dicePool}`
             ])
 
             /*
@@ -2629,9 +2658,9 @@
             setAttrs({
                 roll_array: final,
                 roll_base: base,
-                roll_nomods: baseNoMods,
                 rolldisplay_base: displayBase,
                 rolldisplay_attack: displayAttack,
+                rolldisplay_ischance: dicePool <= 0 ? 1 : 0,
                 rolldisplay: display
             });
         });
@@ -2700,47 +2729,47 @@
                 if(isSecondEdition) {
                     switch(v[`attack_type${i}`]) {
                         // Melee
-                        case "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                         // Gun
-                        case "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                         // Thrown
-                        case "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                         // Brawl (FF)
-                        case "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                         // Melee (FF)
-                        case "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                     }
                 } else {
                     switch(v[`attack_type${i}`]) {
                         // Melee
-                        case "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                         // Gun
-                        case "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                         // Thrown
-                        case "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                         // Brawl (FF)
-                        case "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                         // Melee (FF)
-                        case "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
                             break;
                     }
                 }
