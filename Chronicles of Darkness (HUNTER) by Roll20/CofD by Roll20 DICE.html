@@ -2,7 +2,7 @@
 <div class="background">
 
 <!-- SHEET OPTIONS & PAGE TABS-->
-<input type="radio" class="attr sheetoptions settingssheet" name="attr_pagenumber" title="Settings" value="settings" />
+<input type="radio" class="attr sheetoptions settingssheet" name="attr_pagenumber" title="Settings" value="settings" style="margin-left: 600px;" />
 <span class="sheet-attr" data-i18n="settings" >Settings</span>
 
 <input type="radio" class="attr sheetoptions pages page1" name="attr_pagenumber" title="Page1" value="1" checked="checked" />
@@ -97,6 +97,8 @@
             </tr>
             <tr>
                 <td colspan="2" class="sheet-initiative sheet-rolltoggles">	
+                    <input type="radio" class="sheet-attr" style="margin-left: 6px;" name="attr_rerolldice" value="0" />
+                    <span class="sheet-attr" >None </span>
                     <input type="radio" class="sheet-attr" name="attr_rerolldice" value="10" checked />
                     <span class="sheet-attr" >10A </span>
                     <input type="radio" class="sheet-attr" name="attr_rerolldice" value="9" />
@@ -104,82 +106,34 @@
                     <input type="radio" class="sheet-attr" name="attr_rerolldice" value="8" />
                     <span class="sheet-attr" >8A </span>
                     <input type="radio" class="sheet-attr" name="attr_rerolldice" value="1" />
-                    <span class="sheet-attr" style="margin-right: 65px;" >Rote</span>
+                    <span class="sheet-attr" >Rote</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="rollcontainer rollbuttons">
+                    <div><button type="roll" name="roll_check" value="@{roll_nomods}@{rolltype}"></button></div>
+                    <div><button type="roll" name="roll_check" value="@{roll_base}@{rolltype}"></button></div>
+                    <div><button type="roll" name="roll_initiative" value="&{template:wod-initiative} {{name=@{character_name}}} {{dexterity=@{dexterity}}} {{composure=@{composure}}} {{fastReflexes=@{fast_reflexes}}} {{initiativePenalty=@{initiative_penalty}}} {{result=[[1d10 + @{dexterity} + @{composure} + @{fast_reflexes} + @{initiative_penalty} &{tracker}]]}}"></button></div>
+                    <div><button type="roll" name="roll_check" value="@{rollattack}@{rolltype}"></button></div>
+                    <div><button type="roll" name="roll_check" value="@{rollsimple}@{rolltype}"></button></div>
+                    <div><button type="roll" name="roll_check" value="@{rollchance}"></button></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="sheet-rolldisplay">
+                    <textarea name="attr_rolldisplay_base"></textarea>
+                    <br>
+                    <div class="attackdisplay">
+                        <span class="attackdisplay-start">atk:</span><span class="attackdisplay">
+                            <textarea class="attackdisplay" name="attr_rolldisplay_attack"></textarea>
+                        </span>
+                    </div>
+                </td>
+                <td class="sheet-rolldisplay sheet-rolltoggles sheet-rollflags" style="text-align: center; text-align-last: center;">
                     <input type="checkbox" class="sheet-attr" name="attr_spendwp" value="1" />
-                    <span class="sheet-attr" style="margin-right: 20px;"  >WP</span>
+                    <span class="sheet-attr" style="margin-top: 5px; margin-bottom: 10px;"  >Willpower</span><br>
                     <input type="checkbox" class="sheet-attr" name="attr_specialty" value="1" />
-                    <span class="sheet-attr" >Spec</span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="initiative">
-                    <button type="roll" name="roll_initiative" data-i18n="roll-initiative" value="&{template:wod-initiative} {{name=@{character_name}}} {{dexterity=@{dexterity}}} {{composure=@{composure}}} {{fastReflexes=@{fast_reflexes}}} {{initiativePenalty=@{initiative_penalty}}} {{result=[[1d10 + @{dexterity} + @{composure} + @{fast_reflexes} + @{initiative_penalty} &{tracker}]]}}">Roll Initiative</button>
-                </td>
-            </tr>
-            <tr class="rollstyle">
-                <td rowspan="3" class="rollcontainer">
-                    <button type="roll" name="roll_check" value="@{rollstyle}@{rolltype}"></button>
-                </td>
-                <td>
-                    <input type="radio" class="sheet-attr" name="attr_rollstyle" value="@{roll_base}" title="Sheet Roll" checked="checked" />
-                    <span class="sheet-attr" data-i18n="sheet-roll" >Sheet Roll</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="radio" class="sheet-attr" name="attr_rollstyle" value="@{rollattack}" />
-                    <span class="sheet-attr" data-i18n="attack-roll" >Attack Roll</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="bottom">
-                    <input type="radio" class="sheet-attr" name="attr_rollstyle" value="@{rollsimple}" />
-                    <span class="sheet-attr" data-i18n="simple-roll" >Simple Roll</span>
-                </td>
-            </tr>
-            <tr>
-                <td rowspan="7" class="rolldisplay">
-                    <textarea type="text" name="attr_rolldisplay"></textarea>
-                </td>
-                <td>
-                    <input type="radio" class="sheet-attr" name="attr_rolltype_select" value="Chance" />
-                    <span class="sheet-attr" data-i18n="chance" >Chance</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="radio" class="sheet-attr" name="attr_rolltype_select" value="Normal" title="Normal" checked="checked" />
-                    <span class="sheet-attr" data-i18n="normal" >Normal</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="radio" class="sheet-attr" name="attr_rolltype_select" value="9-Again" />
-                    <span class="sheet-attr" data-i18n="9-again">9-Again</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="radio" class="sheet-attr" name="attr_rolltype_select" value="8-Again" />
-                    <span class="sheet-attr" data-i18n="8-again">8-Again</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="radio" class="sheet-attr" name="attr_rolltype_select" value="Don't Reroll 10s" />
-                    <span class="sheet-attr" data-i18n="dont-reroll" >Don't Reroll 10s</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="radio" class="sheet-attr" name="attr_rolltype_select" value="Chance Rote" />
-                    <span class="sheet-attr" data-i18n="chance-rote" >Chance Rote</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="radio" class="sheet-attr" name="attr_rolltype_select" value="Rote" />
-                    <span class="sheet-attr" data-i18n="rote" >Rote</span>
+                    <span class="sheet-attr" >Specialty</span>
                 </td>
             </tr>
         </tbody>
@@ -396,6 +350,44 @@
     </table>
 </div>
 
+<div class="el_spacer"></div>
+
+<!-- TRACKER FIELDS -->
+<div class="sheet-3colrow trackers">
+    <table class="dottable">
+        <tr>
+            <td class="subheader">Health:</td>
+            <td class="variablecontainer">
+                <input type="radio" class="sheet-normal" name="attr_health" value="1" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_1" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_1" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_1" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_1" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_1">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="2" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_2" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_2" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_2" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_2" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_2">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="3" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_3" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_3" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_3" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_3" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_3">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="4" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_4" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_4" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_4" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_4" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_4">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="5" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_5" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_5" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_5" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_5" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_5">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="6" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_6" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_6" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_6" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_6" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_6">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="7" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_7" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_7" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_7" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_7" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_7">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="8" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_8" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_8" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_8" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_8" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_8">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="9" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_9" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_9" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_9" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_9" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_9">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="10" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_10" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_10" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_10" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_10" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_10">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="11" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_11" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_11" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_11" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_11" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_11">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="12" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_12" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_12" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_12" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_12" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_12">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="13" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_13" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_13" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_13" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_13" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_13">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="14" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_14" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_14" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_14" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_14" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_14">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="15" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_15" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_15" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_15" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_15" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_15">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="16" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_16" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_16" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_16" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_16" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_16">-1-2-3</span></span>
+            </td>
+            <td class="subheader">Willpower:</td>
+            <td class="variablecontainer">
+                <input type="hidden" name="attr_willpower_flag">
+                <input type="radio" class="sheet-normal" name="attr_willpower" value="1" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box1"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="2" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box2"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="3" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box3"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="4" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box4"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="5" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box5"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="6" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box6"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="7" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box7"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="8" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box8"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="9" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box9"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="10" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box10"><span></span></span>
+            </td>
+            <td class="subheader">
+                <span class="mortal hunter 1st" data-i18n="morality" >Morality:</span>
+                <span class="mortal hunter 2nd">Integrity:</span>
+                <span class="vampire" data-i18n="humanity" >Humanity:</span>
+                <span class="promethean 1st" data-i18n="humanity" >Humanity:</span>
+                <span class="promethean 2nd" data-i18n="pilgrimage" >Pilgrimage:</span>
+                <span class="werewolf" data-i18n="harmony" >Harmony:</span>
+                <span class="mage" data-i18n="wisdom" >Wisdom:</span>
+                <span class="changeling" data-i18n="clarity" >Clarity:</span>
+                <span class="geist" data-i18n="synergy" >Synergy:</span>
+                <span class="mummy" data-i18n="memory" >Memory:</span>
+                <span class="demon" data-i18n="cover" >Cover:</span>
+                <span class="beast" data-i18n="satiety" >Satiety:</span>
+            </td>
+            <td class="changeling 2nd variablecontainer">
+                <input type="radio" class="sheet-normal" name="attr_moralhealth" value="1" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_1" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_1" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_1" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="2" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_2" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_2" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_2" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="3" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_3" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_3" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_3" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="4" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_4" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_4" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_4" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="5" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_5" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_5" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_5" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="6" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_6" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_6" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_6" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="7" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_7" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_7" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_7" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="8" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_8" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_8" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_8" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="9" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_9" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_9" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_9" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="10" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_10" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_10" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_10" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="11" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_11" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_11" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_11" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="12" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_12" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_12" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_12" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="13" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_13" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_13" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_13" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="14" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_14" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_14" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_14" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="15" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_15" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_15" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_15" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="16" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_16" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_16" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_16" value="2" /><span class="sheet-lethaldot"></span></span>
+            </td>
+            <td class="normal variablecontainer" style="text-align: center;">
+                <input type="radio" class="sheet-normal" name="attr_morality" value="1" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="2" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="3" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="4" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="5" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="6" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="7" checked="checked" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="8" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="9" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="10" /><span></span>
+            </td>
+        </tr>
+    </table>
+</div>
 <div class="el_spacer"></div>
 
 <!-- SKILL FIELDS -->
@@ -783,7 +775,7 @@
     <table class="merits" style="margin-right: -47px; display: inline-block;">
         <tbody>
             <tr>
-                <th colspan="2" data-i18n="other-traits-u" style="padding-bottom: 6px;">OTHER TRAITS</th>
+                <th data-i18n="other-traits-u" style="padding-right: 100px; padding-bottom: 6px;">OTHER TRAITS</th>
             </tr>
             <tr>
                 <td>
@@ -1444,7 +1436,7 @@
                                         <td><input type="text" name="attr_attack_magazine0" class="weaponstat mag" disabled="disabled" value="-" /></td>
                                         <td><input type="number" name="attr_attack_initiative0" class="weaponstat init" disabled="disabled" value="0" /></td>
                                         <td><input type="number" name="attr_attack_strength0" class="weaponstat str" disabled="disabled" value="0" /></td>
-                                        <td><input type="number" name="attr_attack_size0" class="weaponstat size" disabled="disabled" value="-" /></td>
+                                        <td><input type="number" name="attr_attack_size0" class="weaponstat size" disabled="disabled" value="0" /></td>
                                     </tr>
                                     <tr>
                                         <td><input type="radio" class="sheet-weapon" name="attr_attack" value="{{attack_name=@{attack_name1}}} {{weapon_damage=@{attack_damage1}}} {{range=@{attack_range1}}} @{attack_type1}" /><span></span>
@@ -1600,56 +1592,7 @@
                     </table>
                 </td>
                 <td>
-                    <table class="dottable" style="margin-top: -25px;">
-                        <tr>
-                            <td class="subheader" data-i18n="health">Health</td>
-                        </tr>
-                        <tr>
-                            <td class="variablecontainer">
-                                <input type="radio" class="sheet-normal" name="attr_health" value="1" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_1" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_1" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_1" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_1" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_1">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="2" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_2" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_2" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_2" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_2" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_2">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="3" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_3" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_3" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_3" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_3" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_3">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="4" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_4" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_4" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_4" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_4" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_4">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="5" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_5" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_5" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_5" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_5" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_5">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="6" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_6" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_6" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_6" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_6" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_6">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="7" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_7" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_7" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_7" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_7" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_7">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="8" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_8" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_8" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_8" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_8" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_8">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="9" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_9" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_9" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_9" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_9" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_9">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="10" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_10" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_10" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_10" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_10" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_10">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="11" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_11" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_11" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_11" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_11" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_11">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="12" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_12" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_12" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_12" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_12" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_12">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="13" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_13" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_13" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_13" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_13" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_13">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="14" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_14" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_14" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_14" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_14" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_14">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="15" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_15" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_15" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_15" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_15" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_15">-1-2-3</span></span><input type="radio" class="sheet-normal" name="attr_health" value="16" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_healthbox_16" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_healthbox_16" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_healthbox_16" value="2" /><span class="sheet-lethaldot"></span><input type="radio" class="sheet-aggravateddot" name="attr_healthbox_16" value="3" /><span class="sheet-aggravateddot"></span></span><span class="woundpenalties"><span name="attr_woundpenalties_16">-1-2-3</span></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="spacer"><br><br></td>
-                        </tr>
-                        <tr>
-                            <td class="subheader" data-i18n="willpower">Willpower</td>
-                        </tr>
-                        <tr>
-                            <td class="variablecontainer">
-                                <input type="hidden" name="attr_willpower_flag">
-                                <input type="radio" class="sheet-normal" name="attr_willpower" value="1" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box1"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="2" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box2"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="3" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box3"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="4" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box4"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="5" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box5"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="6" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box6"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="7" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box7"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="8" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box8"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="9" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box9"><span></span></span><input type="radio" class="sheet-normal" name="attr_willpower" value="10" /><span></span><span class="healthboxcontainer"><input type="checkbox" class="sheet-normal" name="attr_willpower_box10"><span></span></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="spacer"></td>
-                        </tr>
-                        <tr>
-                            <td class="subheader">
-                                <span class="mortal hunter 1st" data-i18n="morality" >Morality</span>
-                                <span class="mortal hunter 2nd" data-i18n="integrity" >Integrity</span>
-                                <span class="vampire" data-i18n="humanity" >Humanity</span>
-                                <span class="promethean 1st" data-i18n="humanity" >Humanity</span>
-                                <span class="promethean 2nd" data-i18n="pilgrimage" >Pilgrimage</span>
-                                <span class="werewolf" data-i18n="harmony" >Harmony</span>
-                                <span class="mage" data-i18n="wisdom" >Wisdom</span>
-                                <span class="changeling" data-i18n="clarity" >Clarity</span>
-                                <span class="geist" data-i18n="synergy" >Synergy</span>
-                                <span class="mummy" data-i18n="memory" >Memory</span>
-                                <span class="demon" data-i18n="cover" >Cover</span>
-                                <span class="beast" data-i18n="satiety" >Satiety</span>
-                            </td>
-                        </tr>
-                        <tr class="changeling 2nd">
-                            <td class="variablecontainer">
-                                <input type="radio" class="sheet-normal" name="attr_moralhealth" value="1" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_1" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_1" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_1" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="2" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_2" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_2" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_2" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="3" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_3" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_3" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_3" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="4" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_4" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_4" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_4" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="5" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_5" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_5" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_5" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="6" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_6" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_6" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_6" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="7" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_7" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_7" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_7" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="8" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_8" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_8" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_8" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="9" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_9" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_9" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_9" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="10" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_10" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_10" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_10" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="11" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_11" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_11" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_11" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="12" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_12" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_12" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_12" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="13" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_13" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_13" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_13" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="14" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_14" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_14" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_14" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="15" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_15" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_15" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_15" value="2" /><span class="sheet-lethaldot"></span></span><input type="radio" class="sheet-normal" name="attr_moralhealth" value="16" /><span></span><span class="healthboxcontainer"><input type="radio" class="sheet-whitedot" name="attr_moralhealthbox_16" value="0" checked="checked" /><span class="sheet-whitedot"></span><input type="radio" class="sheet-bashingdot" name="attr_moralhealthbox_16" value="1" /><span class="sheet-bashingdot"></span><input type="radio" class="sheet-lethaldot" name="attr_moralhealthbox_16" value="2" /><span class="sheet-lethaldot"></span></span>
-                            </td>
-                        </tr>
-                        <tr class="normal">
-                            <td style="text-align: center;">
-                                <input type="radio" class="sheet-normal" name="attr_morality" value="1" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="2" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="3" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="4" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="5" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="6" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="7" checked="checked" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="8" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="9" /><span></span><input type="radio" class="sheet-normal" name="attr_morality" value="10" /><span></span>
-                            </td>
-                        </tr>
+                    <table class="dottable" style="margin-top: -63px;">
                         <tr>
                             <td class="rowtext" style="padding-top: 8px;"><span class="touchstone subheader">6</span><input type="text" class="touchstone" name="attr_touchstone1" /></td>
                         </tr>
@@ -1741,6 +1684,31 @@
                                 </table>
                             </td>
                         </tr>
+                        
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="subheader">Tilts</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="rowtext"><input type="text" name="attr_tilts1" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="rowtext"><input type="text" name="attr_tilts2" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="rowtext"><input type="text" name="attr_tilts3" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="rowtext"><input type="text" name="attr_tilts4" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="el_spacer"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
                         <tr>
                             <td class="subheader">
                                 <span class="mortal" data-i18n="other" >Other</span>
@@ -1804,7 +1772,7 @@
 </div>
 
 <!-- PAGE 2 -->
-<div class="expandedsheet" style="margin-top: -60px;">
+<div class="expandedsheet" style="margin-top: -110px;">
 
     <div class="leftcolumn">
 
@@ -1869,7 +1837,7 @@
 </div>
 
 <!-- PAGE 3 -->
-<div class="expandedsheet2" style="width: 100%;">
+<div class="expandedsheet2" style="width: 100%; margin-top:-140px;">
     <div class="fullcolumn customcolumn">
         <fieldset class="repeating_textfieldfull">
             <input type="text" class="subheader" name="attr_textfieldfullname"><br>
@@ -1910,6 +1878,11 @@
 <input type="hidden" name="attr_attack_base_damage" value="((@{attack_damage0}+0)*@{attack_flag0})+((@{attack_damage1}+0)*@{attack_flag1})+((@{attack_damage2}+0)*@{attack_flag2})+((@{attack_damage3}+0)*@{attack_flag3})+((@{attack_damage4}+0)*@{attack_flag4})" />
 <input type="hidden" name="attr_roll_array" />
 <input type="hidden" name="attr_roll_base" />
+<input type="hidden" name="attr_roll_nomods" />
+<input type="hidden" name="attr_rolldisplay_base" />
+<input type="hidden" name="attr_rolldisplay_baseNoMods" />
+<input type="hidden" name="attr_rolldisplay_attack" />
+<input type="hidden" name="attr_rolldisplay_simple" />
 <input type="hidden" name="attr_defense_base" />
 <input type="hidden" name="attr_potency_name" />
 <input type="hidden" name="attr_rolltype" value=")d10!cs>10}>8]]}}" />
@@ -2106,8 +2079,11 @@
         </tr>
         <tr>
             <td class="specialrollflag">
+                {{#noreroll}}
+                    <span style="text-decoration: line-through;">10</span>
+                {{/noreroll}}
                 {{#chance}}
-                    0C
+                    Ch
                 {{/chance}}
                 {{#9again}}
                     9A
@@ -2115,6 +2091,9 @@
                 {{#8again}}
                     8A
                 {{/8again}}
+                {{#rote}}
+                    Rt
+                {{/rote}}
             </td>
         </tr>
     </table>
@@ -2122,17 +2101,40 @@
 
 <rolltemplate class="sheet-rolltemplate-wod-simple">
     <table>
-        <tr><th>{{name}} <span data-i18n="rolls">rolls</span></th></tr>
-        <tr><td class="attr">
-            {{option}} <span data-i18n="dice-for">dice for</span><br>
-        </td></tr>
+        <tr>
+            <th>{{name}} <span data-i18n="rolls">rolls</span></th>
+        </tr>
+        <tr>
+            {{#chance}}
+            <td class="attr">
+                <span style="color: darkred;">a Chance Die for</span>
+            </td>
+            {{/chance}}
+
+            {{#extramodline}}
+            <td class="attr">
+                {{option}} <span>dice</span><br>
+                {{extramodline}} <span>for</span><br>
+            </td>
+            {{/extramodline}}
+            {{^extramodline}}
+            {{^chance}}
+            <td class="attr">
+                {{option}} <span data-i18n="dice-for">dice for</span><br>
+            </td>
+            {{/chance}}
+            {{/extramodline}}
+        </tr>
         <tr>
             <td class="result">{{result}} <span data-i18n="successes">Successes</span></td>
         </tr>
         <tr>
             <td class="specialrollflag">
+                {{#noreroll}}
+                    <span style="text-decoration: line-through; font-weight: bold; color: darkred;">10</span>
+                {{/noreroll}}
                 {{#chance}}
-                    0C
+                    Ch
                 {{/chance}}
                 {{#9again}}
                     9A
@@ -2140,6 +2142,9 @@
                 {{#8again}}
                     8A
                 {{/8again}}
+                {{#rote}}
+                    Rt
+                {{/rote}}
             </td>
         </tr>
     </table>
@@ -2153,14 +2158,17 @@
         <tr>
             <td class="attr">
             {{#part1}}
-                {{part1}}({{part1pool}})<br>
+                {{part1}} ({{part1pool}})<br>
             {{/part1}}
             {{#part2}}
-                {{part2}}({{part2pool}})<br>
+                {{part2}} ({{part2pool}})<br>
             {{/part2}}
             {{#part3}}
-                {{part3}}({{part3pool}})<br>
+                {{part3}} ({{part3pool}})<br>
             {{/part3}}
+            {{#extramodline}}
+                {{extramodline}}<br>
+            {{/extramodline}}
             {{#^rollTotal() woundpenalty 0}}
                 <span data-i18n="wound">Wound</span> <span data-i18n="penalty">Penalty</span>({{woundpenalty}})
             {{/^rollTotal() woundpenalty 0}}
@@ -2173,8 +2181,11 @@
         </tr>
         <tr>
             <td class="specialrollflag">
+                {{#noreroll}}
+                    <span style="text-decoration: line-through; font-weight: bold; color: darkred;">10</span>
+                {{/noreroll}}
                 {{#chance}}
-                    0C
+                    Ch
                 {{/chance}}
                 {{#9again}}
                     9A
@@ -2182,6 +2193,9 @@
                 {{#8again}}
                     8A
                 {{/8again}}
+                {{#rote}}
+                    Rt
+                {{/rote}}
             </td>
         </tr>
     </table>
@@ -2189,7 +2203,7 @@
 
 <rolltemplate class="sheet-rolltemplate-wod-initiative">
     <table>
-        <tr><th>{{name}} <span data-i18n="rolls">rolls</span> <span data-i18n="initiative">Initiative</span></th></tr>
+        <tr><th>{{name}} <span>rolls Initiative</span></th></tr>
         <tr><td class="attr">
             {{#dexterity}}
                 <span data-i18n="dexterity">Dexterity</span>({{dexterity}})<br>
@@ -2281,14 +2295,15 @@
 </div>
 
 <script type="text/worker">
+    
     var attributes = ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure"];
     var skills = ["academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge"];
     var normalStats = ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge"];
     var powers = ["animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time"];
     var allStats = ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time","potency"];
-    var potencyNames = { mortal1:"", mortal2:"", vampire1:"Blood Potency", vampire2:"Blood Potency", werewolf1:"Primal Urge", werewolf2:"Primal Urge", mage1:"Gnosis", mage2:"Gnosis", promethean1:"Azoth", promethean2:"Azoth", changeling1:"Wyrd", changeling2:"Wyrd", demon:"Primum", beast:"Lair", hunter:"", geist1:"Psyche", mummy1:"Sekhem" };
+    var potencyNames = { mortal1:"", mortal2:"", vampire1:"Blood Potency", vampire2:"Blood Potency", werewolf1:"Primal Urge", werewolf2:"Primal Urge", mage1:"Gnosis", mage2:"Gnosis", promethean1:"Azoth", promethean2:"Azoth", changeling1:"Wyrd", changeling2:"Wyrd", demon:"Primum", beast:"Lair", hunter:"", geist1:"Psyche", mummy1:"Sekhem", hunter2:"" };
 
-    ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time","potency","rolltype"].forEach((attr) => {
+    ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time","potency","rolltype"].forEach((attr) => {
         on(`change:${attr} change:${attr}_flag`, (eventInfo) => {
             const source = eventInfo.sourceAttribute;
             const attribute = (attr.includes("flag")) ? attr.split(`_flag`)[0] : attr; //Remove the "_flag" part so we can pass the name
@@ -2380,7 +2395,7 @@
         updateWoundPenalties();
     });
 
-    on("change:rolltype_select", function() {
+    on("change:rolltype_select change:rerolldice change:spendwp change:specialty", function() {
         updateRollType();
     });
 
@@ -2411,6 +2426,11 @@
                 }
             });
             var prev_rarray = v.roll_array && v.roll_array != "" ? v.roll_array.split(",") : [];
+            var consoleLines = ["====== UPDATE ROLLS: ATTRIBUTES PASSED: ======="]
+            for (const [name, val] of Object.entries(v))
+                if (`${val}` !== "0" && val && !normalStats.includes(name.toLowerCase()))
+                    consoleLines.push(`${name.toUpperCase()}: ${typeof val === "string" ? `"${val}"` : val}`)
+            consoleLines.push(" ")
             if(stat != "rolltype") {
                 if(parseInt(v[stat_flag], 10) === 0) {
                     if(rarray.indexOf(stat) > -1) {
@@ -2479,23 +2499,95 @@
                }
                return transX.charAt(0).toUpperCase() + transX.slice(1);//note I actually prefer to do this using .replace if there's going to be a chance for multi word casing
             });
+            
+            consoleLines.push(...[
+                "====== RARRAY: ======",
+                rarray.join(", "),
+                " ",
+                "====== ORDER: ======",
+                order.join(", "),
+                " ",
+                "====== NAMES: ======",
+                names.join(", "),
+            ])
 
             var base = "&{template:wod-simple} {{name=@{character_name}}} {{option=?{@{dicepoolmacro}|0}}} {{result=[[{(?{@{dicepoolmacro}|1}@{rolltype}";
+            var baseNoMods = base;
+            var result = ""
+            var resultNoMods = ""
             if(order.length > 0) {
                 base = "&{template:wod-3part} {{name=@{character_name}}} {{mod=[[?{@{modifiermacro}|0}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}}";
-                var result = " {{result=[[{((?{@{modifiermacro}|0}+@{wound_penalty}+" + v[order[0]];
+                baseNoMods = "&{template:wod-3part} {{name=@{character_name}}} {{mod=0}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}}";
+
+                result = " {{result=[[{((?{@{modifiermacro}|0}+@{wound_penalty}+" + v[order[0]];
+                resultNoMods = " {{result=[[{((@{wound_penalty}+" + v[order[0]];
                 if(order.length > 1) {
                     base = base + " {{part2=" + names[1] + "}} {{part2pool=" + v[order[1]] + "}}";
+                    baseNoMods = baseNoMods + " {{part2=" + names[1] + "}} {{part2pool=" + v[order[1]] + "}}";
                     result = result + "+" + v[order[1]];
+                    resultNoMods = resultNoMods + "+" + v[order[1]];
                 }
                 if(order.length > 2) {
                     base = base + " {{part3=" + names[2] + "}} {{part3pool=" + v[order[2]] + "}}";
+                    baseNoMods = baseNoMods + " {{part3=" + names[2] + "}} {{part3pool=" + v[order[2]] + "}}";
                     result = result + "+" + v[order[2]];
+                    resultNoMods = resultNoMods + "+" + v[order[2]];
                 }
                 base = base + result + ")@{rolltype}"
+                baseNoMods = baseNoMods + resultNoMods + ")@{rolltype}"
             }
-            var display = "";
-            if(v.rollstyle === "@{roll_base}") {
+            consoleLines.push(...[
+                " ",
+                "====== ROLL TEMPLATE CALLS: ======",
+                `RESULT: ${result}`,
+                `BASE: ${base}`,
+                " ",
+                `RESULT-NOMODS: ${result}`,
+                `BASE-NOMODS: ${baseNoMods}`,
+                " "
+            ])
+            var display = "",
+                displayBase = "",
+                displayAttack = "";
+
+            if (order.length === 0)
+                displayBase = `${display}${getTranslationByKey("simple-roll")}\n`
+            else
+                displayBase = names.join(" +\n");
+            var regex = /attack_type(.)/;
+            var attack_type = "attack_type" + v.attack.match(regex)[1];
+            var attackTerms = []
+            if(v[attack_type].indexOf("str=1") > -1) {
+                attackTerms.push(getTranslationByKey("strength"))
+            }
+            if(v[attack_type].indexOf("dex=1") > -1) {
+                attackTerms.push(getTranslationByKey("dexterity"))
+            }
+            if(v[attack_type].indexOf("bra=1") > -1) {
+                attackTerms.push(getTranslationByKey("brawl"))
+            }
+            if(v[attack_type].indexOf("wea=1") > -1) {
+                attackTerms.push(getTranslationByKey("weaponry"))
+            }
+            if(v[attack_type].indexOf("fir=1") > -1) {
+                attackTerms.push(getTranslationByKey("firearms"))
+            }
+            if(v[attack_type].indexOf("ath=1") > -1) {
+                attackTerms.push(getTranslationByKey("athletics"))
+            }
+
+            displayAttack = attackTerms.join(" + ");
+            
+            consoleLines.push(...[
+                " ",
+                "====== DISPLAYS: ======",
+                `BASE: ${displayBase}`,
+                `ATTACK: ${displayAttack}`
+            ])
+
+            /*
+
+            if(v.rollstyle === "@{roll_base}" || v.rollstyle === "@{roll_nomods}") {
                 if(order.length === 0) {
                     display = `${display}${getTranslationByKey("simple-roll")}\n`
                 }
@@ -2530,14 +2622,135 @@
             else if(v.rollstyle === "@{rollsimple}") {
                 display = `${display}${getTranslationByKey("simple-roll")}\n`
             }
+            */
+
+            console.log(consoleLines.join("\n"))
 
             setAttrs({
                 roll_array: final,
                 roll_base: base,
+                roll_nomods: baseNoMods,
+                rolldisplay_base: displayBase,
+                rolldisplay_attack: displayAttack,
                 rolldisplay: display
             });
         });
-    };
+    };    
+
+    var updateRollType = function() {
+        getAttrs(["rolltype_select","sheettype","attack_type0","attack_type1","attack_type2","attack_type3","attack_type4", "rollflag_chance", "rerolldice", "spendwp", "specialty"], function(v) {
+            var consoleLines = []
+            for (const [name, val] of Object.entries(v))
+                consoleLines.push(`${name.toUpperCase()}: ${typeof val === "string" ? `"${val}"` : val}`)
+            consoleLines.push(" ")
+            var update = {
+                rollchance: "&{template:wod-simple} {{name=@{character_name}}} {{result=[[{1d10cf<1}>10]]}} {{chance=1}}"
+            };
+            var isSecondEdition = v.sheettype === "mortal2" ||
+                v.sheettype === "vampire2" ||
+                v.sheettype === "werewolf2" ||
+                v.sheettype === "mage2" ||
+                v.sheettype === "promethean2" ||
+                v.sheettype === "changeling2" ||
+                v.sheettype === "demon" ||
+                v.sheettype === "beast" ||
+                v.sheettype === "hunter2";
+            var templateConstructor = [],
+                extraDice = 0,
+                extraRollMods = [];
+            if (parseInt(v.spendwp)) {
+                extraDice += 3;
+                extraRollMods.push("+ WP (3)")
+            }
+            if (parseInt(v.specialty)) {
+                extraDice += 1;
+                extraRollMods.push("+ Sp (1)")
+            }
+            switch (v.rerolldice) {
+                case "0": {
+                    update["rolltype"] = `+${extraDice})d10cs>10}>8]]}} {{noreroll=1}}`;
+                    break
+                }
+                case "10": {
+                    update["rolltype"] = `+${extraDice})d10!cs>10}>8]]}}`;
+                    break
+                }
+                case "9": {
+                    update["rolltype"] = `+${extraDice})d10!>9cs>9}>8]]}} {{9again=1}}`;
+                    break
+                }
+                case "8": {
+                    update["rolltype"] = `+${extraDice})d10!>8cs>8}>8]]}} {{8again=1}}`;
+                    break
+                }
+                case "1": {
+                    update["rolltype"] = `+${extraDice})d10ro<7}>8]]}} {{rote=1}}`;
+                    update["rollchance"] = "&{template:wod-simple} {{name=@{character_name}}} {{option=1}} {{result=[[{1d10ro<7cf<1}>10]]}} {{chance=1}} {{rote=1}}";
+                    break
+                }
+            }
+            if (extraDice) {
+                update["rolltype"] += " {{extramodline=@{extrarollmoddisplay}}}"
+                update["extrarollmoddisplay"] = `<span style="color: darkgreen;">${extraRollMods.join(" ")}</span>`
+            } else {
+                update["extrarollmoddisplay"] = ""
+            }
+            // (PRD-1406) Check that attack type is correlated to edition
+            for(var i = 0; i < 5; i++) {
+                if(isSecondEdition) {
+                    switch(v[`attack_type${i}`]) {
+                        // Melee
+                        case "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                        // Gun
+                        case "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                        // Thrown
+                        case "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                        // Brawl (FF)
+                        case "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                        // Melee (FF)
+                        case "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                    }
+                } else {
+                    switch(v[`attack_type${i}`]) {
+                        // Melee
+                        case "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                        // Gun
+                        case "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                        // Thrown
+                        case "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                        // Brawl (FF)
+                        case "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                        // Melee (FF)
+                        case "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                            break;
+                    }
+                }
+            }
+            for (const [name, val] of Object.entries(update))
+                consoleLines.push(`${name.toUpperCase()}: ${typeof val === "string" ? `"${val}"` : val}`)
+            console.log(consoleLines.join("\n"))
+            setAttrs(update, {silent: true});
+        });
+    }
 
     var updateHealth = function() {
         getAttrs(["stamina","base_size","giant","small_framed","sheettype","resilience","bonus_health"], function(v) {
@@ -2647,7 +2860,8 @@
                 v.sheettype === "promethean2" ||
                 v.sheettype === "changeling2" ||
                 v.sheettype === "demon" ||
-                v.sheettype === "beast") {
+                v.sheettype === "beast" ||
+                v.sheettype === "hunter2")  {
                 defense = "lowest_plus_athletics";
             }
             else {
@@ -2683,106 +2897,6 @@
             setAttrs({
                 potency_name: potencyNames[v.sheettype]
             });
-        });
-    }
-
-    var updateRollType = function() {
-        getAttrs(["rolltype_select","sheettype","attack_type0","attack_type1","attack_type2","attack_type3","attack_type4"], function(v) {
-            var update = {};
-            var isSecondEdition = v.sheettype === "mortal2" ||
-                v.sheettype === "vampire2" ||
-                v.sheettype === "werewolf2" ||
-                v.sheettype === "mage2" ||
-                v.sheettype === "promethean2" ||
-                v.sheettype === "changeling2" ||
-                v.sheettype === "demon" ||
-                v.sheettype === "beast";
-            var value;
-            switch (v.rolltype_select) {
-                case "Chance":
-                    if (isSecondEdition) {
-                        value = "*0+1)d10cf<1}>10]]}} {{chance=1}}";
-                    }
-                    else {
-                        value = "*0+1)d10!cf<1}>10]]}} {{chance=1}}";
-                    }
-                    break;
-                case "Normal":
-                    value = ")d10!cs>10}>8]]}}";
-                    break;
-                case "9-Again":
-                    value = ")d10!>9cs>9}>8]]}} {{9again=1}}";
-                    break;
-                case "8-Again":
-                    value = ")d10!>8cs>8}>8]]}} {{8again=1}}";
-                    break;
-                case "Don't Reroll 10s":
-                    value = ")d10cs>10}>8]]}}";
-                    break;
-                case "Rote":
-                    value = ")d10ro<7}>8]]}}";
-                    break;
-                case "Chance Rote":
-                    if (isSecondEdition) {
-                        value = "*0+1)d10ro<7cf<1}>10]]}} {{chance=1}}";
-                    }
-                    else {
-                        value = "*0+1)d10!ro<7cf<1}>10]]}} {{chance=1}}";
-                    }
-                    break;
-            }
-            update["rolltype"] = value;
-            // (PRD-1406) Check that attack type is correlated to edition
-            for(var i = 0; i < 5; i++) {
-                if(isSecondEdition) {
-                    switch(v[`attack_type${i}`]) {
-                        // Melee
-                        case "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                        // Gun
-                        case "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                        // Thrown
-                        case "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                        // Brawl (FF)
-                        case "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                        // Melee (FF)
-                        case "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                    }
-                } else {
-                    switch(v[`attack_type${i}`]) {
-                        // Melee
-                        case "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                        // Gun
-                        case "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                        // Thrown
-                        case "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                        // Brawl (FF)
-                        case "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                        // Melee (FF)
-                        case "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+?{@{modifiermacro}|0}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
-                            break;
-                    }
-                }
-            }
-            setAttrs(update, {silent: true});
         });
     }
 
