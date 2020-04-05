@@ -93,21 +93,31 @@
     <table>
         <tbody>
             <tr>
-                <td colspan="2" class="sheet-initiative sheet-rolltoggles">	
-                    <input type="radio" class="sheet-attr" style="margin-left: 6px;" name="attr_rerolldice" value="0" />
-                    <span class="sheet-attr" >None </span>
-                    <input type="radio" class="sheet-attr" name="attr_rerolldice" value="10" checked />
-                    <span class="sheet-attr" >10A </span>
-                    <input type="radio" class="sheet-attr" name="attr_rerolldice" value="9" />
-                    <span class="sheet-attr" >9A </span>
-                    <input type="radio" class="sheet-attr" name="attr_rerolldice" value="8" />
-                    <span class="sheet-attr" >8A </span>
-                    <input type="radio" class="sheet-attr" name="attr_rerolldice" value="1" />
-                    <span class="sheet-attr" >Rote</span>
+                <td colspan="2" class="sheet-rollagaintoggles">
+                    <div>
+                        <input type="radio" class="sheet-rolldisplay-dicepool sheet-rollagaintoggle" name="attr_rerolldice" value="10" checked />
+                        <textarea class="sheet-rolldisplay-dicepool" name="attr_dicepooldisplay" value=""></textarea>
+                        <input type="radio" class="sheet-rollagaintoggle sheet-norerolltoggle" name="attr_rerolldice" value="0" />
+                        <span class="sheet-rollagaintoggle" >NO<br>reroll</span>
+                        <input type="radio" class="sheet-rollagaintoggle" name="attr_rerolldice" value="9" />
+                        <span class="sheet-rollagaintoggle" >9<br>again</span>
+                        <input type="radio" class="sheet-rollagaintoggle" name="attr_rerolldice" value="8" />
+                        <span class="sheet-rollagaintoggle" >8<br>again</span>
+                        <input type="radio" class="sheet-rollagaintoggle" name="attr_rerolldice" value="1" />
+                        <span class="sheet-rollagaintoggle" >ROTE<br>roll</span>
+                        <textarea class="sheet-rolldisplay-wounds" name="attr_wound_penalty"></textarea>
+                    </div>
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="rollcontainer rollbuttons">
+                <td colspan="2" class="sheet-rolldisplay-full">
+                    <div>
+                        <input class="rolldisplay-chance" type="checkbox" name="attr_rolldisplay_ischance" value="1"><textarea name="attr_rolldisplay_base"></textarea>
+                    </div>
+                </td>                
+            </tr>
+            <tr>
+                <td colspan="2" class="sheet-rollbuttons">
                     <div><button type="roll" name="roll_check" value="@{roll_base}@{rolltype}"></button></div>
                     <div><button type="roll" name="roll_initiative" value="&{template:wod-initiative} {{name=@{character_name}}} {{dexterity=@{dexterity}}} {{composure=@{composure}}} {{fastReflexes=@{fast_reflexes}}} {{initiativePenalty=@{initiative_penalty}}} {{result=[[1d10 + @{dexterity} + @{composure} + @{fast_reflexes} + @{initiative_penalty} &{tracker}]]}}"></button></div>
                     <div><button type="roll" name="roll_check" value="@{rollattack}@{rolltype}"></button></div>
@@ -116,22 +126,18 @@
                 </td>
             </tr>
             <tr>
-                <td class="sheet-rolldisplay">
-                    <input class="rolldisplay-chance" type="checkbox" name="attr_rolldisplay_ischance" value="1"><textarea name="attr_rolldisplay_base"></textarea>
-                    <br>
-                    <div class="attackdisplay">
-                        <span class="attackdisplay-start">atk:</span><span class="attackdisplay">
-                            <textarea class="attackdisplay" name="attr_rolldisplay_attack"></textarea>
-                        </span>
-                    </div>
+                <td class="sheet-rollflags">
+                    <input type="number" name="attr_rollmodifier" value="0" /><span>└ modifier<br><span style="font-size: 10px;"></span>defense ─┐</span>
+                    <input type="checkbox" class="sheet-rollflag" name="attr_spendwp" value="1" /><span>spend<br>WILLPOWER</span>
+                    <input type="checkbox" class="sheet-rollflag" name="attr_specialty" value="1" /><span>apply<br>SPECIALTY</span>
                 </td>
-                <td class="sheet-rolldisplay sheet-rolltoggles sheet-rollflags" style="padding-top: 4px; padding-bottom: 0px;">
-                    <input type="number" name="attr_rollmodifier" value="0" />
-                    <span>Mod / Def</span><br>
-                    <input type="checkbox" class="sheet-attr" name="attr_spendwp" value="1" />
-                    <span class="sheet-attr" style="margin-bottom: 5px;" >Willpower</span><br>
-                    <input type="checkbox" class="sheet-attr" name="attr_specialty" value="1" />
-                    <span class="sheet-attr" >Specialty</span>
+            </tr>
+            <tr>
+                <td class="sheet-rolldisplay-attack">
+                    <div>
+                        <textarea class="attack-start" name="attr_rolldisplay_attack_start"></textarea>
+                        <textarea class="rolldisplay-attack" name="attr_rolldisplay_attack"></textarea>
+                    </div>
                 </td>
             </tr>
         </tbody>
@@ -2405,7 +2411,7 @@
         }
     });
 
-    on("change:rollmodifier", function(eventInfo) {
+    on("change:rollmodifier change:rerolldice change:spendwp change:specialty", function(eventInfo) {
         if (eventInfo.sourceType != "sheetworker") {
             console.log(`==== Ch:ROLLMOD ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
             updateRolls("rolltype");
@@ -2539,14 +2545,20 @@
             var base = "&{template:wod-simple} {{name=@{character_name}}} {{option=?{@{dicepoolmacro}|0}}} {{result=[[{(?{@{dicepoolmacro}|1}@{rolltype}";
             var result = "";
             var dicePool = 0;
+            var dicePoolAdjust = 0;
+            var extraDisplayParts = [];
             if (parseInt(v["specialty"])|0 > 0)
                 dicePool += 1;
             if (parseInt(v["spendwp"])|0 > 0)
                 dicePool += 3;
-            if (parseInt(v["rollmodifier"])|0 !== 0)
+            if (parseInt(v["rollmodifier"])|0 !== 0) {
                 dicePool += parseInt(v["rollmodifier"])
-            if (parseInt(v["wound_penalty"])|0 !== 0)
+                extraDisplayParts.push(`${dicePool < 0 ? "-" : "+"} ${Math.abs(dicePool)}`)
+            }
+            if (parseInt(v["wound_penalty"])|0 !== 0) {
                 dicePool += parseInt(v["wound_penalty"])
+                extraDisplayParts.push(`- Wnd (${Math.abs(parseInt(v["wound_penalty"]))})`)
+            }
             if(order.length > 0) {
                 base = "&{template:wod-3part} {{name=@{character_name}}} {{mod=[[@{rollmodifier}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}}";
                 result = " {{result=[[{((@{rollmodifier}+@{wound_penalty}+" + v[order[0]];
@@ -2582,6 +2594,8 @@
                 displayBase = `${display}${getTranslationByKey("simple-roll")}\n`
             else
                 displayBase = names.join(" + ");
+            if (extraDisplayParts.length)
+                displayBase += ` ${extraDisplayParts.join(" ")}`
             var regex = /attack_type(.)/;
             var attack_type = "attack_type" + v.attack.match(regex)[1];
             var attackTerms = []
@@ -2661,7 +2675,8 @@
                 rolldisplay_base: displayBase,
                 rolldisplay_attack: displayAttack,
                 rolldisplay_ischance: dicePool <= 0 ? 1 : 0,
-                rolldisplay: display
+                rolldisplay: display,
+                dicepooldisplay: dicePool <= 0 ? "Ch" : dicePool
             });
         });
     };    

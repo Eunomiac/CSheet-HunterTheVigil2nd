@@ -392,6 +392,7 @@ input.sheet-sheetoptions.sheet-huntersheet:checked +span.sheet-attr {
     text-shadow: 0px 0px 10px black;
 }
 
+
 input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .sheet-weaponstat.sheet-name {
     color: #2A2D80;
     text-shadow: 0px 0px 10px black;
@@ -414,9 +415,13 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 
 .sheet-diceroller {
     position: absolute;
-    top: 18px;
+    top: 6px;
     left: 30px;
-    background: white;
+    width: 260px;
+}
+
+.charsheet .sheet-diceroller table {
+    width: 100%;
 }
 
 .charsheet .sheet-diceroller table th {
@@ -426,15 +431,138 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     padding-top: 5px;
 }
 
-.charsheet .sheet-diceroller table {
-    border: solid 1px #000000;
-    width: 286px;
-}
-
 .charsheet .sheet-diceroller table td {
-    border-right: solid 1px #000000;
+    padding: 0px;
 }
 
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div {
+    display: block;
+    height: 29px;
+    font-size: 0px;
+    margin-bottom: -3px;
+}
+
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div textarea,
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle,
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle {
+    height: 100%;
+    width: calc(100% / 7);
+    margin: 0px;
+    padding: 0px;
+    padding-top: 5px;
+    line-height: 10px;
+    font-family: Voltaire;
+    font-size: 14px;
+    vertical-align: top;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    text-align-last: center;
+    display: inline-block;
+    font-variant: small-caps;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div textarea.sheet-rolldisplay-dicepool {
+    top: 10px;
+    left: -20px;
+    height: 30px;
+    line-height: 20px;
+    width: 50px;    
+    padding-top: 19px;
+    margin-right: -25px;
+    
+    font-family: "Special Elite";
+    font-weight: bold;
+    font-size: 32px;
+    
+    border: 3px solid darkgreen;
+    border-radius: 40px;
+
+    z-index: 6000;
+}
+
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle {
+    opacity: 0;
+    z-index: 9999;
+    height: calc(100% - 2px);
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle.sheet-rolldisplay-dicepool {
+    height: 56px;
+    width: 55px;
+    left: -20px;
+    margin-right: -55px;
+    top: 10px;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle {
+    height: calc(100% - 10px);
+    line-height: 10px;
+    width: calc(100% / 7 - 2px);
+    margin: 0px;
+    margin-left: calc(-1 * 100% / 7);
+    padding: 4px 1px;
+
+    color: white;
+    font-size: 14px;
+    font-weight: normal !important;
+
+    z-index: 2000;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle:nth-of-type(1) {
+    background-color: darkred;
+}
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle:nth-of-type(2) {
+    background-color: rgb(100, 255, 100);
+    color: black;    
+}
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle:nth-of-type(3) {
+    background-color: rgb(100, 255, 100);
+    color: black;
+    
+}
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle:nth-of-type(4) {
+    background-color: rgb(100, 255, 100);
+    color: black;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle:not(:checked) + span.sheet-rollagaintoggle {
+    background-color: transparent;
+    color: #999;
+    font-weight: normal;
+    border: none;
+    height: calc(100% - 11px);
+    width: calc(100% / 7 - 2px);
+    z-index: 1000;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle:not(:checked):hover + span.sheet-rollagaintoggle {
+    color: black;
+    background-color: rgb(200, 255, 200);
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle.sheet-norerolltoggle + span.sheet-rollagaintoggle {
+    width: calc(100% / 7 + 10px - 15px - 2px - 2px);
+    margin-left: calc(-1 * (100% / 7 + 10px));
+    padding-left: 15px;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle.sheet-norerolltoggle:not(:checked):hover + span.sheet-rollagaintoggle {
+    color: black;
+    background-color: rgb(255, 200, 200);
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div textarea.sheet-rolldisplay-wounds {
+    display: none;
+}
+
+
+/* 
 .charsheet .sheet-diceroller table .sheet-bottom {
     border-bottom: solid 1px #000000;
 }
@@ -444,19 +572,111 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     text-align: center;
     text-align-last: center;
 }
+*/
 
-.charsheet .sheet-diceroller .sheet-rollcontainer div {
-    display: inline-block;
-    width: 35px;
-    height: 35px;
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-full {
+    height: 20px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+
+    text-align: left;
+    text-align-last: left;
 }
 
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(1) { background: url('https://i.imgur.com/X0cOWfN.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(2) { background: url('https://i.imgur.com/PZIOGkO.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(3) { background: url('https://i.imgur.com/MXlJlKc.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(4) { background: url('https://i.imgur.com/4JudYAV.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller .sheet-rollcontainer.sheet-rollbuttons div:nth-child(5) { background: url('https://i.imgur.com/NXEtJGS.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div {
+    display: inline-block;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+    position: relative;
+    z-index: 5000;
+}
 
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div input.sheet-rolldisplay-chance {
+    display: none;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div textarea {
+    height: 18px;
+    width: calc(100% - 6px);
+    resize: none;
+    overflow: hidden;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border: none;
+    padding: 0px;
+    text-align: center;
+    pointer-events: none;
+    font-size: 16px;
+    font-family: "Voltaire";
+    font-weight: bold;
+    margin: 0px;
+    text-indent: 35px;
+    border-radius: 30px;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div input.sheet-rolldisplay-chance:checked + textarea {
+    background-color: darkred;
+    color: white;
+    border: 3px solid darkred;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div input.sheet-rolldisplay-chance:not(:checked) + textarea {    
+    background-color: transparent;
+    color:black;
+    border: 3px solid darkgreen;
+}
+
+
+.charsheet .sheet-diceroller table td.sheet-rollbuttons {
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(1) { background: url('https://i.imgur.com/q95sJ1H.png') no-repeat center/contain; margin-left: 30px; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(2) { background: url('https://i.imgur.com/95BptcB.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(3) { background: url('https://i.imgur.com/iDhKncZ.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(4) { background: url('https://i.imgur.com/92tEiSm.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(5) { background: url('https://i.imgur.com/WE1mJ0Y.png') no-repeat center/contain; }
+
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(1) { background: url('https://i.imgur.com/pM1zDE4.png') no-repeat center/contain; margin-left: 25px; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(2) { background: url('https://i.imgur.com/B7Rj2u0.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(3) { background: url('https://i.imgur.com/Fa5G4K0.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(4) { background: url('https://i.imgur.com/onKRA2C.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(5) { background: url('https://i.imgur.com/AcwEq8p.png') no-repeat center/contain; }
+
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background-size: 130% !important;
+    position: relative;
+    z-index: 1000;
+    margin: -5px;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover {
+    height: 55px;
+    width: 55px;
+    background-size: 110% !important;
+    z-index: 9999;
+    vertical-align: middle;
+    margin: -13px -10px;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div button {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    height: 45px;
+    width: 45px;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+/*
 .charsheet .sheet-diceroller button:before {
     font-family: "Courier" !important;
     content: "Roll" !important;
@@ -468,93 +688,140 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     width: 100%;
     opacity: 0;
 }
+*/
 
-.charsheet .sheet-diceroller .sheet-rolldisplay textarea {
-    resize: none;
-    overflow: hidden;
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    border: none;
-    padding: 0px;
-    text-align: center;
-    height: 35px;
-    pointer-events: none;
-    width: 180px;
-    font-size: 14px;
-    font-family: "Special Elite";
-    font-weight: bold;
+.charsheet .sheet-diceroller table td.sheet-rollflags {
+    font-size: 0px;
 }
 
-.charsheet .sheet-diceroller .sheet-rolldisplay input.sheet-rolldisplay-chance {
-    display: none;
-}
-
-.charsheet .sheet-diceroller .sheet-rolldisplay input.sheet-rolldisplay-chance:checked + textarea {
-    background-color: darkred;
-    color: white;
-}
-
-.charsheet .sheet-diceroller .sheet-rolldisplay input.sheet-rolldisplay-chance:not(:checked) + textarea {
-    background-color: transparent;
-    color:black;
-}
-
-.charsheet .sheet-diceroller td.sheet-rolldisplay {
-    text-align: center;
-    text-align-last: center;
-}
-
-.charsheet .sheet-diceroller td.sheet-rolldisplay span.sheet-attackdisplay-start {
+.charsheet .sheet-diceroller table td.sheet-rollflags input {
     display: inline-block;
-    height: 12px;
-    width: 20px;
+    height: 28px;
+    width: calc(100% / 3);
     margin: 0px;
     padding: 0px;
     font-family: Voltaire;
-    font-weight: bold;
-    text-align: center;
-    text-align-last: center;
-    color: white;
-    background-color: darkred;
-    font-variant: small-caps;
-    line-height: 10px;
-
+    z-index: 12000;
+    position: relative;
+    font-size: 14px;
+    opacity: 0;
+    color: black;
 }
 
-.charsheet .sheet-diceroller td.sheet-rolldisplay div.sheet-attackdisplay {
+.charsheet .sheet-diceroller table td.sheet-rollflags input[type=number] {
+    width: 38px;
+    height: 38px;
+    margin-right: 5px;
+    font-weight: bold;
+    text-align: right;
+    text-align-last: right;
+    opacity: 1;
+    line-height: 38px;
+    font-size: 22px;
+    font-family: "Special Elite"; 
+    margin-bottom: -12px;
+    border: none;
+    box-shadow: none;
+    margin-top: -5px;
+    padding-top: 2px;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag {
+    margin-right: calc(-1 * 100% / 3);
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollflags input + span {
     display: inline-block;
-    height: 12px;
-    width: 180px;
-    margin: 0px;
+    height: 28px;
+    width: calc(100% / 3);
     padding: 0px;
-    background-color: #ff000033;
-    border: 1px solid darkred;
+    margin: 0px;
+    font-family: Voltaire;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    text-align-last: center;
+    line-height: 14px;
+    vertical-align: top;
+    font-variant: small-caps;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollflags input[type=number] + span {
+    width: calc(100% / 3 - 38px - 5px);
     text-align: left;
     text-align-last: left;
+    color: black;
+    line-height: 12px;
+    padding-top: 1px;
 }
 
-.charsheet .sheet-diceroller td.sheet-rolldisplay span.sheet-attackdisplay {
+.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag:nth-of-type(2) + span {
+    background-color: teal;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag:nth-of-type(3) + span {
+    background-color: darkviolet;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag:not(:checked) + span {
+    font-weight: normal;
+    color: #CCC;
+    background-color: transparent;    
+}
+
+.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag:not(:checked):hover + span {
+    color: black;
+    background-color: rgba(0,0,255,0.2);    
+}
+
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack {
+}
+
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack div {
+    display: block;
+    border: 3px solid darkred;
+    border-radius: 30px;
+    height: 16px;
+    background-color: rgba(100,0,0,0.2);
+}
+
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack div textarea {
     display: inline-block;
-    height: 12px;
-    width: 150px;
+    height: 16px;
     margin: 0px;
     padding: 0px;
-    margin-left: 5px;
+    font-family: Voltaire;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-align-last: center;
+    border: none;
+    box-shadow: none;
+    pointer-events: none;
 }
 
-.charsheet .sheet-diceroller .sheet-rolldisplay textarea.sheet-attackdisplay {
-    font-family: Voltaire;
-    font-size: 10px;
-    width: 100%;
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack div textarea.sheet-attack-start {
+    color: white;
+    width: 80px;
+    background-color: darkred;
+    font-variant: small-caps;
+    line-height: 14px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    padding-top: 2px;
+    margin-left: -2px;
+    margin-top: -1px;
+}
+
+.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack div textarea.sheet-rolldisplay-attack {
+    width: calc(100% - 80px);
     color: darkred;
-    font-weight: bold;
-    height: 12px;
-    line-height: 12px;
+    line-height: 14px;
     background-color: transparent;
-    margin-bottom: -3px;
+    text-align: left;
+    text-align-last: left;
     text-indent: 3px;
-} 
+}
 
 .charsheet .sheet-3colrow {
     display: inline-block;
@@ -909,26 +1176,6 @@ span.sheet-opt {
     cursor: pointer;
     position: relative;
     margin-left: -91px;
-}
-
-td.sheet-rolltoggles input.sheet-attr {
-    width: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-td.sheet-rolltoggles span.sheet-attr {
-    margin-left: -28px;
-}
-
-td.sheet-rolltoggles.sheet-rollflags input.sheet-attr {
-    width: 110px;
-    margin-right: 0px;
-}
-
-td.sheet-rolltoggles.sheet-rollflags span.sheet-attr {
-    margin-left: -115px;
-    margin-right: 5px;
 }
 
 input.sheet-opt:checked + span.sheet-opt
@@ -1831,52 +2078,6 @@ tr.sheet-wpnheader td.sheet-a-str { background-image: url('https://i.imgur.com/y
     width: 100%;
     opacity: 0;
 }
-
-.charsheet .sheet-diceroller table td.sheet-initiative {
-    border-bottom: solid 1px #000000;
-    text-align: center;
-    padding: 0px;
-    padding-top: 4px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-initiative button:before {
-    content: "" !important;
-}
-
-.charsheet .sheet-diceroller table td.sheet-initiative button {
-    color: #2A2D80;
-    text-shadow: 0px 0px 10px black;
-    font-weight: bold;
-    height: auto;
-    width: auto;
-    opacity: 100;
-    cursor: pointer;
-    background: none;
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-.charsheet .sheet-diceroller td.sheet-rollflags input[type=number] {    
-    font-family: "Special Elite";
-    width: 25px;
-    height: 18px;
-    padding: 0px;
-    padding-top: 3px;
-    margin-left: -6px;
-    font-size: 14px;
-    font-weight: bold;
-    color: black;
-    margin-top: -4px;
-}
-
-.charsheet .sheet-diceroller td.sheet-rollflags input[type=number] + span {    
-    display: inline-block;
-    height: 18px;
-    padding: 0px;
-    margin: 0px;
-}
-
 
 .sheet-expandedsheet textarea,
 .sheet-expandedsheet2 textarea {

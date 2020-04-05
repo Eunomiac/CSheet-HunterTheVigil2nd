@@ -114,7 +114,7 @@
         }
     });
 
-    on("change:rollmodifier", function(eventInfo) {
+    on("change:rollmodifier change:rerolldice change:spendwp change:specialty", function(eventInfo) {
         if (eventInfo.sourceType != "sheetworker") {
             console.log(`==== Ch:ROLLMOD ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
             updateRolls("rolltype");
@@ -248,14 +248,20 @@
             var base = "&{template:wod-simple} {{name=@{character_name}}} {{option=?{@{dicepoolmacro}|0}}} {{result=[[{(?{@{dicepoolmacro}|1}@{rolltype}";
             var result = "";
             var dicePool = 0;
+            var dicePoolAdjust = 0;
+            var extraDisplayParts = [];
             if (parseInt(v["specialty"])|0 > 0)
                 dicePool += 1;
             if (parseInt(v["spendwp"])|0 > 0)
                 dicePool += 3;
-            if (parseInt(v["rollmodifier"])|0 !== 0)
+            if (parseInt(v["rollmodifier"])|0 !== 0) {
                 dicePool += parseInt(v["rollmodifier"])
-            if (parseInt(v["wound_penalty"])|0 !== 0)
+                extraDisplayParts.push(`${dicePool < 0 ? "-" : "+"} ${Math.abs(dicePool)}`)
+            }
+            if (parseInt(v["wound_penalty"])|0 !== 0) {
                 dicePool += parseInt(v["wound_penalty"])
+                extraDisplayParts.push(`- Wnd (${Math.abs(parseInt(v["wound_penalty"]))})`)
+            }
             if(order.length > 0) {
                 base = "&{template:wod-3part} {{name=@{character_name}}} {{mod=[[@{rollmodifier}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}}";
                 result = " {{result=[[{((@{rollmodifier}+@{wound_penalty}+" + v[order[0]];
@@ -291,6 +297,8 @@
                 displayBase = `${display}${getTranslationByKey("simple-roll")}\n`
             else
                 displayBase = names.join(" + ");
+            if (extraDisplayParts.length)
+                displayBase += ` ${extraDisplayParts.join(" ")}`
             var regex = /attack_type(.)/;
             var attack_type = "attack_type" + v.attack.match(regex)[1];
             var attackTerms = []
@@ -370,7 +378,8 @@
                 rolldisplay_base: displayBase,
                 rolldisplay_attack: displayAttack,
                 rolldisplay_ischance: dicePool <= 0 ? 1 : 0,
-                rolldisplay: display
+                rolldisplay: display,
+                dicepooldisplay: dicePool <= 0 ? "Ch" : dicePool
             });
         });
     };    
