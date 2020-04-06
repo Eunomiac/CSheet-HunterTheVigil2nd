@@ -235,3 +235,11 @@ Call_of_Cthulhu_Spanish/Delta Green Variant
 /base.css
 /app.css
 /.vs/config/applicationhost.config
+
+*
+/*
+!/Chronicles of Darkness (HUNTER) by Roll20
+!/Chronicles of Darkness (HUNTER) by Roll20/**
+!/Chronicles of Darkness by Roll20
+!/Chronicles of Darkness by Roll20/**
+.github/pull_request_template.md
