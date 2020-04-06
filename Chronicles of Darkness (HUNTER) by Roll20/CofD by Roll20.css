@@ -1,4 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Voltaire|Iceland|Share+Tech+Mono|Prosto+One|Special+Elite|Andada|Balthazar|Belgrano|Bree+Serif|Cantata+One|Copse|Cutive|Josefin+Slab|Markazi+Text|Noto+Serif|Pridi&display=swap');
+@import url('https://fonts.googleapis.com/css?family="Voltaire"|Special+Elite|Belgrano|Oswald:200,300,400,500,600,700|Teko:300,400,500,600,700&display=swap');
+
+.charsheet {
+    --colorWhite: #FFFFFF;
+    --colorBG: #F4F5F4;
+    --colorGrey: #BEC4C1;
+    --color1: #D6E1DB;
+    --color2: #96A79E;
+    --color3: #5F746B;
+    --color4: #315347;
+    --color5: #1F382E;
+    --color6: #0E1E16;
+    --colorBlack: #000000;
+}
+
 
 .charsheet {
     font-family: "Courier";
@@ -388,13 +402,13 @@ input.sheet-beastsheet:checked ~ div * input.sheet-weapon:checked + span + .shee
 input.sheet-huntersheet:checked ~ div * input.sheet-attr:checked + span.sheet-attr,
 input.sheet-huntersheet:checked ~ span > input.sheet-attr:checked + span.sheet-attr,
 input.sheet-sheetoptions.sheet-huntersheet:checked +span.sheet-attr {
-    color: #2A2D80;
+    color: var(--color4);
     text-shadow: 0px 0px 10px black;
 }
 
 
 input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .sheet-weaponstat.sheet-name {
-    color: #2A2D80;
+    color: var(--color4);
     text-shadow: 0px 0px 10px black;
     font-weight: bold;
 }
@@ -413,11 +427,189 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     height: 20px;
 }
 
+.charsheet div.sheet-dicerollergrid {
+    display: grid;
+    width: 342px;
+    height: 200px;
+    grid: [row1-start] "header header header header header header header header" 25px [row1-end]
+          [row2-start] "dicepool dicepool rollagain1 rollagain2 rollagain3 rollagain4 . ." 25px [row2-end]
+          [row3-start] "dicepool dicepool rolldisplay rolldisplay rolldisplay rolldisplay rolldisplay rolldisplay" 25px [row3-end]
+          [row4-start] ". . rollbutton1 rollbutton2 rollbutton3 rollbutton4 rollbutton5 ." 40px [row4-end]
+          [row5-start] ". modinput modlabel modlabel buttonwp buttonwp buttonspec buttonspec" 0.5fr [row5-end]
+          [row6-start] "attacklabel attacklabel attacklabel attackdisplay attackdisplay attackdisplay attackdisplay attackdisplay" 0.5fr [row6-end]
+          / 25px 25px 1fr 1fr 1fr 1fr 1fr 1fr;
+    background-color: var(--colorBlack);
+    padding: 10px;
+    grid-gap: 0px;
+    position: absolute;
+    z-index: 20000;
+}
+
+.charsheet div.sheet-dicerollergrid div {
+    display: grid;
+    place-self: stretch;
+    place-content: center;
+    overflow: hidden;
+}
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-header { 
+    grid-area: header;
+    justify-content: start;
+ }
+.charsheet div.sheet-dicerollergrid div.sheet-area-dicepool { 
+    grid-area: dicepool;
+    justify-content: start;
+ }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain1 { grid-area: rollagain1 ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain2 { grid-area: rollagain2 ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain3 { grid-area: rollagain3 ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain4 { grid-area: rollagain4 ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rolldisplay { grid-area: rolldisplay ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton1 { grid-area: rollbutton1 ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton2 { grid-area: rollbutton2 ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton3 { grid-area: rollbutton3 ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton4 { grid-area: rollbutton4 ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton5 { grid-area: rollbutton5 ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-modinput { grid-area: modinput ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-modlabel { grid-area: modlabel ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-buttonwp { grid-area: buttonwp ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-buttonspec { grid-area: buttonspec ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-attacklabel { grid-area: attacklabel ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay { grid-area: attackdisplay ; }
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-header { background-color: var(--color2); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-dicepool { background-color: var(--color2); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain1 { background-color: var(--color3) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain2 { background-color: var(--color4) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain3 { background-color: var(--color5) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain4 { background-color: var(--color6) ; }
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-rolldisplay { background-color: var(--color3) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton1 { background-color: var(--color4) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton2 { background-color: var(--color2) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton3 { background-color: var(--color4) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton4 { background-color: var(--color2) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton5 { background-color: var(--color4) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-modinput { background-color: var(--colorWhite)}
+.charsheet div.sheet-dicerollergrid div.sheet-area-modlabel { background-color: var(--color5)}
+.charsheet div.sheet-dicerollergrid div.sheet-area-buttonwp { background-color: var(--color3)}
+.charsheet div.sheet-dicerollergrid div.sheet-area-buttonspec { background-color: var(--color4); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-attacklabel { background-color: var(--color3) ; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay { background-color: var(--color2) ; }
+
+.charsheet .sheet-roundleft {
+    border-top-left-radius: 12.5px;
+    border-bottom-left-radius: 12.5px;
+}
+
+.charsheet .sheet-curvedownleft {
+    border-top-left-radius: 25px;
+}
+
+.charsheet .sheet-roundright {
+    border-top-right-radius: 12.5px;
+    border-bottom-right-radius: 12.5px;
+}
+
+.charsheet .sheet-curvedownright {
+    border-top-right-radius: 25px;
+}
+
+.charsheet .sheet-circular {
+    border-radius: 50%;
+}
+
+.charsheet .sheet-lcarstext {
+    font-family: "Oswald";
+    font-weight: 600;
+    text-transform: uppercase;
+
+    color: white;
+    font-size: 24px;
+    line-height: 25px;
+}
+
+.charsheet .sheet-lcarstext span {
+    transform-origin: center left;
+    transform: scale(0.50, 1);
+    display: inline-block;
+    margin: 0px;
+    width: auto;
+    height: 100%;
+}
+
+.charsheet .sheet-lcarstext span.sheet-lcarstitle {
+    background-color: black;
+    color: var(--color1);   
+    padding: 0px 10px 0px 10px;
+    position: relative;
+    font-size: 30px;
+    line-height: 24px;
+    z-index: 20;
+    height: 25px;
+    justify-content: start;
+}
+
+.charsheet .sheet-lcarstext span.sheet-lcarsdicepool {
+    padding: 0px 25px;
+    height: 25px;
+    font-size: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .sheet-diceroller {
     position: absolute;
     top: 6px;
     left: 30px;
     width: 260px;
+}
+
+.charsheet .sheet-diceroller:not(.sheet-dicerollergrid) div.sheet-lcars {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 300px;
+    height: 167px;
+    width: 322px;
+    background-color: var(--colorBlack);
+    font-size: 0px;
+    margin: 0px;
+    padding: 0px;
+    z-index: 14000;
+
+    border: solid var(--colorBlack) 10px;
+
+}
+
+.charsheet .sheet-diceroller:not(.sheet-dicerollergrid) div.sheet-lcars div.sheet-lcarsheader {
+    display: block;
+    height: 25px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+    background-color: var(--color2);
 }
 
 .charsheet .sheet-diceroller table {
@@ -453,7 +645,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     padding: 0px;
     padding-top: 5px;
     line-height: 10px;
-    font-family: Voltaire;
+    font-family: "Voltaire";
     font-size: 14px;
     vertical-align: top;
     border: none;
@@ -705,7 +897,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     width: calc(100% / 3);
     margin: 0px;
     padding: 0px;
-    font-family: Voltaire;
+    font-family: "Voltaire";
     z-index: 12000;
     position: relative;
     font-size: 14px;
@@ -741,7 +933,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     width: calc(100% / 3);
     padding: 0px;
     margin: 0px;
-    font-family: Voltaire;
+    font-family: "Voltaire";
     color: white;
     font-size: 14px;
     text-align: center;
@@ -795,7 +987,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     height: 16px;
     margin: 0px;
     padding: 0px;
-    font-family: Voltaire;
+    font-family: "Voltaire";
     font-size: 12px;
     font-weight: bold;
     text-align: center;
@@ -958,7 +1150,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .sheet-3colrow table th, .sheet-skills table th, .sheet-othertraits table th {
     font-size: 1.7em;
     font-weight: bolder;
-    font-family: "Courier";
+    font-family: "Special Elite";
     color: #000000;
     text-decoration: overline underline;
     text-align: center;
@@ -1217,7 +1409,7 @@ input[type="checkbox"].sheet-normal + span::before,
     text-align: center;
     display: inline-block;
     vertical-align: middle;
-    font-family: Courier;
+    font-family: "Courier";
 
     -moz-box-shadow: 0 0 0px #000;
     -webkit-box-shadow: 0 0 0px #000;
@@ -2137,7 +2329,7 @@ tr.sheet-wpnheader td.sheet-a-str { background-image: url('https://i.imgur.com/y
 }
 
 div.repcontrol button.btn {
-    font-family: Voltaire;
+    font-family: "Voltaire";
     width: 30px;
     border: none;
     background: none;
