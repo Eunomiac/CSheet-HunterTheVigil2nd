@@ -630,23 +630,28 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     border: 3px solid darkgreen;
 }
 
-
-.charsheet .sheet-diceroller table td.sheet-rollbuttons {
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div.sheet-rollbuttoncontainer {
+    display: block;
+    border-radius: 30px;
+    border: 3px inset grey;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
 }
 
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(1) { background: url('https://i.imgur.com/q95sJ1H.png') no-repeat center/contain; margin-left: 30px; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(2) { background: url('https://i.imgur.com/95BptcB.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(3) { background: url('https://i.imgur.com/iDhKncZ.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(4) { background: url('https://i.imgur.com/92tEiSm.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:nth-child(5) { background: url('https://i.imgur.com/WE1mJ0Y.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(1) { background: url('https://i.imgur.com/q95sJ1H.png') no-repeat center/contain; margin-left: 30px; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(2) { background: url('https://i.imgur.com/95BptcB.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(3) { background: url('https://i.imgur.com/iDhKncZ.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(4) { background: url('https://i.imgur.com/92tEiSm.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(5) { background: url('https://i.imgur.com/WE1mJ0Y.png') no-repeat center/contain; }
 
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(1) { background: url('https://i.imgur.com/pM1zDE4.png') no-repeat center/contain; margin-left: 25px; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(2) { background: url('https://i.imgur.com/B7Rj2u0.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(3) { background: url('https://i.imgur.com/Fa5G4K0.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(4) { background: url('https://i.imgur.com/onKRA2C.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover:nth-child(5) { background: url('https://i.imgur.com/AcwEq8p.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(1) { background: url('https://i.imgur.com/pM1zDE4.png') no-repeat center/contain; margin-left: 25px; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(2) { background: url('https://i.imgur.com/tNlMBPq.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(3) { background: url('https://i.imgur.com/Fa5G4K0.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(4) { background: url('https://i.imgur.com/onKRA2C.png') no-repeat center/contain; }
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(5) { background: url('https://i.imgur.com/AcwEq8p.png') no-repeat center/contain; }
 
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div {
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div {
     display: inline-block;
     width: 45px;
     height: 45px;
@@ -656,7 +661,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     margin: -5px;
 }
 
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div:hover {
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover {
     height: 55px;
     width: 55px;
     background-size: 110% !important;
@@ -665,7 +670,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     margin: -13px -10px;
 }
 
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div button {
+.charsheet .sheet-diceroller table td.sheet-rollbuttons div div button {
     height: 100%;
     width: 100%;
     opacity: 0;

@@ -118,11 +118,13 @@
             </tr>
             <tr>
                 <td colspan="2" class="sheet-rollbuttons">
-                    <div><button type="roll" name="roll_check" value="@{roll_base}@{rolltype}"></button></div>
-                    <div><button type="roll" name="roll_initiative" value="&{template:wod-initiative} {{name=@{character_name}}} {{dexterity=@{dexterity}}} {{composure=@{composure}}} {{fastReflexes=@{fast_reflexes}}} {{initiativePenalty=@{initiative_penalty}}} {{result=[[1d10 + @{dexterity} + @{composure} + @{fast_reflexes} + @{initiative_penalty} &{tracker}]]}}"></button></div>
-                    <div><button type="roll" name="roll_check" value="@{rollattack}@{rolltype}"></button></div>
-                    <div><button type="roll" name="roll_check" value="@{rollsimple}@{rolltype}"></button></div>
-                    <div><button type="roll" name="roll_check" value="@{rollchance}"></button></div>
+                    <div class="sheet-rollbuttoncontainer">
+                        <div><button type="roll" name="roll_check" value="@{roll_base}@{rolltype}"></button></div>
+                        <div><button type="roll" name="roll_initiative" value="&{template:wod-initiative} {{name=@{character_name}}} {{dexterity=@{dexterity}}} {{composure=@{composure}}} {{fastReflexes=@{fast_reflexes}}} {{initiativePenalty=@{initiative_penalty}}} {{result=[[1d10 + @{dexterity} + @{composure} + @{fast_reflexes} + @{initiative_penalty} &{tracker}]]}}"></button></div>
+                        <div><button type="roll" name="roll_check" value="@{rollattack}@{rolltype}"></button></div>
+                        <div><button type="roll" name="roll_check" value="@{rollsimple}@{rolltype}"></button></div>
+                        <div><button type="roll" name="roll_check" value="@{rollchance}"></button></div>
+                    </div>
                 </td>
             </tr>
             <tr>
