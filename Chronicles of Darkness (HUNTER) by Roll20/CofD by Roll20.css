@@ -1,23 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family="Voltaire"|Special+Elite|Belgrano|Oswald:200,300,400,500,600,700|Teko:300,400,500,600,700&display=swap');
 
+/*#region CONFIGURATION & TAB CONTROL*/
 .charsheet {
+    font-family: "Courier";
+    margin-left: -20px;
+    padding: 0px !important;
+    
     --colorWhite: #FFFFFF;
-    --colorBG: #F4F5F4;
     --colorGrey: #BEC4C1;
+    --colorBlack: #000000;
     --color1: #D6E1DB;
     --color2: #96A79E;
     --color3: #5F746B;
     --color4: #315347;
     --color5: #1F382E;
     --color6: #0E1E16;
-    --colorBlack: #000000;
-}
+    --colorBG: #F4F5F4;
+    --colorBrightBG: var(--color6);
 
-
-.charsheet {
-    font-family: "Courier";
-    margin-left: -20px;
-    padding: 0px !important;
+    --blackBorder: 2px solid var(--colorBlack);
+    --blankBorder: none;
+    --topBorder: solid none none none;
+    --bottomBorder: none none solid none;
+    --leftBorder: none none none solid;
+    --rightBorder: none solid none none;
 }
 
 .sheet-background {
@@ -81,6 +87,7 @@ input.sheet-settingssheet:checked ~ div * table.sheet-settings {
 input.sheet-settingssheet:checked ~ div.sheet-3colrow,
 input.sheet-settingssheet:checked ~ div.sheet-2of3colrow,
 input.sheet-settingssheet:checked ~ div.sheet-diceroller,
+input.sheet-settingssheet:checked ~ div.sheet-dicerollergrid,
 input.sheet-settingssheet:checked ~ div.sheet-skills,
 input.sheet-settingssheet:checked ~ div.sheet-othertraits,
 input.sheet-settingssheet:checked ~ div.sheet-expandedsheet,
@@ -92,11 +99,13 @@ input.sheet-pages:checked ~ input.sheet-gametype + span,
 input.sheet-page2:checked ~ div.sheet-2of3colrow,
 input.sheet-page2:checked ~ div.sheet-3colrow,
 input.sheet-page2:checked ~ div.sheet-diceroller,
+input.sheet-page2:checked ~ div.sheet-dicerollergrid,
 input.sheet-page2:checked ~ div.sheet-skills,
 input.sheet-page2:checked ~ div.sheet-othertraits,
 input.sheet-page3:checked ~ div.sheet-2of3colrow,
 input.sheet-page3:checked ~ div.sheet-3colrow,
 input.sheet-page3:checked ~ div.sheet-diceroller,
+input.sheet-page3:checked ~ div.sheet-dicerollergrid,
 input.sheet-page3:checked ~ div.sheet-skills,
 input.sheet-page3:checked ~ div.sheet-othertraits {
     display: none !important;
@@ -426,76 +435,298 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .sheet-spacer {
     height: 20px;
 }
+/*#endregion*/
 
-.charsheet div.sheet-dicerollergrid {
-    display: grid;
-    width: 342px;
-    height: 200px;
-    grid: [row1-start] "header header header header header header header header" 25px [row1-end]
-          [row2-start] "dicepool dicepool rollagain1 rollagain2 rollagain3 rollagain4 . ." 25px [row2-end]
-          [row3-start] "dicepool dicepool rolldisplay rolldisplay rolldisplay rolldisplay rolldisplay rolldisplay" 25px [row3-end]
-          [row4-start] ". . rollbutton1 rollbutton2 rollbutton3 rollbutton4 rollbutton5 ." 40px [row4-end]
-          [row5-start] ". modinput modlabel modlabel buttonwp buttonwp buttonspec buttonspec" 0.5fr [row5-end]
-          [row6-start] "attacklabel attacklabel attacklabel attackdisplay attackdisplay attackdisplay attackdisplay attackdisplay" 0.5fr [row6-end]
-          / 25px 25px 1fr 1fr 1fr 1fr 1fr 1fr;
-    background-color: var(--colorBlack);
-    padding: 10px;
-    grid-gap: 0px;
-    position: absolute;
-    z-index: 20000;
-}
+/*#region GENERAL FONT & STYLE SETTINGS*/
+.charsheet div.sheet-dicerollergrid div textarea.sheet-lcars,
+.charsheet div.sheet-dicerollergrid div input[type="text"].sheet-lcars,
+.charsheet div.sheet-dicerollergrid div input[type="number"].sheet-lcars,
+.charsheet div.sheet-dicerollergrid div span.sheet-lcars {
+    --width: 200%;
+    --fontFamily: "Oswald";
+    --fontWeight: 600;
+    --fontSize: 24px;
+    --lineHeight: 25px;
+    --fontColor: var(--colorBlack);
+    --zIndex: 20;
 
-.charsheet div.sheet-dicerollergrid div {
-    display: grid;
-    place-self: stretch;
-    place-content: center;
+    transform-origin: center var(--textAlign);
+    transform: scale(var(--horizScale), 1); --horizScale: 0.5;
+    text-transform: uppercase;
+
     overflow: hidden;
 }
 
-.charsheet div.sheet-dicerollergrid div.sheet-area-header { 
-    grid-area: header;
-    justify-content: start;
- }
-.charsheet div.sheet-dicerollergrid div.sheet-area-dicepool { 
-    grid-area: dicepool;
-    justify-content: start;
- }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain1 { grid-area: rollagain1 ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain2 { grid-area: rollagain2 ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain3 { grid-area: rollagain3 ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain4 { grid-area: rollagain4 ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rolldisplay { grid-area: rolldisplay ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton1 { grid-area: rollbutton1 ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton2 { grid-area: rollbutton2 ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton3 { grid-area: rollbutton3 ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton4 { grid-area: rollbutton4 ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton5 { grid-area: rollbutton5 ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-modinput { grid-area: modinput ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-modlabel { grid-area: modlabel ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-buttonwp { grid-area: buttonwp ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-buttonspec { grid-area: buttonspec ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-attacklabel { grid-area: attacklabel ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay { grid-area: attackdisplay ; }
+.charsheet div.sheet-dicerollergrid div span.sheet-lcars.sheet-title {
+    /* --height: 25px; */
+    --width: max-content;
+    --bgColor: var(--colorBlack);
+    --fontColor: var(--color1);
+    --padding: 0px 10px 0px 10px;
+    --fontSize: 30px;
+    --lineHeight: 24px;
+}
 
-.charsheet div.sheet-dicerollergrid div.sheet-area-header { background-color: var(--color2); }
-.charsheet div.sheet-dicerollergrid div.sheet-area-dicepool { background-color: var(--color2); }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain1 { background-color: var(--color3) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain2 { background-color: var(--color4) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain3 { background-color: var(--color5) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain4 { background-color: var(--color6) ; }
+.charsheet div.sheet-dicerollergrid div span.sheet-lcars.sheet-tinyheader {
+    --height: 18px;
+    --width: auto;
+    --fontSize: 10px;
+    --textAlign: right;
+    --margin: 0px 1px 0px 0px;
+    --horizScale: 0.75;
+}
 
-.charsheet div.sheet-dicerollergrid div.sheet-area-rolldisplay { background-color: var(--color3) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton1 { background-color: var(--color4) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton2 { background-color: var(--color2) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton3 { background-color: var(--color4) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton4 { background-color: var(--color2) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-rollbutton5 { background-color: var(--color4) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-modinput { background-color: var(--colorWhite)}
-.charsheet div.sheet-dicerollergrid div.sheet-area-modlabel { background-color: var(--color5)}
-.charsheet div.sheet-dicerollergrid div.sheet-area-buttonwp { background-color: var(--color3)}
-.charsheet div.sheet-dicerollergrid div.sheet-area-buttonspec { background-color: var(--color4); }
-.charsheet div.sheet-dicerollergrid div.sheet-area-attacklabel { background-color: var(--color3) ; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay { background-color: var(--color2) ; }
+/*#endregion*/
+
+/*#region DICEROLLER*/
+.charsheet div.sheet-dicerollergrid {
+    display: grid;
+    width: 275px;
+    height: auto;
+    grid: "header header header header header header header" 25px
+        ". . dicepoolnum rollagain1 rollagain2 rollagain3 rollagain4" 2px
+        "dicepoolbar dicepoolbar dicepoolnum rollagain1 rollagain2 rollagain3 rollagain4" 20px
+        "dicepoolbar dicepoolbar dicepoolnum rolldisplay rolldisplay rolldisplay rolldisplay" 30px
+        ". . . . . . ." 2px
+        "modlabel modlabel modinput buttonwp buttonwp buttonspec buttonspec" 15px
+        ". . . . . . ." 2px
+        "dicelabel dicelabel rollbutton rollbutton rollbutton rollbutton rollbutton" 55px
+        ". . . . . . ." 2px
+        "attacklabel attacklabel attacklabel attackdisplay attackdisplay attackdisplay attackdisplay" 25px
+        ". . . . . . ." 1fr
+                / 10px 15px 35px 1fr 1fr 1fr 1fr;
+    background-color: var(--colorBlack);
+    padding: 4px;
+    grid-gap: 0px;
+    position: absolute;
+    z-index: 20000;
+    top: -20px;
+    left: 0px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px rgba(100,100,100,1);
+}
+
+.charsheet div.sheet-dicerollergrid div,
+.charsheet div.sheet-dicerollergrid div span,
+.charsheet div.sheet-dicerollergrid div textarea {
+    height: var(--height); --height: calc(1*100%);
+    width: var(--width); --width: auto;
+    margin: var(--margin); --margin: 0px;
+    padding: var(--padding); --padding: 0px;
+
+    background: var(--bgColor);
+
+    color: var(--fontColor); --fontColor: var(--color6);
+    font-family: var(--fontFamily); --fontFamily: auto;
+    font-size: var(--fontSize); --fontSize: 0px;
+    font-weight: var(--fontWeight); --fontWeight: normal;
+    line-height: var(--lineHeight); --lineHeight: normal;
+    text-align: var(--textAlign); --textAlign: left;
+    text-align-last: var(--textAlign);
+
+    border: var(--border); --border: var(--blackBorder);
+    border-style: var(--borderStyle); --borderStyle: var(--blankBorder);
+    
+    justify-self: var(--justSelf); --justSelf: stretch;
+    align-self: var(--alignSelf); --alignSelf: stretch;
+
+    position: relative;
+    z-index: var(--zIndex); --zIndex: auto;
+}
+
+.charsheet div.sheet-dicerollergrid div textarea {
+    pointer-events: none;
+}
+
+.charsheet div.sheet-dicerollergrid input[type="checkbox"],
+.charsheet div.sheet-dicerollergrid input[type="radio"] {
+    display: inline-block;
+    opacity: 0;
+    z-index: 9999;
+    height: var(--height); --height: 15px;
+    width: var(--width); --width: 100%;
+
+    margin-bottom: -15px;
+}
+
+.charsheet div.sheet-dicerollergrid input[type="radio"].sheet-bignumber {
+    height: 52px;
+    margin: 0px 0px -52px 0px;   
+}
+
+.charsheet div.sheet-dicerollergrid div textarea.sheet-lcars.sheet-bignumber {
+    --fontSize: 56px;
+    --lineHeight: 50px;
+    --fontColor: var(--color1);
+    --height: 52px;
+    
+    text-align: center;
+    text-align-last: center;
+}
+
+
+.charsheet div.sheet-dicerollergrid div textarea.sheet-lcars.sheet-bignumber {
+    --fontSize: 56px;
+    --lineHeight: 47px;
+    --fontColor: var(--color1);
+    
+    text-align: center;
+    text-align-last: center;
+}
+
+.charsheet div.sheet-dicerollergrid div {
+    --width: 100%;
+    display: grid;
+    grid-area: var(--gridArea); --gridArea: auto;
+    justify-items: var(--justItems); --justItems: stretch;
+    align-items: var(--alignItems); --alignItems: stretch;
+    justify-content: var(--justContent); --justContent: stretch;
+    align-content: var(--alignContent); --alignContent: stretch;
+
+    overflow: hidden;
+}
+
+.charsheet div.sheet-dicerollergrid div.sheet-rollflagbutton {
+    --alignContent: start;
+    --padding: 8px 0px 0px 0px;
+}
+.charsheet div.sheet-dicerollergrid div.sheet-area-header { --gridArea: header; --zIndex: 30; --bgColor: var(--color2); --justItems: start; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-header span.sheet-lcars.sheet-title { --margin: 0px 0px 0px 40px; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-dicepoolnum { --gridArea: dicepoolnum; --bgColor: var(--colorBlack); --fontColor: var(--colorWhite); --fontSize: 50px; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-dicepool { --gridArea: dicepoolbar; --bgColor: var(--color3); --alignContent: end; --justContent: end; --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain1 { --gridArea: rollagain1; --bgColor: var(--colorBlack); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain2 { --gridArea: rollagain2; --bgColor: var(--colorBlack); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain3 { --gridArea: rollagain3; --bgColor: var(--colorBlack); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollagain4 { --gridArea: rollagain4; --bgColor: var(--colorBlack); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rolldisplay { --gridArea: rolldisplay; --bgColor: var(--colorBlack); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-dicelabel { --gridArea: dicelabel; --bgColor: var(--color1); --alignContent: end; --justContent: end; --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons { --gridArea: rollbutton; --bgColor: var(--colorBlack); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-modinput { --gridArea: modinput; --bgColor: var(--colorWhite); --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-modlabel { --gridArea: modlabel; --bgColor: var(--color2); --alignContent: end; --justContent: end; --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-buttonwp { --gridArea: buttonwp; --bgColor: var(--colorBlack); --padding: 0px; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-buttonspec { --gridArea: buttonspec; --bgColor: var(--colorBlack); --padding: 0px; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-attacklabel { --gridArea: attacklabel; --bgColor: var(--colorBlack); --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay { --gridArea: attackdisplay; --bgColor: var(--color2); }
+
+
+.charsheet div.sheet-dicerollergrid div.sheet-rollflagbutton span.sheet-lcars {
+    --width: 195%;
+    --height: 15px;
+    --textAlign: center;
+    --fontSize: 14px;
+    --lineHeight: 14px;
+    --bgColor: var(--color2);
+    --fontColor: var(--colorBlack);
+
+    place-self: center;
+    border-radius: 11px;
+ }
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-modinput input[type="number"].sheet-lcars.sheet-mednumber {
+    transform: none;
+    text-align: right;
+    text-align-last: right;
+    background: var(--colorBlack);
+    font-size: 18px;
+    width: 100%;
+    height: 15px;
+    font-weight: bold;
+    font-family: "Oswald";
+    color: var(--color1);
+    padding: 0px 5px 0px 0px;
+
+}
+ 
+ .charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay textarea.sheet-dicepooldisplay.sheet-lcars,
+ .charsheet div.sheet-dicerollergrid div.sheet-area-rolldisplay textarea.sheet-dicepooldisplay.sheet-lcars {
+     --bgColor: var(--colorBlack);
+     --fontColor: var(--color1);
+     --fontSize: 29px;
+     --lineHeight: 28px;
+     pointer-events: none;
+
+     text-indent: 10px;
+ }
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-attacklabel textarea.sheet-lcars {
+    --bgColor: var(--color3);
+    --lineHeight: 26px;
+    --fontSize: 18px;
+    text-align: right;
+    text-align-last: right;
+    border-bottom-left-radius: 25px;   
+}
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay textarea.sheet-dicepooldisplay.sheet-lcars {
+    --bgColor: transparent;
+    --fontColor: var(--colorBlack);
+    --fontSize: 24px;
+    --lineHeight: 22px;
+
+    text-indent: 5px;
+}
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    margin-top: -14px;
+    height: calc(100% + 14px);
+    padding-left: 5px;
+}
+
+.charsheet div.sheet-dicerollergrid input[type="checkbox"]:not(:checked):hover.sheet-rollflag + span.sheet-lcars,
+.charsheet div.sheet-dicerollergrid input[type="radio"]:not(:checked):hover.sheet-rollflag + span.sheet-lcars {
+    background: var(--color1);
+}   
+
+.charsheet div.sheet-dicerollergrid input[type="checkbox"]:checked.sheet-rollflag + span.sheet-lcars,
+.charsheet div.sheet-dicerollergrid input[type="radio"]:checked.sheet-rollflag + span.sheet-lcars {
+    background: rgba(100,255,100,1);
+}   
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:nth-child(1) { background: url('https://i.imgur.com/msiqEMw.png') no-repeat center/contain; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:nth-child(2) { background: url('https://i.imgur.com/7WRT2VX.png') no-repeat center/contain; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:nth-child(3) { background: url('https://i.imgur.com/l9uRIip.png') no-repeat center/contain; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:nth-child(4) { background: url('https://i.imgur.com/HTBXDzi.png') no-repeat center/contain; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:nth-child(5) { background: url('https://i.imgur.com/p5I4Fjo.png') no-repeat center/contain; }
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:hover:nth-child(1) { background: url('https://i.imgur.com/MMY83Cz.png') no-repeat center/contain; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:hover:nth-child(2) { background: url('https://i.imgur.com/xQCvEfa.png') no-repeat center/contain; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:hover:nth-child(3) { background: url('https://i.imgur.com/nUYPhan.png') no-repeat center/contain; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:hover:nth-child(4) { background: url('https://i.imgur.com/0sjZleM.png') no-repeat center/contain; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:hover:nth-child(5) { background: url('https://i.imgur.com/bH47HW4.png') no-repeat center/contain; }
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background-size: 130% !important;
+    position: relative;
+    z-index: 1000;
+    margin: 20px 0px 0px 0px;
+}
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div:hover {
+    height: 55px;
+    width: 55px;
+    background-size: 110% !important;
+    z-index: 9999;
+    vertical-align: middle;
+    margin: -50px -5px -5px -5px;
+}
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons div button {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    height: 45px;
+    width: 45px;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
 
 .charsheet .sheet-roundleft {
     border-top-left-radius: 12.5px;
@@ -519,68 +750,20 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     border-radius: 50%;
 }
 
-.charsheet .sheet-lcarstext {
-    font-family: "Oswald";
-    font-weight: 600;
-    text-transform: uppercase;
-
-    color: white;
-    font-size: 24px;
-    line-height: 25px;
-}
-
-.charsheet .sheet-lcarstext span {
-    transform-origin: center left;
-    transform: scale(0.50, 1);
-    display: inline-block;
-    margin: 0px;
-    width: auto;
-    height: 100%;
-}
-
-.charsheet .sheet-lcarstext span.sheet-lcarstitle {
-    background-color: black;
-    color: var(--color1);   
-    padding: 0px 10px 0px 10px;
-    position: relative;
-    font-size: 30px;
-    line-height: 24px;
-    z-index: 20;
-    height: 25px;
-    justify-content: start;
-}
-
-.charsheet .sheet-lcarstext span.sheet-lcarsdicepool {
-    padding: 0px 25px;
-    height: 25px;
-    font-size: 25px;
-}
 
 
+/*#endregion*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.sheet-diceroller {
+/*#region DICEROLLER: OLD*/
+.sheet-diceroller:not(.sheet-dicerollergrid) {
     position: absolute;
-    top: 6px;
+    display: block !important;
+    top: 250px;
     left: 30px;
     width: 260px;
+    background-color: white;
+    border: 3px solid darkgreen;
+    z-index: 6000;
 }
 
 .charsheet .sheet-diceroller:not(.sheet-dicerollergrid) div.sheet-lcars {
@@ -822,56 +1005,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     border: 3px solid darkgreen;
 }
 
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div.sheet-rollbuttoncontainer {
-    display: block;
-    border-radius: 30px;
-    border: 3px inset grey;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.3);
-}
 
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(1) { background: url('https://i.imgur.com/q95sJ1H.png') no-repeat center/contain; margin-left: 30px; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(2) { background: url('https://i.imgur.com/95BptcB.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(3) { background: url('https://i.imgur.com/iDhKncZ.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(4) { background: url('https://i.imgur.com/92tEiSm.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:nth-child(5) { background: url('https://i.imgur.com/WE1mJ0Y.png') no-repeat center/contain; }
-
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(1) { background: url('https://i.imgur.com/pM1zDE4.png') no-repeat center/contain; margin-left: 25px; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(2) { background: url('https://i.imgur.com/tNlMBPq.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(3) { background: url('https://i.imgur.com/Fa5G4K0.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(4) { background: url('https://i.imgur.com/onKRA2C.png') no-repeat center/contain; }
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover:nth-child(5) { background: url('https://i.imgur.com/AcwEq8p.png') no-repeat center/contain; }
-
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div {
-    display: inline-block;
-    width: 45px;
-    height: 45px;
-    background-size: 130% !important;
-    position: relative;
-    z-index: 1000;
-    margin: -5px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div:hover {
-    height: 55px;
-    width: 55px;
-    background-size: 110% !important;
-    z-index: 9999;
-    vertical-align: middle;
-    margin: -13px -10px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollbuttons div div button {
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    height: 45px;
-    width: 45px;
-    padding: 0px;
-    margin: 0px;
-    border: none;
-}
 
 /*
 .charsheet .sheet-diceroller button:before {
@@ -1019,6 +1153,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     text-align-last: left;
     text-indent: 3px;
 }
+/*#endregion*/
 
 .charsheet .sheet-3colrow {
     display: inline-block;
@@ -1977,8 +2112,10 @@ input[type=number].sheet-experience {
     text-align: center;
     border: none;
     cursor: default;
+    box-shadow: 0px 1px 0px #000;
     -moz-box-shadow: 0px 1px 0px #000;
     -webkit-box-shadow: 0px 1px 0px #000;
+    border-radius: 0px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     -webkit-appearance:none;
@@ -2244,8 +2381,10 @@ tr.sheet-wpnheader td.sheet-a-str { background-image: url('https://i.imgur.com/y
     text-align: center;
     border: none;
     cursor: default;
+    box-shadow: 0px 1px 0px #000;
     -moz-box-shadow: 0px 1px 0px #000;
     -webkit-box-shadow: 0px 1px 0px #000;
+    border-radius: 0px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     -webkit-appearance:none;
@@ -2261,7 +2400,7 @@ tr.sheet-wpnheader td.sheet-a-str { background-image: url('https://i.imgur.com/y
     height: 40px;
     width: 40px;
     display: inline-block;
-    float: right;
+    /*float: right;*/
 }
 
 .sheet-customroll button:before {
@@ -2324,7 +2463,7 @@ tr.sheet-wpnheader td.sheet-a-str { background-image: url('https://i.imgur.com/y
 
 .sheet-rightcolumn {
     display: inline-block;
-    float: right;
+    /*float: right;*/
     width: 49%;
 }
 
