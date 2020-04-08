@@ -5,14 +5,15 @@
     var powers = ["animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time"];
     var allStats = ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time","potency"];
     var potencyNames = { mortal1:"", mortal2:"", vampire1:"Blood Potency", vampire2:"Blood Potency", werewolf1:"Primal Urge", werewolf2:"Primal Urge", mage1:"Gnosis", mage2:"Gnosis", promethean1:"Azoth", promethean2:"Azoth", changeling1:"Wyrd", changeling2:"Wyrd", demon:"Primum", beast:"Lair", hunter:"", geist1:"Psyche", mummy1:"Sekhem", hunter2:"" };
+    var superScripts = ["⁰","¹","²","³","⁴","⁵","⁶","⁷","⁸","⁹"];
 
-    ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time","potency","rolltype"].forEach((attr) => {
+    ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time","potency"].forEach((attr) => {
         on(`change:${attr} change:${attr}_flag`, (eventInfo) => {
             const source = eventInfo.sourceAttribute;
             const attribute = (attr.includes("flag")) ? attr.split(`_flag`)[0] : attr; //Remove the "_flag" part so we can pass the name
 
-            if (eventInfo.sourceType != "sheetworker") {
-                console.log(`==== Ch:Trait/Flag ==== updateRolls('${attribute}'):\n${JSON.stringify(eventInfo)}`)
+            if (!eventInfo.sourceAttribute.endsWith("_flag") || "previousValue" in eventInfo) {
+                console.log(`==== Ch:Trait/Flag: ${eventInfo.sourceType} ==== updateRolls('${attribute}'):\n${JSON.stringify(eventInfo)}`)
                 updateRolls(`${attribute}`);
             }
 
@@ -38,16 +39,16 @@
 
     [...Array(5).keys()].forEach((attr) => {
         on(`change:attack_type${attr}`, (eventInfo) => {//checks attack_type0 trough attack_type4
-            if (eventInfo.sourceType != "sheetworker") {
-                console.log(`==== Ch:ATTACK_TYPE ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
+            if (true /*eventInfo.sourceType != "sheetworker"*/) {
+                console.log(`==== Ch:ATTACK_TYPE: ${eventInfo.sourceType} ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
                 updateRolls("rolltype");
             }
         });
     });
 
     on("change:attack", function(eventInfo) {
-        if (eventInfo.sourceType != "sheetworker") {
-            console.log(`==== Ch:ATTACK ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
+        if (true /*eventInfo.sourceType != "sheetworker"*/) {
+            console.log(`==== Ch:ATTACK: ${eventInfo.sourceType} ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
             updateRolls("rolltype", "previousValue" in eventInfo);
             updateAttacks();
         }
@@ -82,11 +83,11 @@
     });
 
     on("change:sheettype", function(eventInfo) {
-        if (eventInfo.sourceType != "sheetworker") {
+        if (true /*eventInfo.sourceType != "sheetworker"*/) {
             updateHealth();
             updateDefaultDefense();
             updatePotencyName();
-            console.log(`==== Ch:SHEETTYPE ==== updateRollType():\n${JSON.stringify(eventInfo)}`)
+            console.log(`==== Ch:SHEETTYPE: ${eventInfo.sourceType} ==== updateRollType():\n${JSON.stringify(eventInfo)}`)
             updateRollType();
         }
     });
@@ -108,15 +109,15 @@
     });
 
     on("change:rolltype_select change:rerolldice change:spendwp change:specialty", function(eventInfo) {
-        if (eventInfo.sourceType != "sheetworker") {
-            console.log(`==== Ch:ROLL FLAGS ==== updateRollType():\n${JSON.stringify(eventInfo)}`)
+        if (true /*eventInfo.sourceType != "sheetworker"*/) {
+            console.log(`==== Ch:ROLL FLAGS: ${eventInfo.sourceType} ==== updateRollType():\n${JSON.stringify(eventInfo)}`)
             updateRollType();
         }
     });
 
-    on("change:rollmodifier change:rerolldice change:spendwp change:specialty", function(eventInfo) {
-        if (eventInfo.sourceType != "sheetworker") {
-            console.log(`==== Ch:ROLLMOD ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
+    on("change:rollmodifier change:rerolldice change:spendwp change:specialty change:rolltype", function(eventInfo) {
+        if (true /*eventInfo.sourceType != "sheetworker"*/) {
+            console.log(`==== Ch:ROLLMOD: ${eventInfo.sourceType} ==== updateRolls('rolltype'):\n${JSON.stringify(eventInfo)}`)
             updateRolls("rolltype");
         }
     })
@@ -140,7 +141,10 @@
         var type;
         var stat_flag = stat + "_flag";
         var rarray = [];
-        getAttrs(["attack","spendwp", "specialty", "wound_penalty", "rollstyle","rollmodifier","roll_array","attack_type0","attack_type1","attack_type2","attack_type3","attack_type4","intelligence_flag","wits_flag","resolve_flag","strength_flag","dexterity_flag","stamina_flag","presence_flag","manipulation_flag","composure_flag","academics_flag","computer_flag","crafts_flag","investigation_flag","medicine_flag","occult_flag","politics_flag","science_flag","athletics_flag","brawl_flag","drive_flag","firearms_flag","larceny_flag","stealth_flag","survival_flag","weaponry_flag","animalken_flag","empathy_flag","expression_flag","intimidation_flag","persuasion_flag","socialize_flag","streetwise_flag","subterfuge_flag","intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","animalism_flag","auspex","auspex_flag","celerity","celerity_flag","dominate","dominate_flag","majesty","majesty_flag","nightmare","nightmare_flag","obfuscate","obfuscate_flag","protean","protean_flag","resilience","resilience_flag","vigor","vigor_flag","crúac","crúac_flag","thebansorcery","thebansorcery_flag","death","death_flag","fate","fate_flag","forces","forces_flag","life","life_flag","matter","matter_flag","mind","mind_flag","prime","prime_flag","spirit","spirit_flag","space","space_flag","time","time_flag","potency","potency_flag","potency_name"], function(v) {
+
+        
+
+        getAttrs(["attack","spendwp", "specialty", "wound_penalty", "rollstyle","rollmodifier","roll_array","attack_name0","attack_name1","attack_name2","attack_name3","attack_name4","attack_damage0","attack_damage1","attack_damage2","attack_damage3","attack_damage4","attack_type0","attack_type1","attack_type2","attack_type3","attack_type4","intelligence_flag","wits_flag","resolve_flag","strength_flag","dexterity_flag","stamina_flag","presence_flag","manipulation_flag","composure_flag","academics_flag","computer_flag","crafts_flag","investigation_flag","medicine_flag","occult_flag","politics_flag","science_flag","athletics_flag","brawl_flag","drive_flag","firearms_flag","larceny_flag","stealth_flag","survival_flag","weaponry_flag","animalken_flag","empathy_flag","expression_flag","intimidation_flag","persuasion_flag","socialize_flag","streetwise_flag","subterfuge_flag","intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","animalism_flag","auspex","auspex_flag","celerity","celerity_flag","dominate","dominate_flag","majesty","majesty_flag","nightmare","nightmare_flag","obfuscate","obfuscate_flag","protean","protean_flag","resilience","resilience_flag","vigor","vigor_flag","crúac","crúac_flag","thebansorcery","thebansorcery_flag","death","death_flag","fate","fate_flag","forces","forces_flag","life","life_flag","matter","matter_flag","mind","mind_flag","prime","prime_flag","spirit","spirit_flag","space","space_flag","time","time_flag","potency","potency_flag","potency_name"], function(v) {
             allStats.forEach(function(x) {
                 var flagname = x + "_flag";
                 if(parseInt(v[flagname], 10) != 0) {
@@ -228,9 +232,8 @@
 
             var names = order.map(function(x) {
                let transX = getTranslationByKey(x);
-               if (x == "potency"){
+               if (x == "potency")
                    return v.potency_name;//may need to do getTranslationgByKey here as well, but not sure what the potential values of this are, and if they are user defined or sheet defined
-               }
                return transX.charAt(0).toUpperCase() + transX.slice(1);//note I actually prefer to do this using .replace if there's going to be a chance for multi word casing
             });
             
@@ -248,19 +251,31 @@
             var base = "&{template:wod-simple} {{name=@{character_name}}} {{option=?{@{dicepoolmacro}|0}}} {{result=[[{(?{@{dicepoolmacro}|1}@{rolltype}";
             var result = "";
             var dicePool = 0;
-            var dicePoolAdjust = 0;
+            var manualRollMod = parseInt(v["rollmodifier"]) | 0
+            var woundPenalty = parseInt(v["wound_penalty"]) | 0
             var extraDisplayParts = [];
-            if (parseInt(v["specialty"])|0 > 0)
+            if (parseInt(v["specialty"])|0 > 0) {
                 dicePool += 1;
-            if (parseInt(v["spendwp"])|0 > 0)
-                dicePool += 3;
-            if (parseInt(v["rollmodifier"])|0 !== 0) {
-                dicePool += parseInt(v["rollmodifier"])
-                extraDisplayParts.push(`${dicePool < 0 ? "-" : "+"} ${Math.abs(dicePool)}`)
+                for (let i = 0; i < names.length; i++) {
+                    if (skills.includes(names[i].toLowerCase())) {
+                        names[i] += "ꜛ"
+                        break
+                    }
+                }
+                console.log(`NEW NAMES w/ SPECIALTY: ${names.join(", ")}`)
             }
-            if (parseInt(v["wound_penalty"])|0 !== 0) {
-                dicePool += parseInt(v["wound_penalty"])
-                extraDisplayParts.push(`- Wnd (${Math.abs(parseInt(v["wound_penalty"]))})`)
+            if (parseInt(v["spendwp"])|0 > 0) {
+                dicePool += 3;
+                extraDisplayParts.push("+ ψ³");
+            }
+            if (manualRollMod !== 0) {
+                dicePool += manualRollMod
+                extraDisplayParts.push(`${manualRollMod < 0 ? "-" : "+"} ${Math.abs(manualRollMod)}`)
+            }
+            if (woundPenalty !== 0) {
+                var woundPenalty = parseInt(v["wound_penalty"])
+                dicePool += woundPenalty
+                extraDisplayParts.push(`-💔${superScripts[Math.abs(woundPenalty)]}`);
             }
             if(order.length > 0) {
                 base = "&{template:wod-3part} {{name=@{character_name}}} {{mod=[[@{rollmodifier}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}}";
@@ -291,16 +306,29 @@
             ])
             var display = "",
                 displayBase = "",
-                displayAttack = "";
+                displayAttack = "",
+                displayAttackStart = "";
 
             if (order.length === 0)
                 displayBase = `${display}${getTranslationByKey("simple-roll")}\n`
             else
                 displayBase = names.join(" + ");
+            
+            
             if (extraDisplayParts.length)
                 displayBase += ` ${extraDisplayParts.join(" ")}`
+
+            if (displayBase.length > 35) {
+                displayBase = displayBase.split(" ")
+                displayBase[0] = displayBase[0].slice(0,3) + "."
+                displayBase = displayBase.join(" ")
+            }
+            
             var regex = /attack_type(.)/;
-            var attack_type = "attack_type" + v.attack.match(regex)[1];
+            var attackNum = v.attack.match(regex)[1];
+            var attack_name = v[`attack_name${attackNum}`];
+            var attack_type = `attack_type${attackNum}`;
+            var attack_damage = parseInt(v[`attack_damage${attackNum}`])|0;
             var attackTerms = []
             if(v[attack_type].indexOf("str=1") > -1) {
                 attackTerms.push(getTranslationByKey("strength"))
@@ -321,12 +349,24 @@
                 attackTerms.push(getTranslationByKey("athletics"))
             }
 
-            displayAttack = attackTerms.join(" + ");
-            
+            displayAttack = attackTerms.join(" + ") + " " + extraDisplayParts.join(" ");
+                       
+            if (displayAttack.length > 35) {
+                displayAttack = displayAttack.split(" ")
+                displayAttack[0] = displayAttack[0].slice(0,3) + "."
+                displayAttack = displayAttack.join(" ")
+            }
+            if (attackNum == 0) {
+                displayAttackStart = "Unarmed\nAttack"
+            } else {
+                displayAttackStart = `${attack_name}\nAttack`
+            }
+
             consoleLines.push(...[
                 " ",
                 "====== DISPLAYS: ======",
                 `BASE: ${displayBase}`,
+                `ATK START: ${displayAttackStart}`,
                 `ATTACK: ${displayAttack}`,
                 `DICE POOL: ${dicePool}`
             ])
@@ -375,11 +415,14 @@
             setAttrs({
                 roll_array: final,
                 roll_base: base,
+                rollmodifiersign: manualRollMod > 0 ? "+" : "",
                 rolldisplay_base: displayBase,
                 rolldisplay_attack: displayAttack,
+                rolldisplay_attack_start: displayAttackStart,
+                rolldisplay_attack_damage: attack_damage,
                 rolldisplay_ischance: dicePool <= 0 ? 1 : 0,
                 rolldisplay: display,
-                dicepooldisplay: dicePool <= 0 ? "Ch" : dicePool
+                dicepooldisplay: dicePool <= 0 ? "₵" : dicePool
             });
         });
     };    

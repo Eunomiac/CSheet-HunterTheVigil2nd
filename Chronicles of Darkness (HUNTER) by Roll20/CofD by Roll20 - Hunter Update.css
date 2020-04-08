@@ -86,7 +86,6 @@ input.sheet-settingssheet:checked ~ div * table.sheet-settings {
 
 input.sheet-settingssheet:checked ~ div.sheet-3colrow,
 input.sheet-settingssheet:checked ~ div.sheet-2of3colrow,
-input.sheet-settingssheet:checked ~ div.sheet-diceroller,
 input.sheet-settingssheet:checked ~ div.sheet-dicerollergrid,
 input.sheet-settingssheet:checked ~ div.sheet-skills,
 input.sheet-settingssheet:checked ~ div.sheet-othertraits,
@@ -98,13 +97,11 @@ input.sheet-pages:checked ~ .sheet-gametype,
 input.sheet-pages:checked ~ input.sheet-gametype + span,
 input.sheet-page2:checked ~ div.sheet-2of3colrow,
 input.sheet-page2:checked ~ div.sheet-3colrow,
-input.sheet-page2:checked ~ div.sheet-diceroller,
 input.sheet-page2:checked ~ div.sheet-dicerollergrid,
 input.sheet-page2:checked ~ div.sheet-skills,
 input.sheet-page2:checked ~ div.sheet-othertraits,
 input.sheet-page3:checked ~ div.sheet-2of3colrow,
 input.sheet-page3:checked ~ div.sheet-3colrow,
-input.sheet-page3:checked ~ div.sheet-diceroller,
 input.sheet-page3:checked ~ div.sheet-dicerollergrid,
 input.sheet-page3:checked ~ div.sheet-skills,
 input.sheet-page3:checked ~ div.sheet-othertraits {
@@ -656,6 +653,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     text-align-last: left;
     margin-top: -32px;
     --textAlign: right;
+    pointer-events: auto;
 }
 
 .charsheet div.sheet-dicerollergrid div input[type="number"].sheet-lcars,
@@ -689,11 +687,12 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     --bgColor: transparent;
     --height: 25px;
     --width: auto;
-    --lineHeight: 40px;
+    --lineHeight: 10px;
     --fontSize: 10px;
     --textAlign: right;
     --margin: 0px 1px 0px 0px;
     --horizScale: 0.75;
+    --padding: 4px 0px 0px 0px;
     /* text-align: right;
     text-align-last: right; */
 }
@@ -791,407 +790,6 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 
 
 
-/*#endregion*/
-
-/*#region DICEROLLER: OLD*/
-.sheet-diceroller:not(.sheet-dicerollergrid) {
-    position: absolute;
-    display: block !important;
-    top: 250px;
-    left: 30px;
-    width: 260px;
-    background-color: white;
-    border: 3px solid darkgreen;
-    z-index: 6000;
-}
-
-.charsheet .sheet-diceroller:not(.sheet-dicerollergrid) div.sheet-lcars {
-    display: block;
-    position: absolute;
-    top: 20px;
-    left: 300px;
-    height: 167px;
-    width: 322px;
-    background-color: var(--colorBlack);
-    font-size: 0px;
-    margin: 0px;
-    padding: 0px;
-    z-index: 14000;
-
-    border: solid var(--colorBlack) 10px;
-
-}
-
-.charsheet .sheet-diceroller:not(.sheet-dicerollergrid) div.sheet-lcars div.sheet-lcarsheader {
-    display: block;
-    height: 25px;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    position: relative;
-    z-index: 10;
-    overflow: hidden;
-    background-color: var(--color2);
-}
-
-.charsheet .sheet-diceroller table {
-    width: 100%;
-}
-
-.charsheet .sheet-diceroller table th {
-    text-align: center;
-    font-size: 1.3em;
-    padding: 0px;
-    padding-top: 5px;
-}
-
-.charsheet .sheet-diceroller table td {
-    padding: 0px;
-}
-
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div {
-    display: block;
-    height: 29px;
-    font-size: 0px;
-    margin-bottom: -3px;
-}
-
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div textarea,
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle,
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle {
-    height: 100%;
-    width: calc(100% / 7);
-    margin: 0px;
-    padding: 0px;
-    padding-top: 5px;
-    line-height: 10px;
-    font-family: "Voltaire";
-    font-size: 14px;
-    vertical-align: top;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    text-align: center;
-    text-align-last: center;
-    display: inline-block;
-    font-variant: small-caps;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div textarea.sheet-rolldisplay-dicepool {
-    top: 10px;
-    left: -20px;
-    height: 30px;
-    line-height: 20px;
-    width: 50px;    
-    padding-top: 19px;
-    margin-right: -25px;
-    
-    font-family: "Special Elite";
-    font-weight: bold;
-    font-size: 32px;
-    
-    border: 3px solid darkgreen;
-    border-radius: 40px;
-
-    z-index: 6000;
-}
-
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle {
-    opacity: 0;
-    z-index: 9999;
-    height: calc(100% - 2px);
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle.sheet-rolldisplay-dicepool {
-    height: 56px;
-    width: 55px;
-    left: -20px;
-    margin-right: -55px;
-    top: 10px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle {
-    height: calc(100% - 10px);
-    line-height: 10px;
-    width: calc(100% / 7 - 2px);
-    margin: 0px;
-    margin-left: calc(-1 * 100% / 7);
-    padding: 4px 1px;
-
-    color: white;
-    font-size: 14px;
-    font-weight: normal !important;
-
-    z-index: 2000;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle:nth-of-type(1) {
-    background-color: darkred;
-}
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle:nth-of-type(2) {
-    background-color: rgb(100, 255, 100);
-    color: black;    
-}
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle:nth-of-type(3) {
-    background-color: rgb(100, 255, 100);
-    color: black;
-    
-}
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div span.sheet-rollagaintoggle:nth-of-type(4) {
-    background-color: rgb(100, 255, 100);
-    color: black;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle:not(:checked) + span.sheet-rollagaintoggle {
-    background-color: transparent;
-    color: #999;
-    font-weight: normal;
-    border: none;
-    height: calc(100% - 11px);
-    width: calc(100% / 7 - 2px);
-    z-index: 1000;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle:not(:checked):hover + span.sheet-rollagaintoggle {
-    color: black;
-    background-color: rgb(200, 255, 200);
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle.sheet-norerolltoggle + span.sheet-rollagaintoggle {
-    width: calc(100% / 7 + 10px - 15px - 2px - 2px);
-    margin-left: calc(-1 * (100% / 7 + 10px));
-    padding-left: 15px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div input.sheet-rollagaintoggle.sheet-norerolltoggle:not(:checked):hover + span.sheet-rollagaintoggle {
-    color: black;
-    background-color: rgb(255, 200, 200);
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollagaintoggles div textarea.sheet-rolldisplay-wounds {
-    display: none;
-}
-
-
-/* 
-.charsheet .sheet-diceroller table .sheet-bottom {
-    border-bottom: solid 1px #000000;
-}
-
-.charsheet .sheet-diceroller .sheet-rollcontainer {
-    border-bottom: solid 1px #000000;
-    text-align: center;
-    text-align-last: center;
-}
-*/
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-full {
-    height: 20px;
-    margin: 0px;
-    padding: 0px;
-    font-size: 0px;
-
-    text-align: left;
-    text-align-last: left;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div {
-    display: inline-block;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    font-size: 0px;
-    position: relative;
-    z-index: 5000;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div input.sheet-rolldisplay-chance {
-    display: none;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div textarea {
-    height: 18px;
-    width: calc(100% - 6px);
-    resize: none;
-    overflow: hidden;
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    border: none;
-    padding: 0px;
-    text-align: center;
-    pointer-events: none;
-    font-size: 16px;
-    font-family: "Voltaire";
-    font-weight: bold;
-    margin: 0px;
-    text-indent: 35px;
-    border-radius: 30px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div input.sheet-rolldisplay-chance:checked + textarea {
-    background-color: darkred;
-    color: white;
-    border: 3px solid darkred;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-full div input.sheet-rolldisplay-chance:not(:checked) + textarea {    
-    background-color: transparent;
-    color:black;
-    border: 3px solid darkgreen;
-}
-
-
-
-/*
-.charsheet .sheet-diceroller button:before {
-    font-family: "Courier" !important;
-    content: "Roll" !important;
-    background: none !important;
-}
-
-.charsheet .sheet-diceroller button {
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-}
-*/
-
-.charsheet .sheet-diceroller table td.sheet-rollflags {
-    font-size: 0px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollflags input {
-    display: inline-block;
-    height: 28px;
-    width: calc(100% / 3);
-    margin: 0px;
-    padding: 0px;
-    font-family: "Voltaire";
-    z-index: 12000;
-    position: relative;
-    font-size: 14px;
-    opacity: 0;
-    color: black;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollflags input[type=number] {
-    width: 38px;
-    height: 38px;
-    margin-right: 5px;
-    font-weight: bold;
-    text-align: right;
-    text-align-last: right;
-    opacity: 1;
-    line-height: 38px;
-    font-size: 22px;
-    font-family: "Special Elite"; 
-    margin-bottom: -12px;
-    border: none;
-    box-shadow: none;
-    margin-top: -5px;
-    padding-top: 2px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag {
-    margin-right: calc(-1 * 100% / 3);
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollflags input + span {
-    display: inline-block;
-    height: 28px;
-    width: calc(100% / 3);
-    padding: 0px;
-    margin: 0px;
-    font-family: "Voltaire";
-    color: white;
-    font-size: 14px;
-    text-align: center;
-    text-align-last: center;
-    line-height: 14px;
-    vertical-align: top;
-    font-variant: small-caps;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollflags input[type=number] + span {
-    width: calc(100% / 3 - 38px - 5px);
-    text-align: left;
-    text-align-last: left;
-    color: black;
-    line-height: 12px;
-    padding-top: 1px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag:nth-of-type(2) + span {
-    background-color: teal;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag:nth-of-type(3) + span {
-    background-color: darkviolet;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag:not(:checked) + span {
-    font-weight: normal;
-    color: #CCC;
-    background-color: transparent;    
-}
-
-.charsheet .sheet-diceroller table td.sheet-rollflags input.sheet-rollflag:not(:checked):hover + span {
-    color: black;
-    background-color: rgba(0,0,255,0.2);    
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack {
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack div {
-    display: block;
-    border: 3px solid darkred;
-    border-radius: 30px;
-    height: 16px;
-    background-color: rgba(100,0,0,0.2);
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack div textarea {
-    display: inline-block;
-    height: 16px;
-    margin: 0px;
-    padding: 0px;
-    font-family: "Voltaire";
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-    text-align-last: center;
-    border: none;
-    box-shadow: none;
-    pointer-events: none;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack div textarea.sheet-attack-start {
-    color: white;
-    width: 80px;
-    background-color: darkred;
-    font-variant: small-caps;
-    line-height: 14px;
-    border-radius: 30px;
-    text-transform: uppercase;
-    padding-top: 2px;
-    margin-left: -2px;
-    margin-top: -1px;
-}
-
-.charsheet .sheet-diceroller table td.sheet-rolldisplay-attack div textarea.sheet-rolldisplay-attack {
-    width: calc(100% - 80px);
-    color: darkred;
-    line-height: 14px;
-    background-color: transparent;
-    text-align: left;
-    text-align-last: left;
-    text-indent: 3px;
-}
 /*#endregion*/
 
 .charsheet .sheet-3colrow {
@@ -1860,6 +1458,8 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
     background-color: transparent;
     color: #000000;
     border: none;
+    font-size: 1em;
+    padding: 0px;
 }
 
 .sheet-rolltemplate-wod-attack .inlinerollresult
