@@ -91,13 +91,13 @@
     <!-- DICE ROLLER -->
     <div class="dicerollergrid">
         <div class="area-header curvedownleft roundright"><span class="lcars title">Dice Roller</span></div>
-        <div class="area-dicepoolnum"><input type="radio" class="rollflag bignumber" name="attr_rerolldice" value="10" checked /><textarea class="lcars bignumber" name="attr_dicepooldisplay"></textarea></div>
+        <div class="area-dicepoolnum"><input type="radio" class="rollflag bignumber" name="attr_rerolldice" value="10" checked /><textarea class="lcars bignumber" name="attrdicepooldisplay">8</textarea></div>
         <div class="area-dicepool"><span class="lcars tinyheader">Dice</span></div>
         <div class="area-rollagain1 rollflagbutton"><input type="radio" class="rollflag" name="attr_rerolldice" value="0" /><span class="lcars">no rerolls</span></div>
         <div class="area-rollagain2 rollflagbutton"><input type="radio" class="rollflag" name="attr_rerolldice" value="9" /><span class="lcars">9-again</span></div>
         <div class="area-rollagain3 rollflagbutton"><input type="radio" class="rollflag" name="attr_rerolldice" value="8" /><span class="lcars">8-again</span></div>
         <div class="area-rollagain4 rollflagbutton"><input type="radio" class="rollflag" name="attr_rerolldice" value="1" /><span class="lcars">rote roll</span></div>
-        <div class="area-rolldisplay"><textarea class="lcars dicepooldisplay" name="attr_rolldisplay_base"></textarea></div>
+        <div class="area-rolldisplay"><textarea class="lcars dicepooldisplay" name="attrrolldisplay_base">Int. + Investigationꜛ + 3 + ψ³ -💔²</textarea></div>
         <div class="area-dicelabel"><span class="lcars tinyheader">Roll</span></div>
         <div class="area-rollbuttons">
             <div><button type="roll" name="roll_check" value="@{roll_base}@{rolltype}"></button></div>
@@ -106,18 +106,15 @@
             <div><button type="roll" name="roll_check" value="@{rollsimple}@{rolltype}"></button></div>
             <div><button type="roll" name="roll_check" value="@{rollchance}"></button></div>
         </div>
-        <div class="area-rollbutton1"><span>1</span></div>
-        <div class="area-rollbutton2"><span>2</span></div>
-        <div class="area-rollbutton3"><span>3</span></div>
-        <div class="area-rollbutton4"><span>4</span></div>
-        <div class="area-rollbutton5"><span>5</span></div>
-        <div class="area-modinput"><input type="number" class="lcars mednumber" name="attr_rollmodifier" value="0" /></div>
+        <div class="area-modinput"><textarea class="lcars plusminus" name="attrrollmodifiersign">+</textarea><input type="number" class="lcars mednumber" name="attr_rollmodifier" value="0" /></div>
         <div class="area-modlabel"><span class="lcars tinyheader">Mod</span></div>
         <div class="area-buttonwp rollflagbutton"><input type="checkbox" class="rollflag" name="attr_spendwp" value="1" /><span class="lcars">Spend Willpower</span></div>
         <div class="area-buttonspec rollflagbutton"><input type="checkbox" class="rollflag" name="attr_specialty" value="1" /><span class="lcars">Apply Specialty</span></div>
-        
-        <div class="area-attacklabel"><textarea class="lcars attacklabel" name="attr_rolldisplay_attack_start"></textarea></div>
-        <div class="area-attackdisplay roundright"><textarea class="lcars dicepooldisplay" name="attr_rolldisplay_attack"></textarea></div>
+        <div class="area-footer curveupleft roundright">
+            <div class="area-attacklabel"><textarea class="lcars tinyheader" name="attrrolldisplay_attack_start">Rebar Attack</textarea></div>
+            <div class="blacksplash"></div>
+            <div class="area-attackdisplay roundright"><textarea class="lcars dicepooldisplay" name="attrrolldisplay_attack">Strength + Weaponry + ▲² -💔²</textarea></div>
+        </div>
     </div>
     
     <!-- HEADER -->

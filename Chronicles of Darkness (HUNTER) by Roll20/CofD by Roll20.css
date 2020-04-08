@@ -481,18 +481,20 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 /*#region DICEROLLER*/
 .charsheet div.sheet-dicerollergrid {
     display: grid;
-    width: 275px;
+    width: 308px;
     height: auto;
     grid: "header header header header header header header" 25px
-        ". . dicepoolnum rollagain1 rollagain2 rollagain3 rollagain4" 2px
-        "dicepoolbar dicepoolbar dicepoolnum rollagain1 rollagain2 rollagain3 rollagain4" 20px
-        "dicepoolbar dicepoolbar dicepoolnum rolldisplay rolldisplay rolldisplay rolldisplay" 30px
-        ". . . . . . ." 2px
+        ". . dicepoolnum . . . ." 2px
+        "dicepoolbar dicepoolbar dicepoolnum rollagain1 rollagain2 rollagain3 rollagain4" 15px
+        "dicepoolbar dicepoolbar dicepoolnum rolldisplay rolldisplay rolldisplay rolldisplay" 2px
+        "dicepoolbar dicepoolbar dicepoolnum rolldisplay rolldisplay rolldisplay rolldisplay" 26px
+        ". . . rolldisplay rolldisplay rolldisplay rolldisplay" 2px
         "modlabel modlabel modinput buttonwp buttonwp buttonspec buttonspec" 15px
+        "modlabel modlabel modinput rollbutton rollbutton rollbutton rollbutton" 15px
+        ". . modinput rollbutton rollbutton rollbutton rollbutton" 2px
+        "dicelabel dicelabel . rollbutton rollbutton rollbutton rollbutton" 32px
         ". . . . . . ." 2px
-        "dicelabel dicelabel rollbutton rollbutton rollbutton rollbutton rollbutton" 55px
-        ". . . . . . ." 2px
-        "attacklabel attacklabel attacklabel attackdisplay attackdisplay attackdisplay attackdisplay" 25px
+        "footer footer footer footer footer footer footer" 25px
         ". . . . . . ." 1fr
                 / 10px 15px 35px 1fr 1fr 1fr 1fr;
     background-color: var(--colorBlack);
@@ -504,6 +506,9 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     left: 0px;
     border-radius: 15px;
     box-shadow: 3px 3px 5px rgba(100,100,100,1);
+    overflow: hidden;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
 }
 
 .charsheet div.sheet-dicerollergrid div,
@@ -537,9 +542,12 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .charsheet div.sheet-dicerollergrid div textarea {
     pointer-events: none;
 }
+.charsheet div.sheet-dicerollergrid div input[type="number"] {
+    box-shadow: none;
+}
 
-.charsheet div.sheet-dicerollergrid input[type="checkbox"],
-.charsheet div.sheet-dicerollergrid input[type="radio"] {
+.charsheet div.sheet-dicerollergrid div input[type="checkbox"],
+.charsheet div.sheet-dicerollergrid div input[type="radio"] {
     display: inline-block;
     opacity: 0;
     z-index: 9999;
@@ -549,7 +557,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     margin-bottom: -15px;
 }
 
-.charsheet div.sheet-dicerollergrid input[type="radio"].sheet-bignumber {
+.charsheet div.sheet-dicerollergrid div input[type="radio"].sheet-bignumber {
     height: 52px;
     margin: 0px 0px -52px 0px;   
 }
@@ -566,8 +574,8 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 
 
 .charsheet div.sheet-dicerollergrid div textarea.sheet-lcars.sheet-bignumber {
-    --fontSize: 56px;
-    --lineHeight: 47px;
+    --fontSize: 51px;
+    --lineHeight: 42px;
     --fontColor: var(--color1);
     
     text-align: center;
@@ -586,12 +594,12 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     overflow: hidden;
 }
 
+
 .charsheet div.sheet-dicerollergrid div.sheet-rollflagbutton {
     --alignContent: start;
-    --padding: 8px 0px 0px 0px;
 }
 .charsheet div.sheet-dicerollergrid div.sheet-area-header { --gridArea: header; --zIndex: 30; --bgColor: var(--color2); --justItems: start; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-header span.sheet-lcars.sheet-title { --margin: 0px 0px 0px 40px; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-header span.sheet-lcars.sheet-title { --margin: 0px 0px 0px 60px; }
 .charsheet div.sheet-dicerollergrid div.sheet-area-dicepoolnum { --gridArea: dicepoolnum; --bgColor: var(--colorBlack); --fontColor: var(--colorWhite); --fontSize: 50px; }
 .charsheet div.sheet-dicerollergrid div.sheet-area-dicepool { --gridArea: dicepoolbar; --bgColor: var(--color3); --alignContent: end; --justContent: end; --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
 .charsheet div.sheet-dicerollergrid div.sheet-area-rollagain1 { --gridArea: rollagain1; --bgColor: var(--colorBlack); }
@@ -601,12 +609,16 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .charsheet div.sheet-dicerollergrid div.sheet-area-rolldisplay { --gridArea: rolldisplay; --bgColor: var(--colorBlack); }
 .charsheet div.sheet-dicerollergrid div.sheet-area-dicelabel { --gridArea: dicelabel; --bgColor: var(--color1); --alignContent: end; --justContent: end; --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
 .charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons { --gridArea: rollbutton; --bgColor: var(--colorBlack); }
-.charsheet div.sheet-dicerollergrid div.sheet-area-modinput { --gridArea: modinput; --bgColor: var(--colorWhite); --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-modinput { --gridArea: modinput; --bgColor: transparent; --justContent: end; }
 .charsheet div.sheet-dicerollergrid div.sheet-area-modlabel { --gridArea: modlabel; --bgColor: var(--color2); --alignContent: end; --justContent: end; --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
 .charsheet div.sheet-dicerollergrid div.sheet-area-buttonwp { --gridArea: buttonwp; --bgColor: var(--colorBlack); --padding: 0px; }
 .charsheet div.sheet-dicerollergrid div.sheet-area-buttonspec { --gridArea: buttonspec; --bgColor: var(--colorBlack); --padding: 0px; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-attacklabel { --gridArea: attacklabel; --bgColor: var(--colorBlack); --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
-.charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay { --gridArea: attackdisplay; --bgColor: var(--color2); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer { --gridArea: footer; --zIndex: 30; --bgColor: var(--color3); --justItems: start; }
+
+
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-area-attacklabel { --gridArea: attacklabel; --bgColor: transparent; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-area-attackdisplay { --gridArea: attackdisplay; --bgColor: var(--color2); }
 
 
 .charsheet div.sheet-dicerollergrid div.sheet-rollflagbutton span.sheet-lcars {
@@ -622,20 +634,31 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     border-radius: 11px;
  }
 
+ .charsheet div.sheet-dicerollergrid div.sheet-area-modinput textarea.sheet-lcars.sheet-plusminus {
+     --width: 100%;
+     --fontColor: var(--color1);
+     --height: 32px;
+     text-align: right;
+     text-align-last: right;
+ }
+
+
 .charsheet div.sheet-dicerollergrid div.sheet-area-modinput input[type="number"].sheet-lcars.sheet-mednumber {
-    transform: none;
-    text-align: right;
-    text-align-last: right;
     background: var(--colorBlack);
-    font-size: 18px;
+    font-size: 28px;
     width: 100%;
-    height: 15px;
-    font-weight: bold;
+    height: 32px;
     font-family: "Oswald";
     color: var(--color1);
-    padding: 0px 5px 0px 0px;
-
+    padding: 0px 0px 5px 4px;
+    text-indent: 0px;
+    text-align: left;
+    text-align-last: left;
+    margin-top: -32px;
+    --textAlign: right;
 }
+
+.charsheet div.sheet-dicerollergrid div input[type="number"].sheet-lcars,
  
  .charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay textarea.sheet-dicepooldisplay.sheet-lcars,
  .charsheet div.sheet-dicerollergrid div.sheet-area-rolldisplay textarea.sheet-dicepooldisplay.sheet-lcars {
@@ -648,15 +671,32 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
      text-indent: 10px;
  }
 
-.charsheet div.sheet-dicerollergrid div.sheet-area-attacklabel textarea.sheet-lcars {
-    --bgColor: var(--color3);
-    --lineHeight: 26px;
-    --fontSize: 18px;
-    text-align: right;
-    text-align-last: right;
-    border-bottom-left-radius: 25px;   
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer {
+    width: 100%;
+    height: 25px;
+    grid: "attacklabel blacksplash attackdisplay" 25px
+                / 80px 2px 1fr;
+    padding: 0px;
+    grid-gap: 0px;
 }
 
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-blacksplash {
+    --gridArea: blacksplash;
+    background-color: black;
+}
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-area-attacklabel textarea.sheet-lcars {
+    --bgColor: transparent;
+    --height: 25px;
+    --width: auto;
+    --lineHeight: 40px;
+    --fontSize: 10px;
+    --textAlign: right;
+    --margin: 0px 1px 0px 0px;
+    --horizScale: 0.75;
+    /* text-align: right;
+    text-align-last: right; */
+}
 .charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay textarea.sheet-dicepooldisplay.sheet-lcars {
     --bgColor: transparent;
     --fontColor: var(--colorBlack);
@@ -733,9 +773,8 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     border-bottom-left-radius: 12.5px;
 }
 
-.charsheet .sheet-curvedownleft {
-    border-top-left-radius: 25px;
-}
+.charsheet .sheet-curvedownleft { border-top-left-radius: 25px; }
+.charsheet .sheet-curveupleft { border-bottom-left-radius: 25px; }
 
 .charsheet .sheet-roundright {
     border-top-right-radius: 12.5px;
@@ -1192,9 +1231,9 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .charsheet .sheet-2of3colrow {
     display: block;
     clear: none;
-    width: 75%;
-    margin-top: -120px;
+    width: calc(100% - 295px);
     margin-left: 295px;
+    margin-top: -110px;
 }
 
 .charsheet div.sheet-2of3colrow input[type=text] {
