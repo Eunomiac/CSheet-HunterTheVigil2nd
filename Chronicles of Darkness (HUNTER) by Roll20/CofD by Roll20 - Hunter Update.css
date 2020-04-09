@@ -30,7 +30,7 @@
     background: none;
     position: relative;
     padding: 18px 30px 30px 30px;
-    width: 850px;
+    width: 900px;
 }
 
 .sheet-background-image {
@@ -220,7 +220,6 @@ input.sheet-settingssheet:not(:checked) ~ input.sheet-magesheet:checked ~ img.sh
 input.sheet-settingssheet:not(:checked) ~ input.sheet-prometheansheet:checked ~ img.sheet-header.sheet-promethean,
 input.sheet-settingssheet:not(:checked) ~ input.sheet-changelingsheet:checked ~ img.sheet-header.sheet-changeling,
 input.sheet-settingssheet:not(:checked) ~ input.sheet-huntersheet:checked ~ img.sheet-header.sheet-hunter {
-    height: 150px;
     display: inline !important;
     position: absolute;
     top: 40px;
@@ -230,7 +229,6 @@ input.sheet-settingssheet:not(:checked) ~ input.sheet-huntersheet:checked ~ img.
 }
 input.sheet-settingssheet:not(:checked) ~ input.sheet-geistsheet:checked ~ img.sheet-header.sheet-geist,
 input.sheet-settingssheet:not(:checked) ~ input.sheet-demonsheet:checked ~ img.sheet-header.sheet-demon{
-    height: 200px;
     display: inline !important;
     position: absolute;
     top: 40px;
@@ -814,18 +812,7 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .charsheet div.sheet-3colrow.sheet-trackers table.sheet-dottable td.sheet-variablecontainer {
     width: auto;
 }
-.charsheet div.sheet-3colrow.sheet-trackers table.sheet-dottable td:nth-child(1) {
-}
-.charsheet div.sheet-3colrow.sheet-trackers table.sheet-dottable td:nth-child(2) {
-}
-.charsheet div.sheet-3colrow.sheet-trackers table.sheet-dottable td:nth-child(3) {    
-}
-.charsheet div.sheet-3colrow.sheet-trackers table.sheet-dottable td:nth-child(4) {
-}
-.charsheet div.sheet-3colrow.sheet-trackers table.sheet-dottable td:nth-child(5) {
-}
-.charsheet div.sheet-3colrow.sheet-trackers table.sheet-dottable td:nth-child(6) {
-}
+
 .charsheet .sheet-2of3colrow {
     display: block;
     clear: none;
@@ -926,10 +913,6 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     color: #000000;
     text-decoration: overline underline;
     text-align: center;
-}
-
-.sheet-skills table {
-    /* border-right: solid 1px black; */
 }
 
 .sheet-skills td:first-child {
@@ -1396,12 +1379,13 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
     display: none;
 }
 
+/*#region ROLL TEMPLATES*/
+
 .sheet-rolltemplate-wod table,
 .sheet-rolltemplate-wod-attack table,
 .sheet-rolltemplate-wod-simple table,
 .sheet-rolltemplate-wod-3part table,
-.sheet-rolltemplate-wod-initiative table
-{
+.sheet-rolltemplate-wod-initiative table {
     width: 189px;
     height: 100%;
     background: url(https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Chronicles%20of%20Darkness%20by%20Roll20/images/roll.jpg) no-repeat top left;
@@ -1415,8 +1399,7 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
 .sheet-rolltemplate-wod-attack th,
 .sheet-rolltemplate-wod-simple th,
 .sheet-rolltemplate-wod-3part th,
-.sheet-rolltemplate-wod-initiative th
-{
+.sheet-rolltemplate-wod-initiative th {
     color: rgb(112, 0, 0);
     padding: 20px 20px 2px 20px;
     line-height: 1.2em;
@@ -1424,13 +1407,21 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
     text-align: left;
 }
 
+.sheet-rolltemplate-wod th div,
+.sheet-rolltemplate-wod-attack th div,
+.sheet-rolltemplate-wod-simple th div,
+.sheet-rolltemplate-wod-3part th div,
+.sheet-rolltemplate-wod-initiative th div {
+    display: block;
+    height: 20px;
+    border-bottom: 2px solid rgb(112, 0, 0);
+}
 
 .sheet-rolltemplate-wod td,
 .sheet-rolltemplate-wod-attack td,
 .sheet-rolltemplate-wod-simple td,
-.sheet-rolltemplate-wod-3part td ,
-.sheet-rolltemplate-wod-initiative td
-{
+.sheet-rolltemplate-wod-3part td,
+.sheet-rolltemplate-wod-initiative td {
     padding: 2px 20px 2px 20px;
     font-size: 1.0em;
     vertical-align: top;
@@ -1439,22 +1430,23 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
 .sheet-rolltemplate-wod .sheet-result,
 .sheet-rolltemplate-wod-attack .sheet-result,
 .sheet-rolltemplate-wod-simple .sheet-result,
-.sheet-rolltemplate-wod-3part .sheet-result ,
-.sheet-rolltemplate-wod-initiative .sheet-result
-{
+.sheet-rolltemplate-wod-3part .sheet-result,
+.sheet-rolltemplate-wod-initiative .sheet-result {
     font-size: 1.2em;
     text-align: center;
     color: rgb(112, 0, 0);
     padding: 2px 20px 2px 20px;
 }
-
-
-.sheet-rolltemplate-wod .inlinerollresult,
+.sheet-rolltemplate-wod .sheet-result .inlinerollresult,
 .sheet-rolltemplate-wod-attack .sheet-result .inlinerollresult,
+.sheet-rolltemplate-wod-simple .sheet-result .inlinerollresult,
+.sheet-rolltemplate-wod-3part .sheet-result .inlinerollresult,
+.sheet-rolltemplate-wod-initiative .sheet-result .inlinerollresult,
+.sheet-rolltemplate-wod .inlinerollresult,
+.sheet-rolltemplate-wod-attack .inlinerollresult,
 .sheet-rolltemplate-wod-simple .inlinerollresult,
 .sheet-rolltemplate-wod-3part .inlinerollresult,
-.sheet-rolltemplate-wod-initiative .inlinerollresult
-{
+.sheet-rolltemplate-wod-initiative .inlinerollresult {
     background-color: transparent;
     color: #000000;
     border: none;
@@ -1462,44 +1454,150 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
     padding: 0px;
 }
 
-.sheet-rolltemplate-wod-attack .inlinerollresult
- {
-    background-color: transparent;
-    color: #000000;
-    border: none;
-    font-size: 1em;
-    padding: 0px;
-}
-
-.sheet-rolltemplate-wod .inlinerollresult.fullcrit,
+.sheet-rolltemplate-wod .sheet-result .inlinerollresult.fullcrit,
 .sheet-rolltemplate-wod-attack .sheet-result .inlinerollresult.fullcrit,
+.sheet-rolltemplate-wod-simple .sheet-result .inlinerollresult.fullcrit,
+.sheet-rolltemplate-wod-3part .sheet-result .inlinerollresult.fullcrit,
+.sheet-rolltemplate-wod-initiative .sheet-result .inlinerollresult.fullcrit,
+.sheet-rolltemplate-wod .inlinerollresult.fullcrit,
+.sheet-rolltemplate-wod-attack .inlinerollresult.fullcrit,
 .sheet-rolltemplate-wod-simple .inlinerollresult.fullcrit,
 .sheet-rolltemplate-wod-3part .inlinerollresult.fullcrit,
-.sheet-rolltemplate-wod-initiative .inlinerollresult.fullcrit
-{
-    color: #000000;
-    border: none;
-}
-
-.sheet-rolltemplate-wod .inlinerollresult.fullfail,
+.sheet-rolltemplate-wod-initiative .inlinerollresult.fullcrit,
+.sheet-rolltemplate-wod .sheet-result .inlinerollresult.fullfail,
 .sheet-rolltemplate-wod-attack .sheet-result .inlinerollresult.fullfail,
+.sheet-rolltemplate-wod-simple .sheet-result .inlinerollresult.fullfail,
+.sheet-rolltemplate-wod-3part .sheet-result .inlinerollresult.fullfail,
+.sheet-rolltemplate-wod-initiative .sheet-result .inlinerollresult.fullfail,
+.sheet-rolltemplate-wod .inlinerollresult.fullfail,
+.sheet-rolltemplate-wod-attack .inlinerollresult.fullfail,
 .sheet-rolltemplate-wod-simple .inlinerollresult.fullfail,
 .sheet-rolltemplate-wod-3part .inlinerollresult.fullfail,
-.sheet-rolltemplate-wod-initiative .inlinerollresult.fullfail
-{
-    color: #000000;
-    border: none;
-}
-
+.sheet-rolltemplate-wod-initiative .inlinerollresult.fullfail,
 .sheet-rolltemplate-wod .inlinerollresult.importantroll,
 .sheet-rolltemplate-wod-attack .inlinerollresult.importantroll,
 .sheet-rolltemplate-wod-simple .inlinerollresult.importantroll,
 .sheet-rolltemplate-wod-3part .inlinerollresult.importantroll,
-.sheet-rolltemplate-wod-initiative .inlinerollresult.importantroll
-{
+.sheet-rolltemplate-wod-initiative .inlinerollresult.importantroll {
     color: #000000;
     border: none;
 }
+
+.sheet-rolltemplate-wod div.sheet-simplenumber .inlinerollresult,
+.sheet-rolltemplate-wod-attack div.sheet-simplenumber .inlinerollresult,
+.sheet-rolltemplate-wod-simple div.sheet-simplenumber .inlinerollresult,
+.sheet-rolltemplate-wod-3part div.sheet-simplenumber .inlinerollresult,
+.sheet-rolltemplate-wod-initiative div.sheet-simplenumber .inlinerollresult {
+    pointer-events: none;
+}
+
+.sheet-rolltemplate-wod div.userscript-specialty,
+.sheet-rolltemplate-wod-attack div.userscript-specialty,
+.sheet-rolltemplate-wod-simple div.userscript-specialty,
+.sheet-rolltemplate-wod-3part div.userscript-specialty,
+.sheet-rolltemplate-wod-initiative div.userscript-specialty,
+.sheet-rolltemplate-wod div.userscript-specialty .inlinerollresult,
+.sheet-rolltemplate-wod-attack div.userscript-specialty .inlinerollresult,
+.sheet-rolltemplate-wod-simple div.userscript-specialty .inlinerollresult,
+.sheet-rolltemplate-wod-3part div.userscript-specialty .inlinerollresult,
+.sheet-rolltemplate-wod-initiative div.userscript-specialty .inlinerollresult {
+    display: inline;
+    color: rgb(185,0,255);
+}
+
+.sheet-rolltemplate-wod div.sheet-redtext,
+.sheet-rolltemplate-wod-attack div.sheet-redtext,
+.sheet-rolltemplate-wod-simple div.sheet-redtext,
+.sheet-rolltemplate-wod-3part div.sheet-redtext,
+.sheet-rolltemplate-wod-initiative div.sheet-redtext,
+.sheet-rolltemplate-wod div.sheet-redtext .inlinerollresult,
+.sheet-rolltemplate-wod-attack div.sheet-redtext .inlinerollresult,
+.sheet-rolltemplate-wod-simple div.sheet-redtext .inlinerollresult,
+.sheet-rolltemplate-wod-3part div.sheet-redtext .inlinerollresult,
+.sheet-rolltemplate-wod-initiative div.sheet-redtext .inlinerollresult {
+    color: darkred;
+}
+
+.sheet-rolltemplate-wod div.sheet-totaldice,
+.sheet-rolltemplate-wod-attack div.sheet-totaldice,
+.sheet-rolltemplate-wod-simple div.sheet-totaldice,
+.sheet-rolltemplate-wod-3part div.sheet-totaldice,
+.sheet-rolltemplate-wod-initiative div.sheet-totaldice {
+    border-top: 2px solid rgb(112, 0, 0);
+    font-size: 16px;
+    line-height: 28px;
+    height: 20px;
+}
+
+.sheet-rolltemplate-wod td.sheet-result div,
+.sheet-rolltemplate-wod-attack td.sheet-result div,
+.sheet-rolltemplate-wod-simple td.sheet-result div,
+.sheet-rolltemplate-wod-3part td.sheet-result div,
+.sheet-rolltemplate-wod-initiative td.sheet-result div {    
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    text-align-last: center;
+    height: 20px;
+    line-height: 25px;
+    padding: 0px 5px;
+    margin-left: -5px;
+}
+
+.sheet-rolltemplate-wod td.sheet-result div.sheet-resultcontainer,
+.sheet-rolltemplate-wod-attack td.sheet-result div.sheet-resultcontainer,
+.sheet-rolltemplate-wod-simple td.sheet-result div.sheet-resultcontainer,
+.sheet-rolltemplate-wod-3part td.sheet-result div.sheet-resultcontainer,
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-resultcontainer {
+    display: grid;
+    margin-bottom: -20px;
+    height: 20px;
+    opacity: 0;
+}
+
+.sheet-rolltemplate-wod td.sheet-result div.sheet-outcome,
+.sheet-rolltemplate-wod-attack td.sheet-result div.sheet-outcome,
+.sheet-rolltemplate-wod-simple td.sheet-result div.sheet-outcome,
+.sheet-rolltemplate-wod-3part td.sheet-result div.sheet-outcome,
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-outcome,
+.sheet-rolltemplate-wod td.sheet-result div.sheet-outcome .inlinerollresult,
+.sheet-rolltemplate-wod-attack td.sheet-result div.sheet-outcome .inlinerollresult,
+.sheet-rolltemplate-wod-simple td.sheet-result div.sheet-outcome .inlinerollresult,
+.sheet-rolltemplate-wod-3part td.sheet-result div.sheet-outcome .inlinerollresult,
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-outcome .inlinerollresult {
+    pointer-events: none;
+}
+
+.sheet-rolltemplate-wod td.sheet-result div.sheet-outcome.sheet-dramaticfail,
+.sheet-rolltemplate-wod-attack td.sheet-result div.sheet-outcome.sheet-dramaticfail,
+.sheet-rolltemplate-wod-simple td.sheet-result div.sheet-outcome.sheet-dramaticfail,
+.sheet-rolltemplate-wod-3part td.sheet-result div.sheet-outcome.sheet-dramaticfail,
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-outcome.sheet-dramaticfail {
+    background-color: darkred;
+    color: white;
+}
+
+.sheet-rolltemplate-wod td.sheet-result div.sheet-fail,
+.sheet-rolltemplate-wod-attack td.sheet-result div.sheet-fail,
+.sheet-rolltemplate-wod-simple td.sheet-result div.sheet-fail,
+.sheet-rolltemplate-wod-3part td.sheet-result div.sheet-fail,
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-fail {
+    color: darkred;
+}
+
+.sheet-rolltemplate-wod td.sheet-result div.sheet-exceptional,
+.sheet-rolltemplate-wod-attack td.sheet-result div.sheet-exceptional,
+.sheet-rolltemplate-wod-simple td.sheet-result div.sheet-exceptional,
+.sheet-rolltemplate-wod-3part td.sheet-result div.sheet-exceptional,
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-exceptional {
+    box-shadow: inset 0px 0px 15px limegreen, inset 0px 0px 15px limegreen, inset 0px 0px 20px limegreen;
+    border-radius: 25px;
+    border: 3px solid darkgreen;
+}
+
 
 .sheet-rolltemplate-wod .sheet-specialrollflag,
 .sheet-rolltemplate-wod-attack .sheet-specialrollflag,
@@ -1508,10 +1606,21 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
 .sheet-rolltemplate-wod-initiative .sheet-specialrollflag
 {
     color: #000000;
-    height: 30px;
+    height: 20px;
     text-align: right;
     vertical-align: top;
 }
+
+.sheet-rolltemplate-wod .sheet-specialrollflag span,
+.sheet-rolltemplate-wod-attack .sheet-specialrollflag span,
+.sheet-rolltemplate-wod-simple .sheet-specialrollflag span,
+.sheet-rolltemplate-wod-3part .sheet-specialrollflag span ,
+.sheet-rolltemplate-wod-initiative .sheet-specialrollflag span {
+    display: block;
+    margin-bottom: 14px;
+}
+
+/*#endregion*/
 
 .sheet-variablecontainer
 {
@@ -1862,10 +1971,6 @@ table.sheet-merits > tbody > tr > td {
     color: black;
 }
 
-.sheet-weapontable input[type=text].sheet-weaponstat.sheet-range {
-
-}
-
 .sheet-weapontable input[type=text].sheet-weaponstat.sheet-mag {
     width: 30px;
 }
@@ -1992,12 +2097,12 @@ tr.sheet-wpnheader td.sheet-a-str { background-image: url('https://i.imgur.com/y
 }
 
 .sheet-expandedsheet div.sheet-leftcolumn {
-    width: calc(50% - 5px) !important;
+    width: calc(50% - 10px) !important;
     margin-right: 5px !important;
 }
 
 .sheet-expandedsheet div.sheet-rightcolumn {
-    width: calc(50% - 5px) !important;
+    width: calc(50% - 10px) !important;
     margin-right: 0px !important;
     margin-left: 5px !important;
 }

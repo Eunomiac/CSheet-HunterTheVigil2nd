@@ -12,10 +12,10 @@
             const source = eventInfo.sourceAttribute;
             const attribute = (attr.includes("flag")) ? attr.split(`_flag`)[0] : attr; //Remove the "_flag" part so we can pass the name
 
-            if (!eventInfo.sourceAttribute.endsWith("_flag") || "previousValue" in eventInfo) {
-                console.log(`==== Ch:Trait/Flag: ${eventInfo.sourceType} ==== updateRolls('${attribute}'):\n${JSON.stringify(eventInfo)}`)
+            // if (!eventInfo.sourceAttribute.endsWith("_flag") || "previousValue" in eventInfo) {
+            //     console.log(`==== Ch:Trait/Flag: ${eventInfo.sourceType} ==== updateRolls('${attribute}'):\n${JSON.stringify(eventInfo)}`)
                 updateRolls(`${attribute}`);
-            }
+            // }
 
             if (source === "resolve_flag" || source === "composure_flag") {
                 updateWillpower();
@@ -144,7 +144,7 @@
 
         
 
-        getAttrs(["attack","spendwp", "specialty", "wound_penalty", "rollstyle","rollmodifier","roll_array","attack_name0","attack_name1","attack_name2","attack_name3","attack_name4","attack_damage0","attack_damage1","attack_damage2","attack_damage3","attack_damage4","attack_type0","attack_type1","attack_type2","attack_type3","attack_type4","intelligence_flag","wits_flag","resolve_flag","strength_flag","dexterity_flag","stamina_flag","presence_flag","manipulation_flag","composure_flag","academics_flag","computer_flag","crafts_flag","investigation_flag","medicine_flag","occult_flag","politics_flag","science_flag","athletics_flag","brawl_flag","drive_flag","firearms_flag","larceny_flag","stealth_flag","survival_flag","weaponry_flag","animalken_flag","empathy_flag","expression_flag","intimidation_flag","persuasion_flag","socialize_flag","streetwise_flag","subterfuge_flag","intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","animalism_flag","auspex","auspex_flag","celerity","celerity_flag","dominate","dominate_flag","majesty","majesty_flag","nightmare","nightmare_flag","obfuscate","obfuscate_flag","protean","protean_flag","resilience","resilience_flag","vigor","vigor_flag","crúac","crúac_flag","thebansorcery","thebansorcery_flag","death","death_flag","fate","fate_flag","forces","forces_flag","life","life_flag","matter","matter_flag","mind","mind_flag","prime","prime_flag","spirit","spirit_flag","space","space_flag","time","time_flag","potency","potency_flag","potency_name"], function(v) {
+        getAttrs(["rolltype", "attack","spendwp", "specialty", "wound_penalty", "rollstyle","rollmodifier","roll_array","attack_name0","attack_name1","attack_name2","attack_name3","attack_name4","attack_damage0","attack_damage1","attack_damage2","attack_damage3","attack_damage4","attack_type0","attack_type1","attack_type2","attack_type3","attack_type4","intelligence_flag","wits_flag","resolve_flag","strength_flag","dexterity_flag","stamina_flag","presence_flag","manipulation_flag","composure_flag","academics_flag","computer_flag","crafts_flag","investigation_flag","medicine_flag","occult_flag","politics_flag","science_flag","athletics_flag","brawl_flag","drive_flag","firearms_flag","larceny_flag","stealth_flag","survival_flag","weaponry_flag","animalken_flag","empathy_flag","expression_flag","intimidation_flag","persuasion_flag","socialize_flag","streetwise_flag","subterfuge_flag","intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","animalism_flag","auspex","auspex_flag","celerity","celerity_flag","dominate","dominate_flag","majesty","majesty_flag","nightmare","nightmare_flag","obfuscate","obfuscate_flag","protean","protean_flag","resilience","resilience_flag","vigor","vigor_flag","crúac","crúac_flag","thebansorcery","thebansorcery_flag","death","death_flag","fate","fate_flag","forces","forces_flag","life","life_flag","matter","matter_flag","mind","mind_flag","prime","prime_flag","spirit","spirit_flag","space","space_flag","time","time_flag","potency","potency_flag","potency_name"], function(v) {
             allStats.forEach(function(x) {
                 var flagname = x + "_flag";
                 if(parseInt(v[flagname], 10) != 0) {
@@ -249,6 +249,7 @@
             ])
 
             var base = "&{template:wod-simple} {{name=@{character_name}}} {{option=?{@{dicepoolmacro}|0}}} {{result=[[{(?{@{dicepoolmacro}|1}@{rolltype}";
+            var roll_type = v["rolltype"];
             var result = "";
             var dicePool = 0;
             var manualRollMod = parseInt(v["rollmodifier"]) | 0
@@ -278,23 +279,48 @@
                 extraDisplayParts.push(`-💔${superScripts[Math.abs(woundPenalty)]}`);
             }
             if(order.length > 0) {
-                base = "&{template:wod-3part} {{name=@{character_name}}} {{mod=[[@{rollmodifier}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}}";
+                base = "&{template:wod-3part} {{name=@{character_name}}} {{mod=[[@{rollmodifier}]]}} {{moddisplay=" + Math.abs(parseInt(v["rollmodifier"])|0) + "}} {{woundpenaltydisplay=[[@{woundpenaltydisplay}]]}} {{woundpenalty=[[@{wound_penalty}]]}} {{part1=" + names[0] + "}} {{part1pool=" + v[order[0]] + "}} {{part1pooldisplay=(" + v[order[0]] + ")}}";
+                console.log(`Base 1: ${base}`)
                 result = " {{result=[[{((@{rollmodifier}+@{wound_penalty}+" + v[order[0]];
                 dicePool += parseInt(v[order[0]]);
                 if(order.length > 1) {
-                    base = base + " {{part2=" + names[1] + "}} {{part2pool=" + v[order[1]] + "}}";
+                    if (parseInt(v["specialty"])|0 > 0)
+                        base = `${base} {{part2=<div class="specialty">+ ${names[1]}}} {{part2pool=${v[order[1]]}}} {{part2pooldisplay=(${v[order[1]]} + 1)</div>}}`;
+                    else
+                        base = base + " {{part2=" + (parseInt(v[order[1]]) >= 0 ? "+ " : "- ") + names[1] + "}} {{part2pool=" + v[order[1]] + "}} {{part2pooldisplay=(" + Math.abs(v[order[1]]) + ")}}";
+                    console.log(`Base 2: ${base}`)
                     result = result + "+" + v[order[1]];
                     dicePool += parseInt(v[order[1]]);
                 }
                 if(order.length > 2) {
-                    base = base + " {{part3=" + names[2] + "}} {{part3pool=" + v[order[2]] + "}}";
+                    base = base + " {{part3=" + (parseInt(v[order[2]]) >= 0 ? "+ " : "- ") + names[2] + "}} {{part3pool=" + v[order[2]] + "}} {{part3pooldisplay=(" + Math.abs(v[order[2]]) + ")}}";
                     result = result + "+" + v[order[2]];
                     dicePool += parseInt(v[order[2]]);
+                    console.log(`Base 3: ${base}`)
                 }
-                if (dicePool <= 0)
-                    base = base + " {{result=[[{1d10cf<1}>10]]}} {{chance=1}}"
-                else
-                    base = base + ` {{dicepool=${dicePool}}}` + result + ")@{rolltype}"
+                if(order.length > 3) {
+                    base = base + " {{part4=" + (parseInt(v[order[3]]) >= 0 ? "+ " : "- ") + names[3] + "}} {{part4pool=" + v[order[3]] + "}} {{part4pooldisplay=(" + Math.abs(v[order[3]]) + ")}}";
+                    result = result + "+" + v[order[3]];
+                    dicePool += parseInt(v[order[3]]);
+                    console.log(`Base 4: ${base}`)
+                }
+                if(order.length > 4) {
+                    base = base + " {{part5=" + (parseInt(v[order[4]]) >= 0 ? "+ " : "- ") + names[4] + "}} {{part5pool=" + v[order[4]] + "}} {{part5pooldisplay=(" + Math.abs(v[order[4]]) + ")}}";
+                    result = result + "+" + v[order[4]];
+                    dicePool += parseInt(v[order[4]]);
+                    console.log(`Base 5: ${base}`)
+                }
+                if(order.length > 5) {
+                    base = base + " {{part6=" + (parseInt(v[order[5]]) >= 0 ? "+ " : "- ") + names[5] + "}} {{part6pool=" + v[order[5]] + "}} {{part6pooldisplay=(" + Math.abs(v[order[5]]) + ")}}";
+                    result = result + "+" + v[order[5]];
+                    dicePool += parseInt(v[order[5]]);
+                    console.log(`Base 6: ${base}`)
+                }
+                if (dicePool <= 0) {
+                    base = base + " {{result=[[{1d10cf<1}>10]]}} {{chance=[[1]]}}";
+                } else {
+                    base = base + ` {{dicepool=${dicePool}}}` + result + ")" + roll_type;
+                }
             }
             consoleLines.push(...[
                 " ",
@@ -422,7 +448,8 @@
                 rolldisplay_attack_damage: attack_damage,
                 rolldisplay_ischance: dicePool <= 0 ? 1 : 0,
                 rolldisplay: display,
-                dicepooldisplay: dicePool <= 0 ? "₵" : dicePool
+                dicepooldisplay: dicePool <= 0 ? "₵" : dicePool,
+                woundpenaltydisplay: Math.abs(v["wound_penalty"])
             });
         });
     };    
@@ -434,7 +461,7 @@
                 consoleLines.push(`${name.toUpperCase()}: ${typeof val === "string" ? `"${val}"` : val}`)
             consoleLines.push(" ")
             var update = {
-                rollchance: "&{template:wod-simple} {{name=@{character_name}}} {{result=[[{1d10cf<1}>10]]}} {{chance=1}}"
+                rollchance: "&{template:wod-simple} {{name=@{character_name}}} {{result=[[{1d10cf<1}>10]]}} {{chance=[[1]]}}"
             };
             var isSecondEdition = v.sheettype === "mortal2" ||
                 v.sheettype === "vampire2" ||
@@ -450,38 +477,37 @@
                 extraRollMods = [];
             if (parseInt(v.spendwp)) {
                 extraDice += 3;
-                extraRollMods.push("+ WP (3)")
+                extraRollMods.push("+ Willpower (3)")
             }
             if (parseInt(v.specialty)) {
                 extraDice += 1;
-                extraRollMods.push("+ Sp (1)")
             }
             switch (v.rerolldice) {
                 case "0": {
-                    update["rolltype"] = `+${extraDice})d10cs>10}>8]]}} {{noreroll=1}}`;
+                    update["rolltype"] = `+${extraDice})d10cs>10}>8]]}} {{noreroll=1}} {{chance=[[0]]}}`;
                     break
                 }
                 case "10": {
-                    update["rolltype"] = `+${extraDice})d10!cs>10}>8]]}}`;
+                    update["rolltype"] = `+${extraDice})d10!cs>10}>8]]}} {{chance=[[0]]}}`;
                     break
                 }
                 case "9": {
-                    update["rolltype"] = `+${extraDice})d10!>9cs>9}>8]]}} {{9again=1}}`;
+                    update["rolltype"] = `+${extraDice})d10!>9cs>9}>8]]}} {{9again=1}} {{chance=[[0]]}}`;
                     break
                 }
                 case "8": {
-                    update["rolltype"] = `+${extraDice})d10!>8cs>8}>8]]}} {{8again=1}}`;
+                    update["rolltype"] = `+${extraDice})d10!>8cs>8}>8]]}} {{8again=1}} {{chance=[[0]]}}`;
                     break
                 }
                 case "1": {
-                    update["rolltype"] = `+${extraDice})d10ro<7}>8]]}} {{rote=1}}`;
-                    update["rollchance"] = "&{template:wod-simple} {{name=@{character_name}}} {{option=1}} {{result=[[{1d10ro<7cf<1}>10]]}} {{chance=1}} {{rote=1}}";
+                    update["rolltype"] = `+${extraDice})d10ro<7}>8]]}} {{rote=1}} {{chance=[[0]]}}`;
+                    update["rollchance"] = "&{template:wod-simple} {{name=@{character_name}}} {{option=1}} {{result=[[{1d10ro<7cf<1}>10]]}} {{chance=[[1]]}} {{rote=1}}";
                     break
                 }
             }
             if (extraDice) {
                 update["rolltype"] += " {{extramodline=@{extrarollmoddisplay}}}"
-                update["extrarollmoddisplay"] = `<span style="color: darkgreen;">${extraRollMods.join(" ")}</span>`
+                update["extrarollmoddisplay"] = extraRollMods.join("<br>")
             } else {
                 update["extrarollmoddisplay"] = ""
             }
