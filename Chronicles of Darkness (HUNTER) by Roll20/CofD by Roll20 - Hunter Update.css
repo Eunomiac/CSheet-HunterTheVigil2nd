@@ -608,13 +608,20 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .charsheet div.sheet-dicerollergrid div.sheet-area-modlabel { --gridArea: modlabel; --bgColor: var(--color2); --alignContent: end; --justContent: end; --borderStyle: var(--rightBorder); --width: calc(100% - 2px); }
 .charsheet div.sheet-dicerollergrid div.sheet-area-buttonwp { --gridArea: buttonwp; --bgColor: var(--colorBlack); --padding: 0px; }
 .charsheet div.sheet-dicerollergrid div.sheet-area-buttonspec { --gridArea: buttonspec; --bgColor: var(--colorBlack); --padding: 0px; }
-.charsheet div.sheet-dicerollergrid div.sheet-area-footer { --gridArea: footer; --zIndex: 30; --bgColor: var(--color3); --justItems: start; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer { --gridArea: footer; --zIndex: 30; --bgColor: transparent; --justItems: start; }
 
 
 
-.charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-area-attacklabel { --gridArea: attacklabel; --bgColor: transparent; }
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-area-attacklabel { --gridArea: attacklabel; --bgColor: var(--color3); }
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-area-attackdisplaydamage { 
+    --gridArea: attackdamage; --bgColor: var(--color3); --width: 14px; --height: 25px; --borderStyle: var(--rightBorder);
+}
+.charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-area-attackdisplaydamage textarea.sheet-lcars.sheet-damagedisplay {
+    --fontSize: 22px; --lineHeight: 25px;
+    text-align: center;
+    text-align-last: center;
+}
 .charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-area-attackdisplay { --gridArea: attackdisplay; --bgColor: var(--color2); }
-
 
 .charsheet div.sheet-dicerollergrid div.sheet-rollflagbutton span.sheet-lcars {
     --width: 195%;
@@ -670,10 +677,9 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
 .charsheet div.sheet-dicerollergrid div.sheet-area-footer {
     width: 100%;
     height: 25px;
-    grid: "attacklabel blacksplash attackdisplay" 25px
-                / 80px 2px 1fr;
+    grid: "attacklabel attackdamage attackdisplay" 25px
+                / 50px 16px 1fr;
     padding: 0px;
-    grid-gap: 0px;
 }
 
 .charsheet div.sheet-dicerollergrid div.sheet-area-footer div.sheet-blacksplash {
@@ -699,8 +705,40 @@ input.sheet-huntersheet:checked ~ div * input.sheet-weapon:checked + span + .she
     --fontColor: var(--colorBlack);
     --fontSize: 24px;
     --lineHeight: 22px;
+    --height: 25px;
+    --margin: 0px 0px -25px 0px;
 
     text-indent: 5px;
+}
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay span.sheet-lcars {
+    display: inline-block;
+    height: 25px;
+    width: 50px;
+    background-color: black;
+    color: var(--color2);
+    margin-bottom: -25px;
+    margin-left: 190px;
+    border-radius: 12.5px;
+    font-size: 23px;
+    text-align: center;
+    text-align-last: center;
+}
+
+.charsheet div.sheet-dicerollergrid div.sheet-area-attackdisplay input.sheet-lcars.sheet-mednumber {
+    height: 25px;
+    width: calc(100% - 200px);
+    margin: 0px 0px 0px 200px;
+    padding: 0px;
+    background-color: black;
+    color: var(--color1);
+    font-size: 28px;
+    text-align: center;
+    text-align-last: center;
+    transform: scale(1,1);
+    font-weight: bold;
+
+    pointer-events: auto;
 }
 
 .charsheet div.sheet-dicerollergrid div.sheet-area-rollbuttons {
@@ -1413,7 +1451,7 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
 .sheet-rolltemplate-wod-3part th div,
 .sheet-rolltemplate-wod-initiative th div {
     display: block;
-    height: 20px;
+    height: auto;
     border-bottom: 2px solid rgb(112, 0, 0);
 }
 
@@ -1487,7 +1525,12 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
 .sheet-rolltemplate-wod-attack div.sheet-simplenumber .inlinerollresult,
 .sheet-rolltemplate-wod-simple div.sheet-simplenumber .inlinerollresult,
 .sheet-rolltemplate-wod-3part div.sheet-simplenumber .inlinerollresult,
-.sheet-rolltemplate-wod-initiative div.sheet-simplenumber .inlinerollresult {
+.sheet-rolltemplate-wod-initiative div.sheet-simplenumber .inlinerollresult,
+.sheet-rolltemplate-wod div.userscript-simplenumber .inlinerollresult,
+.sheet-rolltemplate-wod-attack div.userscript-simplenumber .inlinerollresult,
+.sheet-rolltemplate-wod-simple div.userscript-simplenumber .inlinerollresult,
+.sheet-rolltemplate-wod-3part div.userscript-simplenumber .inlinerollresult,
+.sheet-rolltemplate-wod-initiative div.userscript-simplenumber .inlinerollresult {
     pointer-events: none;
 }
 
@@ -1514,8 +1557,33 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
 .sheet-rolltemplate-wod-attack div.sheet-redtext .inlinerollresult,
 .sheet-rolltemplate-wod-simple div.sheet-redtext .inlinerollresult,
 .sheet-rolltemplate-wod-3part div.sheet-redtext .inlinerollresult,
-.sheet-rolltemplate-wod-initiative div.sheet-redtext .inlinerollresult {
+.sheet-rolltemplate-wod-initiative div.sheet-redtext .inlinerollresult,
+.sheet-rolltemplate-wod div.userscript-redtext,
+.sheet-rolltemplate-wod-attack div.userscript-redtext,
+.sheet-rolltemplate-wod-simple div.userscript-redtext,
+.sheet-rolltemplate-wod-3part div.userscript-redtext,
+.sheet-rolltemplate-wod-initiative div.userscript-redtext,
+.sheet-rolltemplate-wod div.userscript-redtext .inlinerollresult,
+.sheet-rolltemplate-wod-attack div.userscript-redtext .inlinerollresult,
+.sheet-rolltemplate-wod-simple div.userscript-redtext .inlinerollresult,
+.sheet-rolltemplate-wod-3part div.userscript-redtext .inlinerollresult,
+.sheet-rolltemplate-wod-initiative div.userscript-redtext .inlinerollresult {
     color: darkred;
+}
+
+.sheet-rolltemplate-wod div.sheet-rollmod,
+.sheet-rolltemplate-wod-attack div.sheet-rollmod,
+.sheet-rolltemplate-wod-simple div.sheet-rollmod,
+.sheet-rolltemplate-wod-3part div.sheet-rollmod,
+.sheet-rolltemplate-wod-initiative div.sheet-rollmod,
+.sheet-rolltemplate-wod div.sheet-rollmod .inlinerollresult,
+.sheet-rolltemplate-wod-attack div.sheet-rollmod .inlinerollresult,
+.sheet-rolltemplate-wod-simple div.sheet-rollmod .inlinerollresult,
+.sheet-rolltemplate-wod-3part div.sheet-rollmod .inlinerollresult,
+.sheet-rolltemplate-wod-initiative div.sheet-rollmod .inlinerollresult {
+    font-size: 18px;
+    margin-top: 2px;
+    margin-bottom: -2px;
 }
 
 .sheet-rolltemplate-wod div.sheet-totaldice,
@@ -1575,9 +1643,40 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
 .sheet-rolltemplate-wod-attack td.sheet-result div.sheet-outcome.sheet-dramaticfail,
 .sheet-rolltemplate-wod-simple td.sheet-result div.sheet-outcome.sheet-dramaticfail,
 .sheet-rolltemplate-wod-3part td.sheet-result div.sheet-outcome.sheet-dramaticfail,
-.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-outcome.sheet-dramaticfail {
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-outcome.sheet-dramaticfail {    
+    /* box-shadow: inset 0px 0px 15px limegreen, inset 0px 0px 15px limegreen, inset 0px 0px 20px limegreen; */
+    border-radius: 25px;
+    border: 3px solid red;
     background-color: darkred;
     color: white;
+}
+
+.sheet-rolltemplate-wod td.sheet-result div.sheet-outcome.sheet-bignumber,
+.sheet-rolltemplate-wod-attack td.sheet-result div.sheet-outcome.sheet-bignumber,
+.sheet-rolltemplate-wod-simple td.sheet-result div.sheet-outcome.sheet-bignumber,
+.sheet-rolltemplate-wod-3part td.sheet-result div.sheet-outcome.sheet-bignumber,
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-outcome.sheet-bignumber,
+.sheet-rolltemplate-wod td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult,
+.sheet-rolltemplate-wod-attack td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult,
+.sheet-rolltemplate-wod-simple td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult,
+.sheet-rolltemplate-wod-3part td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult,
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult {
+    height: 38px;
+    line-height: 48px;
+    font-size: 52px;
+}
+
+.sheet-rolltemplate-wod td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult,
+.sheet-rolltemplate-wod-attack td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult,
+.sheet-rolltemplate-wod-simple td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult,
+.sheet-rolltemplate-wod-3part td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult,
+.sheet-rolltemplate-wod-initiative td.sheet-result div.sheet-outcome.sheet-bignumber .inlinerollresult {
+    text-align: left;
+    text-align-last: left;
+    width: 100%;
+    display: block;
+    padding-left: 70px;
+    pointer-events: auto;
 }
 
 .sheet-rolltemplate-wod td.sheet-result div.sheet-fail,
@@ -1618,6 +1717,17 @@ input.sheet-CorC2:checked ~ h4.sheet-CorC2
 .sheet-rolltemplate-wod-initiative .sheet-specialrollflag span {
     display: block;
     margin-bottom: 14px;
+}
+
+.sheet-rolltemplate-wod .sheet-specialrollflag span.sheet-noreroll,
+.sheet-rolltemplate-wod-attack .sheet-specialrollflag span.sheet-noreroll,
+.sheet-rolltemplate-wod-simple .sheet-specialrollflag span.sheet-noreroll,
+.sheet-rolltemplate-wod-3part .sheet-specialrollflag span.sheet-noreroll,
+.sheet-rolltemplate-wod-initiative .sheet-specialrollflag span.sheet-noreroll {
+    text-decoration: line-through;
+    color: white;
+    background-color: darkred;
+    padding: 0px 4px;
 }
 
 /*#endregion*/

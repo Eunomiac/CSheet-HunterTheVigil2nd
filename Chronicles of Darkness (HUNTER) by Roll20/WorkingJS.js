@@ -1,6 +1,11 @@
 
     var attributes = ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure"];
     var skills = ["academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge"];
+    var catskills = {
+        mental: skills.slice(0, 8),
+        physical: skills.slice(8, 16),
+        social: skills.slice(16)
+    }
     var normalStats = ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge"];
     var powers = ["animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time"];
     var allStats = ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time","potency"];
@@ -142,8 +147,6 @@
         var stat_flag = stat + "_flag";
         var rarray = [];
 
-        
-
         getAttrs(["rolltype", "attack","spendwp", "specialty", "wound_penalty", "rollstyle","rollmodifier","roll_array","attack_name0","attack_name1","attack_name2","attack_name3","attack_name4","attack_damage0","attack_damage1","attack_damage2","attack_damage3","attack_damage4","attack_type0","attack_type1","attack_type2","attack_type3","attack_type4","intelligence_flag","wits_flag","resolve_flag","strength_flag","dexterity_flag","stamina_flag","presence_flag","manipulation_flag","composure_flag","academics_flag","computer_flag","crafts_flag","investigation_flag","medicine_flag","occult_flag","politics_flag","science_flag","athletics_flag","brawl_flag","drive_flag","firearms_flag","larceny_flag","stealth_flag","survival_flag","weaponry_flag","animalken_flag","empathy_flag","expression_flag","intimidation_flag","persuasion_flag","socialize_flag","streetwise_flag","subterfuge_flag","intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","animalism_flag","auspex","auspex_flag","celerity","celerity_flag","dominate","dominate_flag","majesty","majesty_flag","nightmare","nightmare_flag","obfuscate","obfuscate_flag","protean","protean_flag","resilience","resilience_flag","vigor","vigor_flag","crúac","crúac_flag","thebansorcery","thebansorcery_flag","death","death_flag","fate","fate_flag","forces","forces_flag","life","life_flag","matter","matter_flag","mind","mind_flag","prime","prime_flag","spirit","spirit_flag","space","space_flag","time","time_flag","potency","potency_flag","potency_name"], function(v) {
             allStats.forEach(function(x) {
                 var flagname = x + "_flag";
@@ -246,7 +249,24 @@
                 " ",
                 "====== NAMES: ======",
                 names.join(", "),
-            ])
+            ])            
+            var formatDisplay = (orderNum, base) => {  
+                var traitRef = order[orderNum];
+                var traitVal = parseInt(v[traitRef])|0;
+                var traitName = names[orderNum];
+                var partNum = orderNum + 1;   
+                if (orderNum == 1 && parseInt(v["specialty"])|0 > 0)
+                    base = `${base} {{part${partNum}=<div class="specialty">+ ${traitName}}} {{part${partNum}pool=${traitVal}}} {{part${partNum}pooldisplay=(${traitVal} + 1)</div>}}`;
+                else if (skills.includes(traitRef) && traitVal < 0) {
+                    base = `${base} {{part${partNum}=+ ${traitName}}} {{part${partNum}pool=${traitVal}}} {{part${partNum}pooldisplay=(0)</div><div class="simplenumber redtext">- Untrained (${Math.abs(traitVal)})</div>}}`;
+                } else {
+                    if (traitVal < 0)
+                        base = `${base} {{part${partNum}=<div class="simplenumber redtext">- ${traitName}}} {{part${partNum}pool=${traitVal}}} {{part${partNum}pooldisplay=(${Math.abs(traitVal)})</div>}}`;
+                    else
+                        base = `${base} {{part${partNum}=+ ${traitName}}} {{part${partNum}pool=${traitVal}}} {{part${partNum}pooldisplay=(${Math.abs(traitVal)})}}`;
+                }
+                return base
+            };  
 
             var base = "&{template:wod-simple} {{name=@{character_name}}} {{option=?{@{dicepoolmacro}|0}}} {{result=[[{(?{@{dicepoolmacro}|1}@{rolltype}";
             var roll_type = v["rolltype"];
@@ -267,7 +287,7 @@
             }
             if (parseInt(v["spendwp"])|0 > 0) {
                 dicePool += 3;
-                extraDisplayParts.push("+ ψ³");
+                extraDisplayParts.push("+ 3ʷᵖ");
             }
             if (manualRollMod !== 0) {
                 dicePool += manualRollMod
@@ -283,43 +303,16 @@
                 console.log(`Base 1: ${base}`)
                 result = " {{result=[[{((@{rollmodifier}+@{wound_penalty}+" + v[order[0]];
                 dicePool += parseInt(v[order[0]]);
-                if(order.length > 1) {
-                    if (parseInt(v["specialty"])|0 > 0)
-                        base = `${base} {{part2=<div class="specialty">+ ${names[1]}}} {{part2pool=${v[order[1]]}}} {{part2pooldisplay=(${v[order[1]]} + 1)</div>}}`;
-                    else
-                        base = base + " {{part2=" + (parseInt(v[order[1]]) >= 0 ? "+ " : "- ") + names[1] + "}} {{part2pool=" + v[order[1]] + "}} {{part2pooldisplay=(" + Math.abs(v[order[1]]) + ")}}";
-                    console.log(`Base 2: ${base}`)
-                    result = result + "+" + v[order[1]];
-                    dicePool += parseInt(v[order[1]]);
-                }
-                if(order.length > 2) {
-                    base = base + " {{part3=" + (parseInt(v[order[2]]) >= 0 ? "+ " : "- ") + names[2] + "}} {{part3pool=" + v[order[2]] + "}} {{part3pooldisplay=(" + Math.abs(v[order[2]]) + ")}}";
-                    result = result + "+" + v[order[2]];
-                    dicePool += parseInt(v[order[2]]);
-                    console.log(`Base 3: ${base}`)
-                }
-                if(order.length > 3) {
-                    base = base + " {{part4=" + (parseInt(v[order[3]]) >= 0 ? "+ " : "- ") + names[3] + "}} {{part4pool=" + v[order[3]] + "}} {{part4pooldisplay=(" + Math.abs(v[order[3]]) + ")}}";
-                    result = result + "+" + v[order[3]];
-                    dicePool += parseInt(v[order[3]]);
-                    console.log(`Base 4: ${base}`)
-                }
-                if(order.length > 4) {
-                    base = base + " {{part5=" + (parseInt(v[order[4]]) >= 0 ? "+ " : "- ") + names[4] + "}} {{part5pool=" + v[order[4]] + "}} {{part5pooldisplay=(" + Math.abs(v[order[4]]) + ")}}";
-                    result = result + "+" + v[order[4]];
-                    dicePool += parseInt(v[order[4]]);
-                    console.log(`Base 5: ${base}`)
-                }
-                if(order.length > 5) {
-                    base = base + " {{part6=" + (parseInt(v[order[5]]) >= 0 ? "+ " : "- ") + names[5] + "}} {{part6pool=" + v[order[5]] + "}} {{part6pooldisplay=(" + Math.abs(v[order[5]]) + ")}}";
-                    result = result + "+" + v[order[5]];
-                    dicePool += parseInt(v[order[5]]);
-                    console.log(`Base 6: ${base}`)
+                for (let i = 1; i < order.length; i++) {
+                    base = formatDisplay(i, base);
+                    console.log(`Base ${i}: ${base}`);
+                    result = `${result}+${v[order[i]]}`;
+                    dicePool += parseInt(v[order[i]])|0;                    
                 }
                 if (dicePool <= 0) {
-                    base = base + " {{result=[[{1d10cf<1}>10]]}} {{chance=[[1]]}}";
+                    base = `${base} {{result=[[{1d10cf<1}>10]]}} {{chance=[[1]]}}`;
                 } else {
-                    base = base + ` {{dicepool=${dicePool}}}` + result + ")" + roll_type;
+                    base = `${base} {{dicepool=${dicePool}}}${result})${roll_type}`;
                 }
             }
             consoleLines.push(...[
@@ -389,6 +382,7 @@
             }
 
             consoleLines.push(...[
+                `Categorized Skills: ${JSON.stringify(catskills)}`,
                 " ",
                 "====== DISPLAYS: ======",
                 `BASE: ${displayBase}`,
@@ -448,8 +442,9 @@
                 rolldisplay_attack_damage: attack_damage,
                 rolldisplay_ischance: dicePool <= 0 ? 1 : 0,
                 rolldisplay: display,
-                dicepooldisplay: dicePool <= 0 ? "₵" : dicePool,
-                woundpenaltydisplay: Math.abs(v["wound_penalty"])
+                dicepooldisplay: dicePool <= 0 ? "©" : dicePool,
+                woundpenaltydisplay: Math.abs(v["wound_penalty"]),
+                moddisplay: Math.abs(parseInt(v["rollmodifier"])|0)
             });
         });
     };    
@@ -461,6 +456,7 @@
                 consoleLines.push(`${name.toUpperCase()}: ${typeof val === "string" ? `"${val}"` : val}`)
             consoleLines.push(" ")
             var update = {
+                rollsimple: "&{template:wod-simple} {{name=@{character_name}}} {{option=?{@{dicepoolmacro}|0}}} {{result=[[{(?{@{dicepoolmacro}|1}",
                 rollchance: "&{template:wod-simple} {{name=@{character_name}}} {{result=[[{1d10cf<1}>10]]}} {{chance=[[1]]}}"
             };
             var isSecondEdition = v.sheettype === "mortal2" ||
@@ -485,22 +481,27 @@
             switch (v.rerolldice) {
                 case "0": {
                     update["rolltype"] = `+${extraDice})d10cs>10}>8]]}} {{noreroll=1}} {{chance=[[0]]}}`;
+                    update["rollsimple"] = `${update["rollsimple"]})d10cs>10}>8]]}} {{noreroll=1}} {{chance=[[0]]}}`;
                     break
                 }
                 case "10": {
                     update["rolltype"] = `+${extraDice})d10!cs>10}>8]]}} {{chance=[[0]]}}`;
+                    update["rollsimple"] = `${update["rollsimple"]})d10!cs>10}>8]]}} {{chance=[[0]]}}`;
                     break
                 }
                 case "9": {
                     update["rolltype"] = `+${extraDice})d10!>9cs>9}>8]]}} {{9again=1}} {{chance=[[0]]}}`;
+                    update["rollsimple"] = `${update["rollsimple"]})d10!>9cs>9}>8]]}} {{9again=1}} {{chance=[[0]]}}`;
                     break
                 }
                 case "8": {
                     update["rolltype"] = `+${extraDice})d10!>8cs>8}>8]]}} {{8again=1}} {{chance=[[0]]}}`;
+                    update["rollsimple"] = `${update["rollsimple"]})d10!>8cs>8}>8]]}} {{8again=1}} {{chance=[[0]]}}`;
                     break
                 }
                 case "1": {
                     update["rolltype"] = `+${extraDice})d10ro<7}>8]]}} {{rote=1}} {{chance=[[0]]}}`;
+                    update["rollsimple"] = `${update["rollsimple"]})d10ro<7}>8]]}} {{rote=1}} {{chance=[[0]]}}`;
                     update["rollchance"] = "&{template:wod-simple} {{name=@{character_name}}} {{option=1}} {{result=[[{1d10ro<7cf<1}>10]]}} {{chance=[[1]]}} {{rote=1}}";
                     break
                 }
@@ -510,53 +511,55 @@
                 update["extrarollmoddisplay"] = extraRollMods.join("<br>")
             } else {
                 update["extrarollmoddisplay"] = ""
-            }
+            }  
+            
+            
             // (PRD-1406) Check that attack type is correlated to edition
             for(var i = 0; i < 5; i++) {
                 if(isSecondEdition) {
                     switch(v[`attack_type${i}`]) {
                         // Melee
-                        case "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                         // Gun
-                        case "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                         // Thrown
-                        case "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                         // Brawl (FF)
-                        case "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                         // Melee (FF)
-                        case "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                     }
                 } else {
                     switch(v[`attack_type${i}`]) {
                         // Melee
-                        case "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{str=1}} {{wea=1}} {{result=[[{((@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{str=1}} {{wea=1}} {{result=[[{((@{attack_damage${i}}+@{strength}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                         // Gun
-                        case "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{fir=1}} {{result=[[{((@{attack_damage${i}}+@{dexterity}+@{firearms}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                         // Thrown
-                        case "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{ath=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{athletics}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                         // Brawl (FF)
-                        case "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{bra=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{brawl}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                         // Melee (FF)
-                        case "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})":
-                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty})";
+                        case "{{2nd=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})":
+                            update[`attack_type${i}`] = "{{1st=1}} {{dex=1}} {{wea=1}} {{result=[[{((@{attack_damage1}+@{dexterity}+@{weaponry}+@{rollmodifier}+@{wound_penalty}+@{weapon_penalty}+@{armor_penalty}-@{target_defense})";
                             break;
                     }
                 }
@@ -606,6 +609,7 @@
             var regex = /attack_type(.)/;
             var atknum = v.attack.match(regex)[1];
             var init = isNaN(v["attack_initiative" + atknum]) === false && v["attack_initiative" + atknum] != "" ? v["attack_initiative" + atknum] : 0;
+            console.log(`******** INIT PENALTY: ${init} ***********`)
             var wpen = str < v["attack_strength" + atknum] ? str - v["attack_strength" + atknum] : 0;
             var apen = 0;
             if(v.armor_flag0 != 0 && str < parseInt(v.armor_strength0)) {apen = apen + (str - parseInt(v.armor_strength0));};
@@ -624,9 +628,13 @@
             }
             setAttrs({
                 weapon_penalty: wpen,
+                wpendisplay: Math.abs(parseInt(wpen)|0),
                 armor_penalty: apen,
+                apendisplay: Math.abs(parseInt(apen)|0),
                 initiative_penalty: init,
-                wound_penalty: wound_penalty
+                initiativepenaltydisplay: Math.abs(parseInt(init)|0),
+                wound_penalty: wound_penalty,
+                woundpenaltydisplay: Math.abs(parseInt(wound_penalty)|0)
             });
         });
     }
