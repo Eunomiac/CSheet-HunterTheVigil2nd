@@ -11,11 +11,18 @@
     var allStats = ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time","potency"];
     var potencyNames = { mortal1:"", mortal2:"", vampire1:"Blood Potency", vampire2:"Blood Potency", werewolf1:"Primal Urge", werewolf2:"Primal Urge", mage1:"Gnosis", mage2:"Gnosis", promethean1:"Azoth", promethean2:"Azoth", changeling1:"Wyrd", changeling2:"Wyrd", demon:"Primum", beast:"Lair", hunter:"", geist1:"Psyche", mummy1:"Sekhem", hunter2:"" };
     var superScripts = ["⁰","¹","²","³","⁴","⁵","⁶","⁷","⁸","⁹"];
-
+    var rollflags = {
+        "!cs>10": "",
+        "cs>10": " {{isnoreroll=1}}",
+        "!>9cs>9": " {{is9again=1}}",
+        "!>8cs>8": " {{is8again=1}}",
+        "ro<7": " {{isrote=1}}"
+    };
     ["intelligence","wits","resolve","strength","dexterity","stamina","presence","manipulation","composure","academics","computer","crafts","investigation","medicine","occult","politics","science","athletics","brawl","drive","firearms","larceny","stealth","survival","weaponry","animalken","empathy","expression","intimidation","persuasion","socialize","streetwise","subterfuge","animalism","auspex","celerity","dominate","majesty","nightmare","obfuscate","protean","resilience","vigor","crúac","thebansorcery","death","fate","forces","life","matter","mind","prime","spirit","space","time","potency"].forEach((attr) => {
         on(`change:${attr} change:${attr}_flag`, (eventInfo) => {
             const source = eventInfo.sourceAttribute;
             const attribute = (attr.includes("flag")) ? attr.split(`_flag`)[0] : attr; //Remove the "_flag" part so we can pass the name
+            updateRollTraits(`${attribute}`)
 
             // if (!eventInfo.sourceAttribute.endsWith("_flag") || "previousValue" in eventInfo) {
             //     console.log(`==== Ch:Trait/Flag: ${eventInfo.sourceType} ==== updateRolls('${attribute}'):\n${JSON.stringify(eventInfo)}`)
