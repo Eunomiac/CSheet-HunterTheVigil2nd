@@ -413,11 +413,13 @@ const updateRollData = function(stat = "rolltype", isClearingFlags = false) {
                 }
             }
 
-            if (dicePool <= 0) 
-                rollBase += ` {{result=${chanceResult}}} {{chance=[[1]]}}`
-            else 
+            if (dicePool <= 0)
+                if (parseInt(v.rerolldice) == 1)
+                    rollBase += ` {{result=${chanceResult}}} {{chance=[[1]]}} {{rote=1}}`
+                else
+                    rollBase += ` {{result=${chanceResult}}} {{chance=[[1]]}}`
+            else
                 rollBase += ` {{dicepool=${dicePool}}}${result})${rollType} {{chance=[[0]]}}`
-            
 
             consoleLines.push(...[
                 "====== ROLL TEMPLATE CALLS: ======",
