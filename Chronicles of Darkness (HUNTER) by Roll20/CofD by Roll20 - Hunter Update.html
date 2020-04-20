@@ -2526,7 +2526,7 @@ const updateRollData = function(stat = "rolltype", isClearingFlags = false) {
                 }
                 // no default
             }
-            attrList.rolltypechanceresult = `{{chanceresult=${chanceResult}}`
+            attrList.rolltypechanceresult = `{{chanceresult=${chanceResult}}}`
 
             for (const [name, val] of Object.entries(attrList))
                 consoleLines.push(` U: ${name.toUpperCase()}: ${typeof val === "string" ? `"${val}"` : val}`)
